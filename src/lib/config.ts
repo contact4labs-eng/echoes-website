@@ -1,3 +1,15 @@
+interface GeoPoint {
+	latitude: number;
+	longitude: number;
+}
+
+interface HoursSpec {
+	days: string;
+	dayOfWeek: string[];
+	opens: string;
+	closes: string;
+}
+
 export const site = {
 	name: 'Echoes Bistrot',
 	wordmark: 'Echoes',
@@ -15,15 +27,11 @@ export const site = {
 		addressRegionEn: 'Attica',
 		addressCountry: 'GR',
 	},
-	geo: {
-		// TODO_CLIENT: confirm exact rooftop pin from Google Business Profile.
-		latitude: 37.9295,
-		longitude: 23.7568,
-	},
-	hours: [
-		{ days: 'Mon-Fri', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '18:00' },
-		{ days: 'Sat-Sun', dayOfWeek: ['Saturday', 'Sunday'], opens: '09:00', closes: '23:00' },
-	],
+	// TODO_CLIENT: confirm exact rooftop pin (GBP). Until confirmed, no `geo` in JSON-LD.
+	geo: null as GeoPoint | null,
+	// TODO_CLIENT: confirm exact open times. Until confirmed, no `openingHoursSpecification` in JSON-LD.
+	// Visible UI copy in `visit.hoursWeekdays/Weekends` is verified ("morning until 18:00 / 23:00") and stays.
+	hours: null as HoursSpec[] | null,
 	cuisine: ['Brunch', 'Bistro', 'Mediterranean', 'Coffee'],
 	priceRange: '€€',
 	social: {
@@ -39,6 +47,6 @@ export const site = {
 		encodeURIComponent('Νυμφών 33, Ηλιούπολη 163 41') +
 		'&output=embed',
 	ogImage: '/og-image.jpg',
-} as const;
+};
 
 export type SiteConfig = typeof site;

@@ -4,6 +4,7 @@ import type { Locale } from '@/i18n/utils';
 import { useTranslations } from '@/i18n/utils';
 import { site } from '@/lib/config';
 import { menuHighlights } from '@/content/menu';
+import { MenuCard } from '@/components/interactive/MenuCard';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -25,33 +26,45 @@ const t = useTranslations(locale);
 		</div>
 
 		<ul
-			class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:grid-cols-5"
+			class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:grid-cols-6"
 			data-reveal-stagger
 		>
-			{menuHighlights.map((item) => (
-				<li class="menu-card group relative flex flex-col overflow-hidden rounded-sm border border-foreground/8 bg-card transition-all duration-500 hover:-translate-y-1.5 hover:border-foreground/20 hover:shadow-[0_24px_48px_-24px_color-mix(in_oklch,var(--color-bistro-ink)_30%,transparent)]">
-					<div class="relative aspect-[4/5] overflow-hidden bg-muted">
-						<Image
-							src={item.image}
-							alt={t(`menu.items.${item.i18nKey}.name`)}
-							widths={[320, 480, 640, 800]}
-							sizes="(min-width: 1280px) 18vw, (min-width: 640px) 45vw, 90vw"
-							format="webp"
-							quality={82}
-							loading="lazy"
-							class="menu-image h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-						/>
-					</div>
-					<div class="flex flex-col gap-2 p-5">
-						<h3 class="font-heading text-xl leading-tight font-semibold text-balance text-foreground">
-							{t(`menu.items.${item.i18nKey}.name`)}
-						</h3>
-						<p class="text-sm leading-relaxed text-foreground/65">
-							{t(`menu.items.${item.i18nKey}.desc`)}
-						</p>
-					</div>
-				</li>
-			))}
+			{menuHighlights.map((item, idx) => {
+				const featured = idx === 0;
+				const colSpan = featured ? 'sm:col-span-2 lg:col-span-3 xl:col-span-2' : 'xl:col-span-1';
+				const aspect = featured ? 'aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] xl:aspect-[4/5]' : 'aspect-[4/5]';
+				return (
+					<li class={`${colSpan} flex`}>
+						<MenuCard
+							client:visible
+							className="menu-card group relative flex w-full flex-col overflow-hidden rounded-sm border border-foreground/8 bg-card transition-[border-color,box-shadow] duration-500 hover:border-foreground/20 hover:shadow-[0_24px_48px_-24px_color-mix(in_oklch,var(--color-bistro-ink)_30%,transparent)]"
+						>
+							<div class={`relative ${aspect} overflow-hidden bg-muted`}>
+								<Image
+									src={item.image}
+									alt={t(`menu.items.${item.i18nKey}.name`)}
+									widths={featured ? [480, 768, 1024, 1280] : [320, 480, 640, 800]}
+									sizes={featured
+										? '(min-width: 1280px) 28vw, (min-width: 640px) 90vw, 90vw'
+										: '(min-width: 1280px) 14vw, (min-width: 640px) 45vw, 90vw'}
+									format="webp"
+									quality={featured ? 84 : 82}
+									loading="lazy"
+									class="menu-image h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+								/>
+							</div>
+							<div class="flex flex-col gap-2 p-5 md:p-6">
+								<h3 class={`font-heading leading-tight font-semibold text-balance text-foreground ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+									{t(`menu.items.${item.i18nKey}.name`)}
+								</h3>
+								<p class={`leading-relaxed text-foreground/65 ${featured ? 'text-base' : 'text-sm'}`}>
+									{t(`menu.items.${item.i18nKey}.desc`)}
+								</p>
+							</div>
+						</MenuCard>
+					</li>
+				);
+			})}
 		</ul>
 
 		<div class="mt-14 flex flex-col items-center gap-2 text-center" data-reveal>

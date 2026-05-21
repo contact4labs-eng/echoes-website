@@ -18,7 +18,9 @@
 		"headline": "Brunch χωρίς πόζες.",
 		"subhead": "Καφές από νωρίς, brunch όλη μέρα, cocktails αθόρυβα ως αργά.",
 		"ctaPrimary": "Καλέστε μας",
-		"ctaSecondary": "Δείτε στο Instagram"
+		"ctaSecondary": "Δείτε στο Instagram",
+		"metaA": "Brunch · Coffee · Cocktails",
+		"metaB": "Νυμφών 33, Ηλιούπολη"
 	},
 	"story": {
 		"eyebrow": "Η ιστορία μας",
@@ -27,10 +29,10 @@
 		"bodyB": "Καφές από το πρωί, πιάτα με σπιτικό αέρα, και cocktails που εμφανίζονται διακριτικά καθώς πέφτει το φως."
 	},
 	"menu": {
-		"eyebrow": "Από το μενού",
-		"title": "Comfort food, με προσοχή στη λεπτομέρεια.",
-		"subtitle": "Από τα all-day πιάτα μας — πάρτε μια γεύση.",
-		"viewMoreLabel": "Δείτε όλο το μενού",
+		"eyebrow": "Επιλεγμένα πιάτα",
+		"title": "Πιάτα που κρατούν τον ρυθμό της ημέρας.",
+		"subtitle": "Μερικές επιλεγμένες γεύσεις από την all-day κουζίνα — όχι ολόκληρος κατάλογος.",
+		"viewMoreLabel": "Για το σημερινό πλήρες μενού, καλέστε μας.",
 		"viewMoreCta": "Καλέστε μας",
 		"items": {
 			"crispyChickenBowl": {
@@ -96,13 +98,14 @@
 		"instagramCta": "Δείτε στο Instagram"
 	},
 	"social": {
-		"eyebrow": "Από τον τύπο και τους συνεργάτες μας",
-		"title": "Μια διακριτική παρουσία στη γειτονιά.",
+		"eyebrow": "Από τον τύπο",
+		"title": "Μια νέα, ήσυχη άφιξη στην Ηλιούπολη.",
 		"pressName": "noupou.gr",
 		"pressDate": "Ιανουάριος 2026",
 		"pressQuote": "«Νέο brunch spot στην Ηλιούπολη.»",
 		"partnerLabel": "Καφές από",
-		"partnerName": "Taf Coffee"
+		"partnerName": "Taf Coffee",
+		"partnerBody": "Καφές από Taf, ένα από τα πιο γνωστά specialty roasters της Αθήνας."
 	},
 	"cta": {
 		"title": "Έρχεστε από νωρίς. Φεύγετε αργά.",

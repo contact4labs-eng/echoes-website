@@ -31,7 +31,7 @@ const igHref = site.social.instagramDm;
 	<div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 md:px-8 md:py-4">
 		<a
 			href="/"
-			class="font-heading text-2xl font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80 md:text-3xl"
+			class="font-heading text-2xl font-semibold tracking-tight text-[var(--header-fg-strong)] transition-[color,opacity] duration-300 hover:opacity-80 md:text-3xl"
 		>
 			{site.wordmark}
 		</a>
@@ -40,7 +40,7 @@ const igHref = site.social.instagramDm;
 			{links.map((l) => (
 				<a
 					href={l.href}
-					class="text-[13px] font-medium tracking-[0.04em] text-foreground/75 transition-colors duration-300 hover:text-foreground"
+					class="text-[13px] font-medium tracking-[0.04em] text-[var(--header-fg-muted)] transition-colors duration-300 hover:text-[var(--header-fg-strong)]"
 				>
 					{l.label}
 				</a>
@@ -51,7 +51,7 @@ const igHref = site.social.instagramDm;
 			<LangSwitcher locale={locale} pathname={pathname} />
 			<a
 				href={telHref}
-				class="hidden h-9 items-center rounded-md bg-primary px-4 text-[13px] font-semibold tracking-wide text-primary-foreground transition-all duration-300 hover:bg-[color-mix(in_oklch,var(--primary)_85%,black)] md:inline-flex"
+				class="hidden h-9 items-center rounded-md bg-[var(--header-cta-bg)] px-4 text-[13px] font-semibold tracking-wide text-[var(--header-cta-fg)] transition-[background-color,color] duration-300 hover:bg-[var(--header-cta-bg-hover)] md:inline-flex"
 				aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
 			>
 				{t('nav.reserve')}

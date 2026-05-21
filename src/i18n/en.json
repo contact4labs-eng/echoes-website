@@ -18,7 +18,9 @@
 		"headline": "A quieter take on brunch.",
 		"subhead": "Coffee from morning, brunch all day, cocktails kept low-key.",
 		"ctaPrimary": "Call us",
-		"ctaSecondary": "Find us on Instagram"
+		"ctaSecondary": "Find us on Instagram",
+		"metaA": "Brunch · Coffee · Cocktails",
+		"metaB": "Nymfon 33, Ilioupoli"
 	},
 	"story": {
 		"eyebrow": "Our story",
@@ -27,10 +29,10 @@
 		"bodyB": "Coffee from morning, dishes with a homemade feel, and cocktails that arrive discreetly as the light fades."
 	},
 	"menu": {
-		"eyebrow": "From the menu",
-		"title": "Comfort food, with care in the details.",
-		"subtitle": "From the all-day kitchen — a taste of what we serve.",
-		"viewMoreLabel": "See the full menu",
+		"eyebrow": "Signature highlights",
+		"title": "Plates that carry the rhythm of the day.",
+		"subtitle": "A few selected tastes from the all-day kitchen — not the full menu.",
+		"viewMoreLabel": "For today’s full menu, call us.",
 		"viewMoreCta": "Call us",
 		"items": {
 			"crispyChickenBowl": {
@@ -96,13 +98,14 @@
 		"instagramCta": "Find us on Instagram"
 	},
 	"social": {
-		"eyebrow": "From the press and our partners",
-		"title": "A quiet presence in the neighborhood.",
+		"eyebrow": "From the press",
+		"title": "A new, quieter arrival in Ilioupoli.",
 		"pressName": "noupou.gr",
 		"pressDate": "January 2026",
 		"pressQuote": "“A new brunch spot in Ilioupoli.”",
 		"partnerLabel": "Coffee by",
-		"partnerName": "Taf Coffee"
+		"partnerName": "Taf Coffee",
+		"partnerBody": "Coffee by Taf, one of Athens’ best-known specialty roasters."
 	},
 	"cta": {
 		"title": "Come early. Leave late.",
