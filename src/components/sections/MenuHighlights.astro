@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import { menuHighlights } from '@/content/menu';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="menu" class="relative bg-background px-5 py-24 md:px-8 md:py-32 lg:py-40">
+	<div class="mx-auto max-w-7xl">
+		<div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-12" data-reveal>
+			<div class="max-w-2xl">
+				<p class="text-[11px] font-semibold tracking-[0.25em] text-primary uppercase">{t('menu.eyebrow')}</p>
+				<h2 class="font-heading mt-4 text-balance text-4xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-5xl md:text-[3.25rem]">
+					{t('menu.title')}
+				</h2>
+			</div>
+			<p class="max-w-md text-lg leading-relaxed text-foreground/65">
+				{t('menu.subtitle')}
+			</p>
+		</div>
+
+		<ul
+			class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:grid-cols-5"
+			data-reveal-stagger
+		>
+			{menuHighlights.map((item) => (
+				<li class="menu-card group relative flex flex-col overflow-hidden rounded-sm border border-foreground/8 bg-card transition-all duration-500 hover:-translate-y-1.5 hover:border-foreground/20 hover:shadow-[0_24px_48px_-24px_color-mix(in_oklch,var(--color-bistro-ink)_30%,transparent)]">
+					<div class="relative aspect-[4/5] overflow-hidden bg-muted">
+						<Image
+							src={item.image}
+							alt={t(`menu.items.${item.i18nKey}.name`)}
+							widths={[320, 480, 640, 800]}
+							sizes="(min-width: 1280px) 18vw, (min-width: 640px) 45vw, 90vw"
+							format="webp"
+							quality={82}
+							loading="lazy"
+							class="menu-image h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+						/>
+					</div>
+					<div class="flex flex-col gap-2 p-5">
+						<h3 class="font-heading text-xl leading-tight font-semibold text-balance text-foreground">
+							{t(`menu.items.${item.i18nKey}.name`)}
+						</h3>
+						<p class="text-sm leading-relaxed text-foreground/65">
+							{t(`menu.items.${item.i18nKey}.desc`)}
+						</p>
+					</div>
+				</li>
+			))}
+		</ul>
+
+		<div class="mt-14 flex flex-col items-center gap-2 text-center" data-reveal>
+			<p class="text-sm text-foreground/65">{t('menu.viewMoreLabel')}</p>
+			<a
+				href={`tel:${site.phone}`}
+				class="font-heading text-xl text-primary underline decoration-primary/30 underline-offset-[6px] transition-all duration-300 hover:decoration-primary"
+			>
+				{site.phoneDisplay}
+			</a>
+		</div>
+	</div>
+</section>

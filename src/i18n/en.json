@@ -1,0 +1,130 @@
+{
+	"meta": {
+		"home": {
+			"title": "Echoes Bistrot · Brunch & Coffee · Ilioupoli, Athens",
+			"description": "A quieter take on brunch in Ilioupoli, Athens. Coffee from morning, brunch all day, cocktails kept low-key. Nymfon 33."
+		}
+	},
+	"nav": {
+		"story": "Story",
+		"menu": "Menu",
+		"chef": "Kitchen",
+		"visit": "Visit",
+		"reserve": "Call us",
+		"langOther": "EL"
+	},
+	"hero": {
+		"eyebrow": "Nymfon 33 · Ilioupoli",
+		"headline": "A quieter take on brunch.",
+		"subhead": "Coffee from morning, brunch all day, cocktails kept low-key.",
+		"ctaPrimary": "Call us",
+		"ctaSecondary": "Find us on Instagram"
+	},
+	"story": {
+		"eyebrow": "Our story",
+		"title": "A quieter take on brunch.",
+		"bodyA": "On the corner of Nymfon, under red-and-yellow striped awnings, Echoes serves a quieter take on brunch.",
+		"bodyB": "Coffee from morning, dishes with a homemade feel, and cocktails that arrive discreetly as the light fades."
+	},
+	"menu": {
+		"eyebrow": "From the menu",
+		"title": "Comfort food, with care in the details.",
+		"subtitle": "From the all-day kitchen — a taste of what we serve.",
+		"viewMoreLabel": "See the full menu",
+		"viewMoreCta": "Call us",
+		"items": {
+			"crispyChickenBowl": {
+				"name": "Crispy chicken bowl",
+				"desc": "Crispy breaded chicken, romaine, croutons, parmesan."
+			},
+			"prosciuttoEgg": {
+				"name": "Thessaloniki koulouri",
+				"desc": "Basil pesto, prosciutto, eggs, smoked provolone."
+			},
+			"scrambleChorizo": {
+				"name": "Scrambled eggs with chorizo",
+				"desc": "Soft scrambled eggs, chorizo, avocado, cherry tomatoes, herbs."
+			},
+			"eggsToast": {
+				"name": "Eggs on toast",
+				"desc": "House bread, sunny-side eggs, olive oil, fresh cheese."
+			},
+			"baconEggRoll": {
+				"name": "Bacon & egg roll",
+				"desc": "Brioche, cheddar, onion marmalade, bacon."
+			},
+			"frenchToastTiramisu": {
+				"name": "French toast tiramisu",
+				"desc": "White-chocolate namelaka, mocha ice cream."
+			},
+			"frenchToastPistachio": {
+				"name": "French toast, Aegina pistachio",
+				"desc": "Forest-fruit sauce, candied pistachio."
+			},
+			"goddessBowl": {
+				"name": "Goddess bowl",
+				"desc": "Quinoa, seasonal vegetables, hummus, fresh herbs."
+			},
+			"beefBurger": {
+				"name": "Beef burger",
+				"desc": "Brioche, smashed beef patty, house sauces."
+			},
+			"quiche": {
+				"name": "Quiche Lorraine",
+				"desc": "Sablée crust, smoked bacon, gruyère."
+			},
+			"milkshake": {
+				"name": "Strawberry milkshake",
+				"desc": "Fresh strawberry, vanilla ice cream, whipped cream."
+			}
+		}
+	},
+	"chef": {
+		"eyebrow": "In the kitchen",
+		"title": "Made by hand, one plate at a time.",
+		"body": "Open kitchen. Deep blue tiles. Copper lamps. The team serves at its own pace — quick enough to keep things hot, quiet enough to let you talk."
+	},
+	"visit": {
+		"eyebrow": "Visit us",
+		"title": "Nymfon 33, Ilioupoli.",
+		"addressLabel": "Address",
+		"phoneLabel": "Phone",
+		"hoursLabel": "Hours",
+		"hoursWeekdays": "Mon–Fri · morning until 18:00",
+		"hoursWeekends": "Sat–Sun · morning until 23:00",
+		"mapsCta": "Open in Maps",
+		"instagramCta": "Find us on Instagram"
+	},
+	"social": {
+		"eyebrow": "From the press and our partners",
+		"title": "A quiet presence in the neighborhood.",
+		"pressName": "noupou.gr",
+		"pressDate": "January 2026",
+		"pressQuote": "“A new brunch spot in Ilioupoli.”",
+		"partnerLabel": "Coffee by",
+		"partnerName": "Taf Coffee"
+	},
+	"cta": {
+		"title": "Come early. Leave late.",
+		"subtitle": "Table? Order? Call us or send a DM.",
+		"primary": "Call us",
+		"secondary": "DM on Instagram"
+	},
+	"footer": {
+		"tagline": "A quieter take on brunch.",
+		"section": {
+			"visit": "Visit",
+			"hours": "Hours",
+			"follow": "Follow"
+		},
+		"copyright": "© {year} Echoes Bistrot · Designed with care in Athens"
+	},
+	"a11y": {
+		"skipToContent": "Skip to content",
+		"openMenu": "Open menu",
+		"closeMenu": "Close menu",
+		"switchLang": "Switch language to Greek",
+		"callPhone": "Call {phone}",
+		"openInstagram": "Open Instagram in a new tab"
+	}
+}

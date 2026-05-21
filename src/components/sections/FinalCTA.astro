@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import interiorEvening from '@/assets/photos/interior-evening.png';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="relative isolate overflow-hidden">
+	<div class="absolute inset-0 -z-10">
+		<Image
+			src={interiorEvening}
+			alt=""
+			widths={[640, 960, 1280, 1920]}
+			sizes="100vw"
+			format="webp"
+			quality={80}
+			loading="lazy"
+			class="kenburns h-full w-full object-cover"
+		/>
+		<div class="absolute inset-0 bg-gradient-to-t from-bistro-ink/85 via-bistro-ink/55 to-bistro-ink/65" aria-hidden="true"></div>
+	</div>
+
+	<div class="mx-auto max-w-3xl px-5 py-32 text-center md:px-8 md:py-44 lg:py-52" data-reveal>
+		<h2 class="font-heading text-balance text-4xl leading-[1.05] font-semibold tracking-tight text-bistro-cream sm:text-6xl md:text-7xl">
+			{t('cta.title')}
+		</h2>
+		<p class="mt-7 text-lg leading-relaxed text-bistro-cream/85 md:text-xl">
+			{t('cta.subtitle')}
+		</p>
+		<div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+			<a
+				href={`tel:${site.phone}`}
+				class="inline-flex h-12 items-center justify-center rounded-full bg-bistro-cream px-7 text-sm font-semibold tracking-wide text-bistro-ink transition-all duration-300 hover:scale-[1.02] hover:bg-white"
+				aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
+			>
+				{t('cta.primary')}
+			</a>
+			<a
+				href={site.social.instagramDm}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex h-12 items-center justify-center rounded-full border border-bistro-cream/45 px-7 text-sm font-semibold tracking-wide text-bistro-cream transition-all duration-300 hover:border-bistro-cream hover:bg-bistro-cream/5"
+			>
+				{t('cta.secondary')}
+			</a>
+		</div>
+	</div>
+</section>

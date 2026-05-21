@@ -1,0 +1,128 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import heroPoster from '@/assets/photos/facade-bougainvillea.jpg';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section
+	id="hero"
+	class="relative isolate flex min-h-svh items-end overflow-hidden bg-bistro-ink text-bistro-cream"
+	aria-label={t('hero.headline')}
+>
+	<div class="absolute inset-0 -z-10">
+		<Image
+			src={heroPoster}
+			alt=""
+			width={1440}
+			height={2560}
+			widths={[640, 960, 1280, 1920]}
+			sizes="100vw"
+			format="webp"
+			quality={78}
+			loading="eager"
+			fetchpriority="high"
+			class="hero-poster h-full w-full object-cover"
+		/>
+		<!-- Hero video disabled in v1: available source clips have burnt-in caption overlays.
+		     Re-enable by restoring data-webm / data-mp4 once clean cinematic footage exists. -->
+		<video
+			data-hero-video
+			data-hero-disabled
+			class="hidden"
+			poster=""
+			muted
+			loop
+			playsinline
+			preload="none"
+			aria-hidden="true"
+		></video>
+	</div>
+
+	<div
+		class="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/15 to-black/80"
+		aria-hidden="true"
+	></div>
+
+	<div class="mx-auto w-full max-w-7xl px-5 pt-32 pb-20 md:px-8 md:pt-40 md:pb-32">
+		<div class="max-w-3xl">
+			<p class="hero-stagger hero-eyebrow text-[11px] font-medium tracking-[0.25em] text-bistro-cream/85 uppercase">
+				{t('hero.eyebrow')}
+			</p>
+			<h1 class="hero-stagger hero-headline font-heading mt-5 text-5xl leading-[1.04] font-semibold tracking-tight text-balance text-bistro-cream sm:text-6xl md:text-7xl lg:text-8xl">
+				{t('hero.headline')}
+			</h1>
+			<p class="hero-stagger hero-subhead mt-7 max-w-2xl text-pretty text-lg leading-relaxed text-bistro-cream/90 md:text-xl">
+				{t('hero.subhead')}
+			</p>
+			<div class="hero-stagger hero-ctas mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+				<a
+					href={`tel:${site.phone}`}
+					class="inline-flex h-12 items-center justify-center rounded-full bg-bistro-cream px-7 text-sm font-semibold tracking-wide text-bistro-ink transition-all duration-300 hover:scale-[1.02] hover:bg-white"
+					aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
+				>
+					{t('hero.ctaPrimary')}
+				</a>
+				<a
+					href={site.social.instagramUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex h-12 items-center justify-center rounded-full border border-bistro-cream/45 px-7 text-sm font-semibold tracking-wide text-bistro-cream transition-all duration-300 hover:border-bistro-cream hover:bg-bistro-cream/5"
+				>
+					{t('hero.ctaSecondary')}
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="absolute right-5 bottom-5 z-10 hidden flex-col items-center gap-2 text-bistro-cream/65 md:right-8 md:bottom-8 md:flex">
+		<span class="text-[10px] font-medium tracking-[0.35em] uppercase">Scroll</span>
+		<span class="hero-scroll-line h-10 w-px bg-bistro-cream/45"></span>
+	</div>
+</section>
+
+<style>
+	@keyframes heroFade {
+		from { opacity: 0; transform: translate3d(0, 20px, 0); }
+		to   { opacity: 1; transform: translate3d(0, 0, 0); }
+	}
+	@keyframes scrollLine {
+		0%   { transform: scaleY(0); transform-origin: top; }
+		45%  { transform: scaleY(1); transform-origin: top; }
+		55%  { transform: scaleY(1); transform-origin: bottom; }
+		100% { transform: scaleY(0); transform-origin: bottom; }
+	}
+	@keyframes posterDrift {
+		0%   { transform: scale(1.04) translate3d(0, 0, 0); }
+		100% { transform: scale(1.1) translate3d(-1%, -1%, 0); }
+	}
+	.hero-stagger {
+		opacity: 0;
+		animation: heroFade 1100ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+	}
+	.hero-eyebrow   { animation-delay: 200ms; }
+	.hero-headline  { animation-delay: 320ms; }
+	.hero-subhead   { animation-delay: 560ms; }
+	.hero-ctas      { animation-delay: 760ms; }
+	.hero-scroll-line {
+		animation: scrollLine 3.4s ease-in-out 1.5s infinite;
+	}
+	.hero-poster {
+		animation: posterDrift 18s ease-in-out infinite alternate;
+		will-change: transform;
+	}
+	video[data-hero-video].is-playing {
+		opacity: 1;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.hero-stagger { opacity: 1 !important; animation: none !important; }
+		.hero-scroll-line { animation: none !important; opacity: 0.4; }
+		.hero-poster { animation: none !important; }
+	}
+</style>
+

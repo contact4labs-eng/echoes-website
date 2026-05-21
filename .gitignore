@@ -1,29 +1,32 @@
-# Dependencies
-node_modules/
-.pnpm-store/
-
-# Build output
+# build output
 dist/
-.output/
-.next/
-out/
-build/
+# generated types
+.astro/
 
-# Env
-.env
-.env.local
-.env.*.local
+# dependencies
+node_modules/
 
-# Logs
-*.log
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor / OS
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
-Thumbs.db
-.vscode/
+
+# jetbrains setting folder
 .idea/
-*.swp
+
+# Local downloads / asset bundles that live in the project dir but should not be committed
+wetransfer_*.zip
+
+# Claude Code local config — keep launch.json (Preview MCP dev-server config), ignore everything else
+.claude/*
+!.claude/launch.json
+

@@ -1,0 +1,33 @@
+---
+import type { Locale } from '@/i18n/utils';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Story from '@/components/sections/Story.astro';
+import MenuHighlights from '@/components/sections/MenuHighlights.astro';
+import ChefProcess from '@/components/sections/ChefProcess.astro';
+import Visit from '@/components/sections/Visit.astro';
+import SocialProof from '@/components/sections/SocialProof.astro';
+import FinalCTA from '@/components/sections/FinalCTA.astro';
+
+interface Props {
+	locale: Locale;
+	pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+---
+
+<Header locale={locale} pathname={pathname} />
+
+<main id="main">
+	<Hero locale={locale} />
+	<Story locale={locale} />
+	<MenuHighlights locale={locale} />
+	<ChefProcess locale={locale} />
+	<Visit locale={locale} />
+	<SocialProof locale={locale} />
+	<FinalCTA locale={locale} />
+</main>
+
+<Footer locale={locale} />
