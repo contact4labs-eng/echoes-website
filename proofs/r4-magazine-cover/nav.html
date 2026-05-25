@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="el">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>Echoes · περιεχόμενα · R4 nav proof</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&family=Old+Standard+TT:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./nav.css">
+</head>
+<body>
+	<!--
+	   This is the magazine's table of contents (περιεχόμενα), shown as a
+	   full-bleed takeover when the user clicks the [ περιεχόμενα ] link
+	   from any spread.
+
+	   NOT a hamburger, NOT a top nav bar, NOT a CTA pill.
+
+	   Each row is a magazine TOC entry: page number, italic spread title,
+	   one-line description, all on a cream paper background.
+	-->
+	<main class="contents-overlay">
+		<header class="overlay-header">
+			<p class="overlay-eyebrow">Echoes</p>
+			<p class="overlay-title">περιεχόμενα</p>
+			<button type="button" class="overlay-close" aria-label="κλείσιμο">
+				<span aria-hidden="true">×</span>
+			</button>
+		</header>
+
+		<ol class="toc">
+			<li class="toc-entry">
+				<span class="toc-page">σελ. 01</span>
+				<a href="./cover-v2.html" class="toc-title">Echoes</a>
+				<span class="toc-blurb">το εξώφυλλο. ποια γωνία.</span>
+			</li>
+			<li class="toc-entry">
+				<span class="toc-page">σελ. 12</span>
+				<a href="./spread-v2.html" class="toc-title">Σαββατοκύριακο.</a>
+				<span class="toc-blurb">από την κουζίνα — κουλούρι Θεσσαλονίκης.</span>
+			</li>
+			<li class="toc-entry">
+				<span class="toc-page">σελ. 18</span>
+				<a href="#" class="toc-title">Στο πάσο.</a>
+				<span class="toc-blurb">μπρίκι, φωτιά χαμηλά, καφές από Taf.</span>
+			</li>
+			<li class="toc-entry">
+				<span class="toc-page">σελ. 24</span>
+				<a href="#" class="toc-title">Νυμφών 33.</a>
+				<span class="toc-blurb">πώς θα μας βρείτε. πότε είμαστε ανοιχτά.</span>
+			</li>
+			<li class="toc-entry">
+				<span class="toc-page">σελ. 28</span>
+				<a href="#" class="toc-title">σας περιμένουμε.</a>
+				<span class="toc-blurb">από το πρωί ως αργά. <a href="tel:+302109901676" class="inline-phone">210 990 1676</a>.</span>
+			</li>
+		</ol>
+
+		<footer class="overlay-foot">
+			<p class="foot-left">Echoes · Νυμφών 33 · Ηλιούπολη <span class="postal">163 41</span></p>
+			<p class="foot-right"><a href="tel:+302109901676">210 990 1676</a></p>
+		</footer>
+	</main>
+</body>
+</html>

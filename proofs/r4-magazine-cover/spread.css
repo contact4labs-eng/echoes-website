@@ -1,0 +1,265 @@
+/* -----------------------------------------------------------------------
+   R4 — Magazine spread proof (σελ. 12: από την κουζίνα — Σαββατοκύριακο)
+   Same palette + type system as the cover. Different composition rules:
+   - Title hangs upper-left in display italic.
+   - Photo anchored lower-right with a credit-style folio caption.
+   - A pull-quote sits at the spine of the spread.
+   ----------------------------------------------------------------------- */
+
+:root {
+	--paper: #f0e7d2;
+	--paper-deep: #ebe0c5;
+	--ink: #1a1814;
+	--whisper: rgba(26, 24, 20, 0.42);
+	--mark: rgba(26, 24, 20, 0.18);
+	--accent: #b53a2a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--paper); color: var(--ink); }
+body {
+	font-family: 'Crimson Pro', 'Georgia', serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+.spread {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 28px 56px 40px;
+	background:
+		radial-gradient(80% 60% at 80% 100%, var(--paper-deep) 0%, var(--paper) 70%);
+}
+
+/* -------- FOLIO (top page-number line) -------- */
+.folio {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--ink);
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+}
+.folio p { margin: 0; }
+.folio .folio-left { color: var(--ink); font-weight: 500; }
+.folio .folio-right { color: var(--whisper); }
+
+/* -------- COMPOSITION -------- */
+.composition {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1.1fr 0.9fr;
+	align-items: stretch;
+	column-gap: 40px;
+	padding: 56px 0 40px;
+}
+
+/* -------- TITLE AREA (left) -------- */
+.title-area {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 60vh;
+	padding-right: 8px;
+}
+.spread-title {
+	margin: 0;
+	font-family: 'Cormorant Garamond', 'Crimson Pro', Georgia, serif;
+	font-weight: 500;
+	font-style: italic;
+	font-size: clamp(4rem, 9.5vw, 8.5rem);
+	line-height: 0.86;
+	letter-spacing: -0.025em;
+	color: var(--ink);
+}
+.spread-title-line {
+	display: block;
+}
+
+.spread-subhead {
+	margin: 1.6rem 0 0;
+	font-family: 'Crimson Pro', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+	line-height: 1.32;
+	color: var(--ink);
+	max-width: 28ch;
+}
+.spread-subhead em {
+	color: var(--accent);
+	font-style: italic;
+	font-weight: 500;
+}
+
+/* The pull-quote sits at the bottom of the title column, set as a hanging
+   editorial element with a hairline rule. */
+.pull {
+	margin-top: 2.4rem;
+	padding-top: 16px;
+	border-top: 1px solid var(--mark);
+	max-width: 28ch;
+}
+.pull-text {
+	margin: 0;
+	font-family: 'Cormorant Garamond', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1rem, 1.3vw, 1.25rem);
+	line-height: 1.35;
+	color: var(--whisper);
+}
+
+/* -------- PLATE (photo area, right) -------- */
+.plate {
+	margin: 0;
+	align-self: end;
+	justify-self: end;
+	width: clamp(260px, 32vw, 440px);
+}
+.plate img {
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	object-position: center 40%;
+	box-shadow:
+		0 1px 0 rgba(26, 24, 20, 0.06),
+		0 36px 60px -32px rgba(26, 24, 20, 0.30);
+	filter: contrast(1.02) saturate(0.97);
+}
+.plate figcaption {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: baseline;
+	gap: 12px;
+	margin-top: 14px;
+	font-family: 'Crimson Pro', serif;
+	font-size: 12.5px;
+	line-height: 1.35;
+}
+.caption-label {
+	font-style: italic;
+	font-weight: 500;
+	color: var(--accent);
+	letter-spacing: 0.04em;
+}
+.caption-body {
+	font-style: italic;
+	color: var(--whisper);
+}
+
+/* -------- RUN-ON (bottom of page) -------- */
+.run-on {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	gap: 24px;
+	padding-top: 18px;
+	border-top: 1px solid var(--ink);
+}
+.run-on .lead {
+	margin: 0;
+	font-family: 'Crimson Pro', serif;
+	font-style: normal;
+	font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+	line-height: 1.5;
+	color: var(--ink);
+	max-width: 56ch;
+}
+.run-on .lead em {
+	font-style: italic;
+	color: var(--accent);
+	font-weight: 500;
+}
+.run-on .meta {
+	margin: 0;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--ink);
+	text-align: right;
+}
+.run-on .meta a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.run-on .meta span {
+	color: var(--whisper);
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.spread {
+		padding: 18px 22px 28px;
+		grid-template-rows: auto auto 1fr auto;
+	}
+
+	.folio {
+		font-size: 9.5px;
+		letter-spacing: 0.22em;
+	}
+
+	.composition {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		column-gap: 0;
+		row-gap: 28px;
+		padding: 28px 0 24px;
+	}
+
+	.title-area {
+		min-height: auto;
+		padding-right: 0;
+	}
+	.spread-title {
+		font-size: clamp(3rem, 14vw, 5rem);
+		line-height: 0.9;
+	}
+	.spread-subhead {
+		margin-top: 1.1rem;
+		font-size: 1.05rem;
+		max-width: 26ch;
+	}
+	.pull {
+		margin-top: 1.6rem;
+		padding-top: 12px;
+		max-width: 28ch;
+	}
+	.pull-text { font-size: 1rem; }
+
+	.plate {
+		width: 100%;
+		max-width: 100%;
+		justify-self: stretch;
+	}
+	.plate img {
+		max-height: 56vh;
+	}
+	.plate figcaption {
+		grid-template-columns: 1fr;
+		gap: 4px;
+		font-size: 11.5px;
+	}
+
+	.run-on {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.run-on .meta { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { animation: none !important; transition: none !important; }
+}

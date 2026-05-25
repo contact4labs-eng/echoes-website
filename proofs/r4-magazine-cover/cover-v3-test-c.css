@@ -1,0 +1,162 @@
+/* -----------------------------------------------------------------------
+   v3 trial — Variant C · type-first inset
+   Type fills the upper page. Plate is small, almost a postcard-pinned
+   inset. Editorial restraint over photo dominance. Risk: less premium
+   because the photo loses visual weight.
+   ----------------------------------------------------------------------- */
+
+:root {
+	--paper: #f0e7d2;
+	--paper-deep: #ebe0c5;
+	--ink: #1a1814;
+	--whisper: rgba(26, 24, 20, 0.42);
+	--mark: rgba(26, 24, 20, 0.18);
+	--accent: #b53a2a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--paper); color: var(--ink); }
+body {
+	font-family: 'Crimson Pro', 'Georgia', serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+.cover {
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 18px 22px 22px;
+	background:
+		radial-gradient(120% 80% at 50% 0%, var(--paper) 60%, var(--paper-deep) 100%);
+}
+
+/* MASTHEAD */
+.masthead {
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--ink);
+}
+.masthead-text {
+	margin: 0;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 9.5px;
+	font-weight: 500;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.m-name { color: var(--accent); }
+.m-sep { color: var(--mark); }
+.m-where { color: var(--ink); }
+
+/* COMPOSITION */
+.composition {
+	display: flex;
+	flex-direction: column;
+	padding: 22px 0 14px;
+	position: relative;
+}
+
+/* WORDMARK — moderate, top */
+.wordmark {
+	position: relative;
+	margin: 0 0 16px;
+	font-family: 'Cormorant Garamond', 'Crimson Pro', Georgia, serif;
+	font-weight: 500;
+	font-style: italic;
+	font-size: 28vw;
+	line-height: 0.85;
+	letter-spacing: -0.035em;
+	color: var(--ink);
+	text-align: left;
+}
+.wordmark-shadow, .wordmark-fill { display: block; }
+.wordmark-shadow { color: var(--ink); }
+.wordmark-fill {
+	position: absolute;
+	inset: 0;
+	background-image: url('../../src/assets/photos/facade-bougainvillea.jpg');
+	background-size: 180% 200%;
+	background-position: 40% 58%;
+	background-repeat: no-repeat;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	opacity: 0.94;
+}
+
+.cover-line {
+	margin: 0 0 12px;
+	font-family: 'Crimson Pro', Georgia, serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 1.15rem;
+	line-height: 1.22;
+	color: var(--accent);
+	max-width: 22ch;
+}
+.hours {
+	margin: 0 0 24px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 9.5px;
+	letter-spacing: 0.18em;
+	text-transform: lowercase;
+	color: var(--whisper);
+	line-height: 1.7;
+}
+
+/* PLATE — small inset, pinned bottom-right */
+.cover-plate {
+	margin: auto 0 0 auto;
+	width: 50vw;
+	max-width: 200px;
+}
+.cover-plate img {
+	width: 100%;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+	object-position: center 40%;
+	box-shadow:
+		0 1px 0 rgba(26, 24, 20, 0.05),
+		0 14px 22px -12px rgba(26, 24, 20, 0.30);
+	filter: contrast(1.02) saturate(0.97);
+}
+.cover-plate figcaption {
+	margin-top: 8px;
+	font-family: 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 11px;
+	color: var(--whisper);
+	text-align: right;
+}
+
+/* COLOPHON */
+.colophon {
+	padding-top: 12px;
+	border-top: 1px solid var(--ink);
+	display: grid;
+	gap: 4px;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 9.5px;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+.colophon p { margin: 0; }
+.colophon .address { color: var(--ink); font-weight: 500; }
+.colophon .postal { color: var(--whisper); }
+.colophon .phone a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { animation: none !important; transition: none !important; }
+}

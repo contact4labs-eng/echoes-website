@@ -1,0 +1,271 @@
+/* -----------------------------------------------------------------------
+   R4 — Magazine Cover proof
+   Hand-written CSS only. No utility-class grammar. No design-system look.
+   Pairing: Cormorant Garamond Italic (wordmark) + Crimson Pro (Greek body)
+   + IBM Plex Mono (masthead / colophon small print).
+   Three colors only. One accent.
+   ----------------------------------------------------------------------- */
+
+:root {
+	--paper: #f0e7d2;
+	--paper-deep: #ebe0c5;
+	--ink: #1a1814;
+	--whisper: rgba(26, 24, 20, 0.42);
+	--mark: rgba(26, 24, 20, 0.18);
+	--accent: #b53a2a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--paper); color: var(--ink); }
+body {
+	font-family: 'Crimson Pro', 'Georgia', serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+/* The cover takes the whole viewport in one composition. No card, no padding box. */
+.cover {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 28px 56px 40px;
+	background:
+		radial-gradient(120% 80% at 50% 0%, var(--paper) 60%, var(--paper-deep) 100%);
+}
+
+/* -------- MASTHEAD -------- */
+.masthead {
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--ink);
+}
+.masthead-text {
+	margin: 0;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+	color: var(--ink);
+	text-align: center;
+}
+.masthead-text .ny {
+	font-feature-settings: "sups" 0, "smcp" 1;
+	color: var(--accent);
+}
+
+/* -------- COMPOSITION: brand left, plate right -------- */
+.composition {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1.05fr 0.95fr;
+	align-items: center;
+	column-gap: 24px;
+	padding: 32px 0 36px;
+}
+
+.brand-block {
+	position: relative;
+	z-index: 2;
+	padding-top: 16px;
+}
+
+.wordmark {
+	position: relative;
+	margin: 0;
+	font-family: 'Cormorant Garamond', 'Crimson Pro', Georgia, serif;
+	font-weight: 500;
+	font-style: italic;
+	font-size: clamp(8rem, 18vw, 16rem);
+	line-height: 0.82;
+	letter-spacing: -0.035em;
+	color: var(--ink);
+}
+/* The wordmark uses two stacked spans so we can paint the facade
+   photograph inside the letterforms (background-clip: text) without
+   losing a visible silhouette as a fallback when the clip isn't
+   supported. */
+.wordmark-shadow,
+.wordmark-fill {
+	display: block;
+}
+.wordmark-shadow {
+	color: var(--ink);
+}
+.wordmark-fill {
+	position: absolute;
+	inset: 0;
+	background-image: url('../../src/assets/photos/facade-bougainvillea.jpg');
+	background-size: 130% 200%;
+	background-position: 40% 55%;
+	background-repeat: no-repeat;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	mix-blend-mode: normal;
+	opacity: 0.92;
+}
+
+.cover-line {
+	margin: 2.6rem 0 0;
+	font-family: 'Crimson Pro', Georgia, serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1.15rem, 1.6vw, 1.55rem);
+	line-height: 1.25;
+	color: var(--accent);
+	max-width: 22ch;
+	letter-spacing: 0.005em;
+}
+
+/* The cover plate (dessert-sorbet). Positioned so it visually overlaps
+   the wordmark on its left edge — Vogue-style cover subject intrusion. */
+.cover-plate {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	justify-self: end;
+	width: clamp(280px, 32vw, 460px);
+	transform: translate(-9%, -4%);
+}
+.cover-plate img {
+	width: 100%;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+	object-position: center 35%;
+	box-shadow:
+		0 1px 0 rgba(26, 24, 20, 0.06),
+		0 36px 60px -32px rgba(26, 24, 20, 0.28);
+	filter: contrast(1.02) saturate(0.97);
+}
+.cover-plate figcaption {
+	margin-top: 10px;
+	font-family: 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 12px;
+	color: var(--whisper);
+	text-align: right;
+	letter-spacing: 0.01em;
+}
+
+/* -------- COLOPHON -------- */
+.colophon {
+	display: grid;
+	grid-template-columns: minmax(0, auto) auto 1fr;
+	align-items: baseline;
+	gap: 28px;
+	padding-top: 16px;
+	border-top: 1px solid var(--ink);
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+.colophon p { margin: 0; }
+.colophon .address {
+	font-weight: 500;
+}
+.colophon .address .number {
+	font-feature-settings: "tnum" 1;
+}
+.colophon .address .postal {
+	color: var(--whisper);
+}
+.colophon .phone a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.colophon .phone a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+.colophon .services {
+	color: var(--whisper);
+	text-align: right;
+}
+
+/* -------- CONTINUE HINT -------- */
+.continue {
+	position: absolute;
+	right: 56px;
+	bottom: 70px;
+	margin: 0;
+	font-family: 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 13px;
+	letter-spacing: 0.06em;
+	color: var(--mark);
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.cover {
+		padding: 18px 22px 24px;
+		grid-template-rows: auto auto 1fr auto;
+	}
+
+	.masthead-text {
+		font-size: 9px;
+		letter-spacing: 0.24em;
+	}
+	.masthead-text .ny { display: none; }
+
+	.composition {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		row-gap: 18px;
+		column-gap: 0;
+		padding: 22px 0 18px;
+		align-items: start;
+	}
+	.brand-block { padding-top: 0; }
+	.wordmark {
+		font-size: clamp(5rem, 26vw, 8rem);
+		line-height: 0.84;
+	}
+	.cover-line {
+		margin-top: 1.4rem;
+		font-size: 1.05rem;
+		max-width: 18ch;
+	}
+
+	.cover-plate {
+		width: 100%;
+		max-width: 100%;
+		justify-self: stretch;
+		transform: translate(0, 0);
+		/* Pull photo upward so the dessert subject grazes the wordmark's lower edge */
+		margin-top: -32px;
+		padding-left: 18%;
+	}
+	.cover-plate img {
+		aspect-ratio: 3 / 4;
+		max-height: 58vh;
+	}
+	.cover-plate figcaption {
+		font-size: 11px;
+	}
+
+	.colophon {
+		grid-template-columns: 1fr;
+		gap: 6px;
+		padding-top: 12px;
+		font-size: 9.5px;
+		letter-spacing: 0.16em;
+	}
+	.colophon .services { text-align: left; }
+
+	.continue { display: none; }
+}
+
+/* -------- REDUCED MOTION (no animation here, but kept for consistency) -------- */
+@media (prefers-reduced-motion: reduce) {
+	* { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,308 @@
+/* -----------------------------------------------------------------------
+   R4 v3 — Magazine Cover (Echoes Bistrot · Νυμφών 33)
+   Changes from v2:
+   DESKTOP
+   - .brand-block becomes a flex column that fills the row height
+     (composition align-items: stretch). The wordmark sits at the top
+     and the .brand-lower (cover-line + hours) is pushed to the bottom
+     via margin-top: auto. This kills the v2 empty cream band on the
+     lower-left.
+   - .cover-plate gets align-self: end so its base sits flush with the
+     colophon hairline. The page floor reads as a single editorial line.
+   - Colophon padding tightened upward by a few pixels to pull the floor
+     in (no filler element added).
+   - .continue removed entirely.
+   MOBILE
+   - Wordmark grows to 36vw italic photo-fill (the page's brand moment).
+   - Plate becomes a small lower-left cutout (38vw, 4:5 aspect).
+   - Cover-line + hours form a right-hand text column at the same
+     vertical baseline as the plate.
+   - Masthead categories stay visible on mobile (business clarity).
+   ----------------------------------------------------------------------- */
+
+:root {
+	--paper: #f0e7d2;
+	--paper-deep: #ebe0c5;
+	--ink: #1a1814;
+	--whisper: rgba(26, 24, 20, 0.42);
+	--mark: rgba(26, 24, 20, 0.18);
+	--accent: #b53a2a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--paper); color: var(--ink); }
+body {
+	font-family: 'Crimson Pro', 'Georgia', serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+.cover {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 28px 56px 32px;
+	background:
+		radial-gradient(120% 80% at 50% 0%, var(--paper) 60%, var(--paper-deep) 100%);
+}
+
+/* -------- MASTHEAD (brand-line bar) -------- */
+.masthead {
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--ink);
+}
+.masthead-text {
+	margin: 0;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--ink);
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+.masthead .m-name { color: var(--accent); }
+.masthead .m-sep { color: var(--mark); }
+.masthead .m-cats { color: var(--whisper); }
+
+/* -------- COMPOSITION -------- */
+.composition {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1.05fr 0.95fr;
+	align-items: stretch;          /* was center in v2 — stretch is the v3 desktop fix */
+	column-gap: 24px;
+	padding: 36px 0 24px;
+}
+
+/* Brand block becomes a flex column. Wordmark at top, brand-lower at bottom. */
+.brand-block {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.wordmark {
+	position: relative;
+	margin: 0;
+	font-family: 'Cormorant Garamond', 'Crimson Pro', Georgia, serif;
+	font-weight: 500;
+	font-style: italic;
+	font-size: clamp(8rem, 18vw, 16rem);
+	line-height: 0.82;
+	letter-spacing: -0.035em;
+	color: var(--ink);
+}
+.wordmark-shadow, .wordmark-fill { display: block; }
+.wordmark-shadow { color: var(--ink); }
+.wordmark-fill {
+	position: absolute;
+	inset: 0;
+	background-image: url('../../src/assets/photos/facade-bougainvillea.jpg');
+	background-size: 140% 200%;
+	background-position: 38% 58%;
+	background-repeat: no-repeat;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	opacity: 0.94;
+}
+
+/* The lower text block — pushed to the bottom of the brand-block.
+   This is the v3 desktop fix: the lower-left is no longer empty. */
+.brand-lower {
+	margin-top: auto;
+	padding-top: 24px;
+}
+
+.cover-line {
+	margin: 0;
+	font-family: 'Crimson Pro', Georgia, serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1.2rem, 1.7vw, 1.65rem);
+	line-height: 1.25;
+	color: var(--accent);
+	max-width: 22ch;
+	letter-spacing: 0.005em;
+}
+
+.hours {
+	margin: 1.2rem 0 0;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: 0.2em;
+	text-transform: lowercase;
+	color: var(--whisper);
+	line-height: 1.8;
+}
+
+/* PLATE — anchor to bottom-right so the plate base sits at the colophon line. */
+.cover-plate {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	align-self: end;             /* v3 — anchor plate to the bottom of its column */
+	justify-self: end;
+	width: clamp(280px, 32vw, 460px);
+	transform: translate(-6%, 0);
+}
+.cover-plate img {
+	width: 100%;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+	object-position: center 35%;
+	box-shadow:
+		0 1px 0 rgba(26, 24, 20, 0.06),
+		0 36px 60px -32px rgba(26, 24, 20, 0.28);
+	filter: contrast(1.02) saturate(0.97);
+}
+
+/* -------- COLOPHON -------- */
+.colophon {
+	display: grid;
+	grid-template-columns: minmax(0, auto) auto 1fr;
+	align-items: baseline;
+	gap: 28px;
+	padding-top: 14px;
+	border-top: 1px solid var(--ink);
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+.colophon p { margin: 0; }
+.colophon .address { font-weight: 500; }
+.colophon .address .number { font-feature-settings: "tnum" 1; }
+.colophon .address .postal { color: var(--whisper); }
+.colophon .phone a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.colophon .phone a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+.colophon .services {
+	color: var(--whisper);
+	text-align: right;
+}
+.colophon .services .sep { color: var(--mark); margin: 0 6px; }
+.colophon .services a {
+	color: var(--whisper);
+	text-decoration: none;
+	transition: color 200ms ease;
+}
+.colophon .services a:hover { color: var(--accent); }
+.colophon .services .nav-trigger { color: var(--ink); }
+
+/* -------- MOBILE: 390x844 — Variant A "wordmark dominant" -------- */
+@media (max-width: 768px) {
+	.cover {
+		padding: 18px 22px 22px;
+		grid-template-rows: auto 1fr auto;
+	}
+
+	.masthead-text {
+		font-size: 9.5px;
+		letter-spacing: 0.18em;
+		gap: 8px;
+	}
+	/* Categories stay visible on mobile (business clarity). */
+	.masthead .m-cats { display: inline; }
+
+	/* Composition becomes a 2-col, 2-row grid:
+	     row 1: wordmark spans full width
+	     row 2: plate (left col 38vw) + brand-lower (right col 1fr) */
+	.composition {
+		grid-template-columns: 38vw 1fr;
+		grid-template-rows: auto 1fr;
+		row-gap: 18px;
+		column-gap: 16px;
+		padding: 18px 0 12px;
+	}
+
+	/* display: contents promotes wordmark + brand-lower to be direct grid
+	   children of composition (sibling to the plate). */
+	.brand-block {
+		display: contents;
+	}
+
+	/* Wordmark dominant — Variant A. Spans the full top row. */
+	.wordmark {
+		grid-row: 1;
+		grid-column: 1 / -1;
+		font-size: 36vw;
+		line-height: 0.84;
+		letter-spacing: -0.038em;
+		margin: 0;
+	}
+	.wordmark-fill {
+		background-size: 200% 220%;
+		background-position: 42% 60%;
+	}
+
+	/* Plate sits in the left column of the lower row. */
+	.cover-plate {
+		grid-row: 2;
+		grid-column: 1;
+		justify-self: start;
+		align-self: end;
+		width: 100%;
+		max-width: none;
+		transform: none;
+		margin: 0;
+	}
+	.cover-plate img {
+		aspect-ratio: 4 / 5;
+	}
+
+	/* brand-lower sits in the right column of the lower row, baseline-aligned to plate. */
+	.brand-lower {
+		grid-row: 2;
+		grid-column: 2;
+		align-self: end;
+		margin-top: 0;
+		padding-top: 0;
+		padding-bottom: 4px;
+	}
+	.cover-line {
+		margin: 0 0 10px;
+		font-size: 1.05rem;
+		max-width: 22ch;
+	}
+	.hours {
+		margin: 0;
+		font-size: 9.5px;
+		letter-spacing: 0.16em;
+		line-height: 1.65;
+	}
+
+	.colophon {
+		grid-template-columns: 1fr;
+		gap: 4px;
+		padding-top: 12px;
+		font-size: 9.5px;
+		letter-spacing: 0.14em;
+	}
+	.colophon .services { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { animation: none !important; transition: none !important; }
+}

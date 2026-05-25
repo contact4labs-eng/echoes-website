@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="el">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>Echoes · Νυμφών 33 · R4 cover v3</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&family=Old+Standard+TT:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./cover-v3.css">
+</head>
+<body>
+	<!--
+	   R4 v3 — Magazine cover (brand-tuned for Echoes Bistrot, Νυμφών 33)
+	   Changes from v2:
+	   DESKTOP
+	   - Empty cream band below the hours is fixed by rebalancing the
+	     brand-block: wordmark anchors the TOP, cover-line + hours anchor
+	     the BOTTOM (margin-top: auto), so the lower-left is no longer
+	     underbuilt. The breath now sits in the upper-middle as deliberate
+	     editorial air between the wordmark and the lower text block.
+	   - Plate (right column) align-self: end — anchors bottom-right so the
+	     plate base aligns visually with the colophon line.
+	   - Composition padding-bottom tightened so colophon sits a touch
+	     higher.
+	   - The "↓ μέσα" continue hint is REMOVED. It competed with the
+	     colophon in a static proof and added no logic. If the Astro
+	     implementation needs a scroll affordance it can earn it there.
+	   MOBILE
+	   - Wordmark dominates (Variant A from the v3 trial). Type is the
+	     brand moment, not a label above a photo.
+	   - Plate becomes a small editorial cutout in the lower-left.
+	   - Cover-line + hours form a tight text column right of the plate.
+	   - Masthead keeps the categories on mobile (business clarity wins
+	     over typographic tightness).
+	-->
+	<main class="cover">
+
+		<header class="masthead" aria-label="Echoes — Νυμφών 33, Ηλιούπολη">
+			<p class="masthead-text">
+				<span class="m-name">Echoes</span>
+				<span class="m-sep" aria-hidden="true">·</span>
+				<span class="m-where">Νυμφών 33 · Ηλιούπολη</span>
+				<span class="m-sep" aria-hidden="true">·</span>
+				<span class="m-cats">καφές · brunch · cocktails</span>
+			</p>
+		</header>
+
+		<section class="composition">
+			<div class="brand-block">
+				<h1 class="wordmark" aria-label="Echoes">
+					<span class="wordmark-shadow" aria-hidden="true">Echoes</span>
+					<span class="wordmark-fill" aria-hidden="true">Echoes</span>
+				</h1>
+
+				<!-- Lower text block — anchored to bottom of brand-block (margin-top: auto)
+				     on desktop to remove the v2 empty band. On mobile it joins the plate
+				     in a 2-column lower-row for the Variant A composition. -->
+				<div class="brand-lower">
+					<p class="cover-line">
+						Από το πρωί, στη γωνία της Νυμφών.
+					</p>
+					<p class="hours">
+						καθημερινά · έως 18:00<br>
+						σαβ–κυρ · έως 23:00
+					</p>
+				</div>
+			</div>
+
+			<figure class="cover-plate">
+				<img
+					src="../../src/assets/photos/dessert-sorbet.jpg"
+					alt="από την κουζίνα του Echoes"
+				>
+			</figure>
+		</section>
+
+		<footer class="colophon" aria-label="Echoes — colophon">
+			<p class="address"><span class="number">Νυμφών 33</span> · Ηλιούπολη <span class="postal">163 41</span></p>
+			<p class="phone"><a href="tel:+302109901676">210 990 1676</a></p>
+			<p class="services">
+				<a href="./nav.html" class="nav-trigger">[ περιεχόμενα ]</a>
+				<span class="sep" aria-hidden="true">·</span>
+				<a href="https://instagram.com/echoes_bistrot" target="_blank" rel="noopener noreferrer">instagram</a>
+			</p>
+		</footer>
+	</main>
+</body>
+</html>
