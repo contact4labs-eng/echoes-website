@@ -5,6 +5,38 @@
 			"description": "Brunch χωρίς πόζες στην Ηλιούπολη. Καφές από νωρίς, brunch όλη μέρα, cocktails αθόρυβα ως αργά. Νυμφών 33."
 		}
 	},
+	"cover": {
+		"masthead": {
+			"name": "Echoes",
+			"where": "Νυμφών 33 · Ηλιούπολη",
+			"cats": "καφές · brunch · cocktails"
+		},
+		"wordmark": "Echoes",
+		"line": "Από το πρωί, στη γωνία της Νυμφών.",
+		"hoursWeekdays": "καθημερινά · έως 18:00",
+		"hoursWeekend": "σαβ–κυρ · έως 23:00",
+		"addressStreet": "Νυμφών 33",
+		"addressCity": "Ηλιούπολη",
+		"addressPostal": "163 41",
+		"phoneDisplay": "210 990 1676",
+		"contentsTrigger": "[ περιεχόμενα ]",
+		"instagramLabel": "instagram",
+		"plateAlt": "από την κουζίνα του Echoes"
+	},
+	"contents": {
+		"eyebrow": "Echoes",
+		"title": "περιεχόμενα",
+		"closeLabel": "κλείσιμο",
+		"entries": {
+			"cover": {
+				"page": "σελ. 01",
+				"title": "Echoes",
+				"blurb": "το εξώφυλλο. ποια γωνία."
+			}
+		},
+		"footerLeft": "Echoes · Νυμφών 33 · Ηλιούπολη 163 41",
+		"footerPhone": "210 990 1676"
+	},
 	"nav": {
 		"story": "Ιστορία",
 		"menu": "Μενού",

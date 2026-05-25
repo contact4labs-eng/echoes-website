@@ -99,6 +99,20 @@
 	--sidebar-accent-foreground: oklch(0.18 0.012 240);
 	--sidebar-border: oklch(0.88 0.012 84);
 	--sidebar-ring: oklch(0.535 0.075 195);
+
+	/* -----------------------------------------------------------------
+	   R4 magazine palette (additive — does not displace the shadcn tokens
+	   above, which are still used by the not-yet-touched Footer).
+	   These are sRGB hex on purpose: they were locked into the cover/
+	   spread/nav proofs at exact values and have been calibrated against
+	   real photography. Do not OKLCH-convert them.
+	   ----------------------------------------------------------------- */
+	--paper: #f0e7d2;
+	--paper-deep: #ebe0c5;
+	--ink: #1a1814;
+	--whisper: rgba(26, 24, 20, 0.42);
+	--mark: rgba(26, 24, 20, 0.18);
+	--accent: #b53a2a;
 }
 
 @layer base {

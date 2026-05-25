@@ -1,0 +1,204 @@
+/* -----------------------------------------------------------------------
+   R4 production · Contents overlay
+   Direct port of proofs/r4-magazine-cover/nav.css to production, with
+   added modal positioning (fixed-fill viewport + scroll inside + z-index).
+   Palette tokens come from global.css; fonts come from astro.config.mjs
+   Fonts API CSS variables.
+   ----------------------------------------------------------------------- */
+
+.contents-overlay {
+	/* Modal positioning — covers the viewport over the page underneath. */
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	overflow-y: auto;
+
+	/* Layout (matches proof) */
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 28px 56px 40px;
+
+	background:
+		radial-gradient(120% 80% at 50% 0%, var(--paper) 60%, var(--paper-deep) 100%);
+	color: var(--ink);
+	font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+}
+.contents-overlay *,
+.contents-overlay *::before,
+.contents-overlay *::after { box-sizing: border-box; }
+.contents-overlay a { color: inherit; }
+
+/* -------- OVERLAY HEADER -------- */
+.contents-overlay .overlay-header {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: baseline;
+	gap: 16px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--ink);
+}
+.contents-overlay .overlay-eyebrow {
+	margin: 0;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+.contents-overlay .overlay-title {
+	margin: 0;
+	font-family: var(--font-greek-display), 'Old Standard TT', 'Cormorant Garamond', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(2.2rem, 4.5vw, 4rem);
+	line-height: 1;
+	letter-spacing: -0.018em;
+	color: var(--ink);
+	text-align: center;
+}
+.contents-overlay .overlay-close {
+	justify-self: end;
+	border: 1px solid var(--ink);
+	background: transparent;
+	color: var(--ink);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 18px;
+	width: 36px;
+	height: 36px;
+	border-radius: 0;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 200ms ease, color 200ms ease;
+}
+.contents-overlay .overlay-close:hover {
+	background: var(--ink);
+	color: var(--paper);
+}
+.contents-overlay .overlay-close:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+/* -------- TABLE OF CONTENTS -------- */
+.contents-overlay .toc {
+	list-style: none;
+	margin: 0 auto;
+	padding: 56px 0 32px;
+	display: flex;
+	flex-direction: column;
+	max-width: 920px;
+	width: 100%;
+}
+.contents-overlay .toc-entry {
+	display: grid;
+	grid-template-columns: 110px 1fr 36ch;
+	align-items: baseline;
+	gap: 36px;
+	padding: 24px 0;
+	border-top: 1px solid var(--mark);
+	transition: padding 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.contents-overlay .toc-entry:last-child { border-bottom: 1px solid var(--mark); }
+.contents-overlay .toc-entry:hover {
+	padding-left: 12px;
+	padding-right: 12px;
+}
+.contents-overlay .toc-page {
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--whisper);
+	font-feature-settings: "tnum" 1;
+}
+.contents-overlay .toc-title {
+	font-family: var(--font-greek-display), 'Old Standard TT', 'Cormorant Garamond', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(2.4rem, 5vw, 4.5rem);
+	line-height: 1.02;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+	text-decoration: none;
+	transition: color 220ms ease;
+}
+.contents-overlay .toc-title:hover { color: var(--accent); }
+.contents-overlay .toc-title:focus-visible {
+	outline: 1px solid var(--accent);
+	outline-offset: 6px;
+}
+.contents-overlay .toc-blurb {
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 14px;
+	line-height: 1.45;
+	color: var(--whisper);
+	text-align: right;
+}
+
+/* -------- OVERLAY FOOTER -------- */
+.contents-overlay .overlay-foot {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: baseline;
+	gap: 16px;
+	padding-top: 18px;
+	border-top: 1px solid var(--ink);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+.contents-overlay .overlay-foot p { margin: 0; }
+.contents-overlay .overlay-foot .foot-left { color: var(--ink); font-weight: 500; }
+.contents-overlay .overlay-foot .foot-right a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.contents-overlay .overlay-foot .foot-right a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.contents-overlay {
+		padding: 18px 22px 24px;
+	}
+
+	.contents-overlay .overlay-header {
+		grid-template-columns: auto 1fr auto;
+		gap: 12px;
+	}
+	.contents-overlay .overlay-eyebrow { font-size: 9px; letter-spacing: 0.22em; }
+	.contents-overlay .overlay-title { font-size: 1.8rem; }
+	.contents-overlay .overlay-close { width: 30px; height: 30px; font-size: 16px; }
+
+	.contents-overlay .toc { padding: 24px 0 18px; }
+	.contents-overlay .toc-entry {
+		grid-template-columns: 1fr;
+		gap: 6px;
+		padding: 18px 0;
+	}
+	.contents-overlay .toc-entry:hover { padding-left: 0; padding-right: 0; }
+	.contents-overlay .toc-page { font-size: 9.5px; }
+	.contents-overlay .toc-title { font-size: 2.4rem; line-height: 1.04; }
+	.contents-overlay .toc-blurb { font-size: 13px; text-align: left; }
+
+	.contents-overlay .overlay-foot {
+		grid-template-columns: 1fr;
+		gap: 4px;
+		font-size: 9.5px;
+		letter-spacing: 0.14em;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.contents-overlay * { transition: none !important; }
+}

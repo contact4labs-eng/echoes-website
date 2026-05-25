@@ -1,0 +1,91 @@
+---
+/**
+ * R4 Cover spread — production port of the approved proof at
+ * proofs/r4-magazine-cover/cover-v3.{html,css}.
+ *
+ * - No `data-reveal` / fade-up: cover is print-static.
+ * - Wordmark background-fill uses the bougainvillea facade photo via
+ *   `background-clip: text`. The image URL is passed in as a CSS custom
+ *   property so Astro's import resolver gives us the right hashed path.
+ * - The plate uses Astro's <Image> for responsive srcset; LCP candidate,
+ *   so it gets `loading="eager"` + `fetchpriority="high"`.
+ * - The `[ περιεχόμενα ]` link carries `data-contents-trigger` — the
+ *   ContentsOverlay React island listens for clicks on any element with
+ *   that attribute. This keeps Astro in charge of trigger markup.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import { Image } from 'astro:assets';
+import facadeBougainvillea from '@/assets/photos/facade-bougainvillea.jpg';
+import dessertSorbet from '@/assets/photos/dessert-sorbet.jpg';
+import '@/styles/cover.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const phoneTel = `tel:${site.phone}`;
+const igHref = site.social.instagramUrl;
+const wordmarkText = t('cover.wordmark');
+---
+
+<section
+	class="cover"
+	data-spread="cover"
+	style={`--wordmark-bg: url(${facadeBougainvillea.src});`}
+>
+	<header class="masthead" aria-label={`${t('cover.masthead.name')} — ${t('cover.masthead.where')}`}>
+		<p class="masthead-text">
+			<span class="m-name">{t('cover.masthead.name')}</span>
+			<span class="m-sep" aria-hidden="true">·</span>
+			<span class="m-where">{t('cover.masthead.where')}</span>
+			<span class="m-sep" aria-hidden="true">·</span>
+			<span class="m-cats">{t('cover.masthead.cats')}</span>
+		</p>
+	</header>
+
+	<div class="composition">
+		<div class="brand-block">
+			<h1 class="wordmark" aria-label={wordmarkText}>
+				<span class="wordmark-shadow" aria-hidden="true">{wordmarkText}</span>
+				<span class="wordmark-fill" aria-hidden="true">{wordmarkText}</span>
+			</h1>
+
+			<div class="brand-lower">
+				<p class="cover-line">{t('cover.line')}</p>
+				<p class="hours">
+					{t('cover.hoursWeekdays')}<br />
+					{t('cover.hoursWeekend')}
+				</p>
+			</div>
+		</div>
+
+		<figure class="cover-plate">
+			<Image
+				src={dessertSorbet}
+				alt={t('cover.plateAlt')}
+				widths={[280, 460, 920]}
+				sizes="(min-width: 769px) 460px, 38vw"
+				loading="eager"
+				fetchpriority="high"
+			/>
+		</figure>
+	</div>
+
+	<footer class="colophon" aria-label={`${t('cover.masthead.name')} — colophon`}>
+		<p class="address">
+			<span class="number">{t('cover.addressStreet')}</span> · {t('cover.addressCity')} <span class="postal">{t('cover.addressPostal')}</span>
+		</p>
+		<p class="phone">
+			<a href={phoneTel} aria-label={`${t('cover.masthead.name')} ${t('cover.phoneDisplay')}`}>
+				{t('cover.phoneDisplay')}
+			</a>
+		</p>
+		<p class="services">
+			<button type="button" class="nav-trigger" data-contents-trigger>{t('cover.contentsTrigger')}</button>
+			<span class="sep" aria-hidden="true">·</span>
+			<a href={igHref} target="_blank" rel="noopener noreferrer">{t('cover.instagramLabel')}</a>
+		</p>
+	</footer>
+</section>

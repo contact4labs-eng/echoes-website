@@ -5,6 +5,38 @@
 			"description": "A quieter take on brunch in Ilioupoli, Athens. Coffee from morning, brunch all day, cocktails kept low-key. Nymfon 33."
 		}
 	},
+	"cover": {
+		"masthead": {
+			"name": "Echoes",
+			"where": "Nymfon 33 · Ilioupoli",
+			"cats": "coffee · brunch · cocktails"
+		},
+		"wordmark": "Echoes",
+		"line": "From morning, on the Nymfon corner.",
+		"hoursWeekdays": "weekdays · until 18:00",
+		"hoursWeekend": "sat–sun · until 23:00",
+		"addressStreet": "Nymfon 33",
+		"addressCity": "Ilioupoli",
+		"addressPostal": "163 41",
+		"phoneDisplay": "210 990 1676",
+		"contentsTrigger": "[ contents ]",
+		"instagramLabel": "instagram",
+		"plateAlt": "from the Echoes kitchen"
+	},
+	"contents": {
+		"eyebrow": "Echoes",
+		"title": "contents",
+		"closeLabel": "close",
+		"entries": {
+			"cover": {
+				"page": "pg. 01",
+				"title": "Echoes",
+				"blurb": "the cover. which corner."
+			}
+		},
+		"footerLeft": "Echoes · Nymfon 33 · Ilioupoli 163 41",
+		"footerPhone": "210 990 1676"
+	},
 	"nav": {
 		"story": "Story",
 		"menu": "Menu",

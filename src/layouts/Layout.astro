@@ -67,8 +67,17 @@ const ogImage = `${site.url}${site.ogImage}`;
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
 
-		<Font cssVariable="--font-heading" preload />
-		<Font cssVariable="--font-sans" preload />
+		{/* R4 magazine fonts. Cormorant + Crimson Pro + IBM Plex Mono are
+		    above-the-fold on the cover, so preload them. Old Standard TT
+		    only renders inside the contents overlay (lazy) — no preload. */}
+		<Font cssVariable="--font-wordmark" preload />
+		<Font cssVariable="--font-italic" preload />
+		<Font cssVariable="--font-mono" preload />
+		<Font cssVariable="--font-greek-display" />
+
+		{/* Retained for the still-untouched Footer (Phase 1 scope). */}
+		<Font cssVariable="--font-heading" />
+		<Font cssVariable="--font-sans" />
 
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
