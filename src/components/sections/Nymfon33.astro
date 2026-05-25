@@ -1,0 +1,171 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import facadeDay from '@/assets/photos/facade-day.jpg';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const street = locale === 'el' ? site.address.streetAddress : site.address.streetAddressEn;
+const locality = locale === 'el' ? site.address.addressLocality : site.address.addressLocalityEn;
+const region = locale === 'el' ? site.address.addressRegion : site.address.addressRegionEn;
+---
+
+<section
+	id="visit"
+	class="relative bg-background px-5 py-24 md:px-8 md:py-32 lg:py-40"
+	aria-label={t('visit.title')}
+>
+	<div class="mx-auto grid max-w-7xl items-start gap-12 md:grid-cols-12 md:gap-16">
+		<!-- POSTCARD: tilted, 4:3 frame, address as the hero typography.
+		     Subtle paper grain via the .postcard::after pseudo, and a small
+		     circular postmark with verified facts (city + postal code) in the
+		     top-right corner of the frame. -->
+		<article
+			class="postcard relative col-span-12 mx-auto w-full max-w-2xl border border-foreground/10 bg-card shadow-[0_30px_60px_-30px_color-mix(in_oklch,var(--color-bistro-ink)_25%,transparent)] md:col-span-8 md:col-start-1"
+			data-reveal="editorial"
+		>
+			<div class="relative aspect-[4/3] w-full overflow-hidden">
+				<!-- Faint background photo of the daytime facade. -->
+				<Image
+					src={facadeDay}
+					alt=""
+					widths={[480, 768, 1024]}
+					sizes="(min-width: 768px) 60vw, 90vw"
+					format="webp"
+					quality={80}
+					loading="lazy"
+					class="absolute inset-0 h-full w-full object-cover opacity-[0.18]"
+				/>
+				<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-card via-card/85 to-card/65" aria-hidden="true"></div>
+
+				<!-- Postmark — top-right corner. Verified facts only (city + postal code).
+				     A circular outline with two stacked lines inside. No fake date, no
+				     fake stamp art. -->
+				<div
+					class="pointer-events-none absolute top-4 right-4 z-10 flex h-20 w-20 flex-col items-center justify-center rounded-full border border-bistro-copper/40 text-bistro-copper/65 md:top-6 md:right-6 md:h-24 md:w-24"
+					aria-hidden="true"
+				>
+					<span class="text-[8px] font-semibold leading-tight tracking-[0.18em] uppercase md:text-[9px]">
+						{site.address.addressLocality}
+					</span>
+					<span class="mt-1 h-px w-6 bg-bistro-copper/40"></span>
+					<span class="mt-1 text-[9px] font-medium leading-tight tracking-[0.12em] uppercase md:text-[10px]">
+						{site.address.postalCode}
+					</span>
+				</div>
+
+				<div class="relative flex h-full flex-col justify-between p-6 md:p-10">
+					<div>
+						<p class="text-[10px] font-semibold tracking-[0.3em] text-bistro-copper uppercase">
+							{locale === 'el' ? 'Επισκεφθείτε μας' : 'Visit'}
+						</p>
+						<h2
+							class="font-heading mt-4 text-balance leading-[1.0] text-foreground"
+							style="font-size: clamp(2.8rem, 6vw, 5.2rem);"
+						>
+							{street}
+						</h2>
+						<p class="mt-2 text-sm tracking-wide text-foreground/65 md:text-base">
+							{locality} · {site.address.postalCode} · {region}
+						</p>
+					</div>
+
+					<dl class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8">
+						<div>
+							<dt class="text-[10px] font-semibold tracking-[0.25em] text-foreground/55 uppercase">
+								{t('visit.hoursLabel')}
+							</dt>
+							<dd class="mt-2 text-sm leading-relaxed text-foreground/85 md:text-base">
+								<div>{t('visit.hoursWeekdays')}</div>
+								<div>{t('visit.hoursWeekends')}</div>
+							</dd>
+						</div>
+						<div>
+							<dt class="text-[10px] font-semibold tracking-[0.25em] text-foreground/55 uppercase">
+								{t('visit.phoneLabel')}
+							</dt>
+							<dd class="mt-2 text-sm md:text-base">
+								<a href={`tel:${site.phone}`} class="text-foreground transition-colors hover:text-bistro-copper">
+									{site.phoneDisplay}
+								</a>
+							</dd>
+						</div>
+					</dl>
+				</div>
+			</div>
+
+			<!-- Primary CTA: filled teal pill below the postcard. -->
+			<div class="border-t border-foreground/10 p-6 md:p-8">
+				<a
+					href={`tel:${site.phone}`}
+					class="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold tracking-wide text-primary-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-[color-mix(in_oklch,var(--primary)_88%,black)]"
+					aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
+				>
+					{t('visit.callCta')}
+				</a>
+			</div>
+		</article>
+
+		<!-- Secondary actions: small text links beside (or below on mobile). -->
+		<aside class="col-span-12 flex flex-col items-start gap-4 md:col-span-3 md:col-start-10 md:pt-8">
+			<a
+				href={site.mapsSearchUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group inline-flex items-center gap-2 text-sm font-medium tracking-wide text-foreground/65 transition-colors hover:text-foreground"
+			>
+				<span class="block h-px w-6 bg-foreground/30 transition-all duration-300 group-hover:w-8 group-hover:bg-foreground"></span>
+				<span>{t('visit.mapsCta')}</span>
+			</a>
+			<a
+				href={site.social.instagramUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group inline-flex items-center gap-2 text-sm font-medium tracking-wide text-foreground/65 transition-colors hover:text-foreground"
+				aria-label={t('a11y.openInstagram')}
+			>
+				<span class="block h-px w-6 bg-foreground/30 transition-all duration-300 group-hover:w-8 group-hover:bg-foreground"></span>
+				<span>{t('visit.instagramCta')}</span>
+			</a>
+		</aside>
+	</div>
+</section>
+
+<style>
+	.postcard {
+		transform: rotate(-1.2deg);
+		transform-origin: 30% 40%;
+		transition: transform 1500ms cubic-bezier(0.22, 1, 0.36, 1);
+		position: relative;
+	}
+	/* Subtle paper-grain texture overlay — tiny dots at low opacity.
+	   Layered on top of the postcard contents but kept pointer-events: none. */
+	.postcard::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background-image:
+			radial-gradient(circle at 25% 35%, oklch(0.18 0.012 240 / 0.025) 1px, transparent 1.5px),
+			radial-gradient(circle at 70% 80%, oklch(0.18 0.012 240 / 0.018) 1px, transparent 1.5px),
+			radial-gradient(circle at 50% 50%, oklch(1 0 0 / 0.02) 1px, transparent 1.5px);
+		background-size: 7px 7px, 11px 11px, 5px 5px;
+		mix-blend-mode: multiply;
+		opacity: 0.55;
+	}
+	.postcard[data-reveal="editorial"]:not(.is-revealed) {
+		transform: rotate(-4deg);
+	}
+	.postcard.is-revealed {
+		transform: rotate(-1.2deg);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.postcard {
+			transform: rotate(0deg) !important;
+		}
+	}
+</style>

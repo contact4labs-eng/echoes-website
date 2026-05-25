@@ -4,6 +4,18 @@
 
 ---
 
+## v2 redesign in progress — "Slow Hours"
+
+**Status:** A complete homepage rebuild called **"Slow Hours"** is now sitting on the `recovery/slow-hours` branch, committed but not pushed. It supersedes the v1 composition described below (Hero / Story / Menu cards / Chef process row / Visit / SocialProof / FinalCTA) with a vertical-cinema 8-movement narrative: Threshold → First Word → Through the Door → Slow Hours → From the Kitchen → The Pass → Nymfon 33 → End Card. See `README.md` "Homepage — the 8 movements" for the new section list.
+
+**What survives from v1 → v2 unchanged:** the entire technical foundation (Astro 6, React 19, Tailwind v4, shadcn primitives, motion, Lenis, sitemap with hreflang, schema trust cleanup with `geo: null`/`hours: null`, brand tokens, fonts), the `astro check` + `verify` scripts, the chef-anonymous guard, and the manager ↔ developer protocol below.
+
+**What changed:** all 7 section components were deleted and replaced with the 8 new movements; the predictable `eyebrow → headline → body → CTA` rhythm is gone; AI-feeling copy has been rewritten by ear; the menu card grid and `01 / 02 / 03` chef-process row are gone for good; Social Proof cards are deleted, with trust signals integrated as a quiet footer credit + a Kitchen caption. The "Slow Hours" interaction (time-of-day-aware daypart triptych) is the one bespoke moment.
+
+**Sections 5–7 of this briefing (v1 state) are now stale for the new build.** Use them as v1 reference. For the v2 spec, read the recovery plan at `~/.claude/plans/role-objective-you-breezy-matsumoto.md` on the developer's machine, or read `README.md` in this repo, or read the diff on the `recovery/slow-hours` branch.
+
+---
+
 ## 1. Your role
 
 You are the **project manager** for the Echoes Bistrot marketing website. Your counterpart is a senior developer running in another Claude Code session in this same repository (`contact4labs-eng/echoes-website`). The two of you collaborate over a shared chat to ship a premium one-page marketing site.

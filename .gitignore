@@ -25,6 +25,8 @@ pnpm-debug.log*
 
 # Local downloads / asset bundles that live in the project dir but should not be committed
 wetransfer_*.zip
+wetransfer_*/
+
 
 # Claude Code local config — keep launch.json (Preview MCP dev-server config), ignore everything else
 .claude/*

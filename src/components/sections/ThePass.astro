@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+
+import pouringImg from '@/assets/photos/chef-pouring.jpg';
+import dessertImg from '@/assets/photos/dessert-sorbet.jpg';
+import violaImg from '@/assets/photos/chef-viola.png';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const altPouring = locale === 'el' ? 'Σερβίρισμα καφέ από μπρίκι σε λευκή κούπα' : 'Coffee poured from a briki into a white cup';
+const altDessert = locale === 'el' ? 'Τοποθέτηση παγωτού σορμπέ φράουλας σε ψημένη μπριός' : 'Strawberry sorbet placed on toasted brioche';
+const altViola = locale === 'el' ? 'Τοποθέτηση βρώσιμου άνθους βιόλας σε επιδόρπιο' : 'An edible viola placed on a dessert';
+---
+
+<section
+	id="kitchen"
+	class="the-pass relative overflow-hidden bg-bistro-ink px-5 py-24 text-bistro-cream md:px-8 md:py-32 lg:py-40"
+>
+	<div class="mx-auto max-w-7xl">
+		<div class="max-w-3xl" data-reveal="editorial">
+			<p class="text-[11px] font-semibold tracking-[0.25em] text-bistro-copper uppercase">
+				{t('kitchen.eyebrow')}
+			</p>
+			<h2
+				class="font-heading mt-5 text-balance text-bistro-cream"
+				style="font-size: var(--text-display); line-height: var(--text-display--line-height);"
+			>
+				{t('kitchen.title')}
+			</h2>
+		</div>
+
+		<!-- Asymmetric editorial spread (desktop). Mobile = simple stack.
+		     Composition reads as: pouring (mid-left, anchored low) + viola (upper-right,
+		     small counterweight) + dessert (oversized, breaks out across the bottom). -->
+		<div class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:gap-x-6 md:gap-y-0">
+			<!-- LEFT photo — pouring, anchored lower so it visually drops down. -->
+			<figure
+				class="relative overflow-hidden rounded-sm md:col-span-5 md:col-start-1 md:row-start-1 md:mt-28"
+				data-reveal
+			>
+				<Image
+					src={pouringImg}
+					alt={altPouring}
+					widths={[480, 768, 1024, 1280]}
+					sizes="(min-width: 768px) 40vw, 90vw"
+					format="webp"
+					quality={84}
+					loading="lazy"
+					class="aspect-[3/4] h-full w-full object-cover"
+				/>
+			</figure>
+
+			<!-- RIGHT photo — viola, smaller, anchored high. -->
+			<figure
+				class="relative overflow-hidden rounded-sm md:col-span-4 md:col-start-9 md:row-start-1"
+				data-reveal
+			>
+				<Image
+					src={violaImg}
+					alt={altViola}
+					widths={[320, 480, 640]}
+					sizes="(min-width: 768px) 30vw, 90vw"
+					format="webp"
+					quality={82}
+					loading="lazy"
+					class="aspect-square h-full w-full object-cover md:aspect-[4/5]"
+				/>
+			</figure>
+
+			<!-- CENTER/RIGHT photo — the dessert centerpiece, breaks across columns,
+			     pulls up so it overlaps visually with the row above. -->
+			<figure
+				class="relative overflow-hidden rounded-sm md:col-span-9 md:col-start-2 md:row-start-2 md:-mt-24"
+				data-reveal="editorial"
+			>
+				<Image
+					src={dessertImg}
+					alt={altDessert}
+					widths={[640, 960, 1280, 1600]}
+					sizes="(min-width: 768px) 65vw, 90vw"
+					format="webp"
+					quality={86}
+					loading="lazy"
+					class="aspect-[3/4] h-full w-full object-cover md:aspect-[16/10]"
+				/>
+			</figure>
+		</div>
+
+		<!-- Body copy hangs as a small narrow column. -->
+		<div class="mt-16 max-w-md md:mt-24 md:ml-[8%]" data-reveal="editorial">
+			<p class="font-heading text-balance text-2xl leading-snug text-bistro-cream/90 md:text-3xl">
+				{t('kitchen.body')}
+			</p>
+			<p class="mt-6 text-[11px] font-semibold tracking-[0.25em] text-bistro-copper/85 uppercase">
+				{t('kitchen.tafCredit')}
+			</p>
+		</div>
+	</div>
+</section>

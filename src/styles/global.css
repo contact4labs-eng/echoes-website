@@ -19,6 +19,14 @@
 	--font-heading: var(--font-heading), "Fraunces", "Georgia", "Playfair Display", serif;
 	--font-sans: var(--font-sans), "Inter", "Geist Variable", system-ui, -apple-system, sans-serif;
 
+	/* Editorial typography scales for Slow Hours rebuild */
+	--text-display: clamp(2.2rem, 4.5vw, 4rem);
+	--text-display--line-height: 1.06;
+	--text-monolith: clamp(6rem, 14vw, 14rem);
+	--text-monolith--line-height: 0.94;
+	--text-quiet-eyebrow: 11px;
+	--text-quiet-eyebrow--line-height: 1.6;
+
 	/* shadcn surfaces */
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);

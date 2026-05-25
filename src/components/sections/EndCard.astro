@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import dessert from '@/assets/photos/dessert-sorbet.jpg';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section
+	class="relative isolate overflow-hidden bg-bistro-ink"
+	aria-label={t('endCard.phrase')}
+>
+	<div class="absolute inset-0 -z-10">
+		<Image
+			src={dessert}
+			alt=""
+			widths={[640, 960, 1280, 1920]}
+			sizes="100vw"
+			format="webp"
+			quality={84}
+			loading="lazy"
+			class="kenburns h-full w-full object-cover"
+		/>
+		<div class="absolute inset-0 bg-gradient-to-t from-bistro-ink/80 via-bistro-ink/35 to-bistro-ink/55" aria-hidden="true"></div>
+	</div>
+
+	<div class="relative mx-auto flex min-h-[80svh] max-w-3xl flex-col items-center justify-end px-5 pb-16 pt-32 text-center md:px-8 md:pb-24 md:pt-44 lg:pb-32 lg:pt-56">
+		<div class="flex flex-col items-center gap-5" data-reveal="editorial">
+			<p
+				class="font-heading text-balance text-bistro-cream"
+				style="font-size: clamp(2rem, 4.8vw, 3.6rem); line-height: 1.05;"
+			>
+				{t('endCard.phrase')}
+			</p>
+			<span class="block h-px w-12 bg-bistro-copper/70" aria-hidden="true"></span>
+		</div>
+
+		<nav
+			class="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-bistro-cream/80"
+			aria-label={t('endCard.phrase')}
+			data-reveal="quiet"
+		>
+			<a
+				href={`tel:${site.phone}`}
+				class="font-heading text-xl text-bistro-cream transition-colors duration-300 hover:text-white md:text-2xl"
+				aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
+			>
+				{site.phoneDisplay}
+			</a>
+			<span class="text-bistro-cream/35" aria-hidden="true">·</span>
+			<a
+				href={site.mapsSearchUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-bistro-cream"
+			>
+				{t('endCard.actions.maps')}
+			</a>
+			<span class="text-bistro-cream/35" aria-hidden="true">·</span>
+			<a
+				href={site.social.instagramUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-bistro-cream"
+				aria-label={t('a11y.openInstagram')}
+			>
+				{t('endCard.actions.instagram')}
+			</a>
+		</nav>
+	</div>
+</section>

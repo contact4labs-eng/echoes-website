@@ -2,38 +2,40 @@
 	"meta": {
 		"home": {
 			"title": "Echoes Bistrot · Brunch & Coffee · Ηλιούπολη",
-			"description": "Brunch χωρίς πόζες στην Ηλιούπολη. Καφές από νωρίς, brunch όλη μέρα, cocktails αθόρυβα ως αργά. Νυμφών 33."
+			"description": "Καφές από νωρίς, brunch όλη μέρα, cocktails αν μείνετε αργά. Νυμφών 33, Ηλιούπολη."
 		}
 	},
 	"nav": {
-		"story": "Ιστορία",
 		"menu": "Μενού",
-		"chef": "Κουζίνα",
+		"kitchen": "Κουζίνα",
 		"visit": "Επίσκεψη",
 		"reserve": "Καλέστε μας",
 		"langOther": "EN"
 	},
-	"hero": {
-		"eyebrow": "Νυμφών 33 · Ηλιούπολη",
-		"headline": "Brunch χωρίς πόζες.",
-		"subhead": "Καφές από νωρίς, brunch όλη μέρα, cocktails αθόρυβα ως αργά.",
-		"ctaPrimary": "Καλέστε μας",
-		"ctaSecondary": "Δείτε στο Instagram",
-		"metaA": "Brunch · Coffee · Cocktails",
-		"metaB": "Νυμφών 33, Ηλιούπολη"
+	"threshold": {
+		"identityStrip": "Echoes Bistrot · καφές, brunch, cocktails · Νυμφών 33, Ηλιούπολη"
 	},
-	"story": {
-		"eyebrow": "Η ιστορία μας",
-		"title": "Μια πιο ήσυχη εκδοχή του brunch.",
-		"bodyA": "Στη γωνία της Νυμφών, κάτω από κόκκινες και κίτρινες τέντες, το Echoes σερβίρει μια πιο ήσυχη εκδοχή του brunch.",
-		"bodyB": "Καφές από το πρωί, πιάτα με σπιτικό αέρα, και cocktails που εμφανίζονται διακριτικά καθώς πέφτει το φως."
+	"firstWord": {
+		"line": "Έχουμε καφέ από νωρίς. Cocktails αν μείνετε αργά."
+	},
+	"throughDoor": {
+		"caption": "Κάτω από τις τέντες, η μέρα χαμηλώνει ρυθμό.",
+		"altExterior": "Η πρόσοψη του Echoes με μπουκαμβίλια και ριγέ τέντες",
+		"altInterior": "Άποψη από το εσωτερικό μέσα από τις τέντες, με ψάθινα σκαμπό και κιγκλίδωμα"
+	},
+	"slowHours": {
+		"eyebrow": "Όλες οι ώρες",
+		"heading": "Οι ώρες αλλάζουν. Το Echoes μένει.",
+		"labels": {
+			"morning": { "daypart": "Πρωί", "offer": "Καφές" },
+			"midday":  { "daypart": "Μεσημέρι", "offer": "Brunch" },
+			"evening": { "daypart": "Βράδυ", "offer": "Cocktails" }
+		}
 	},
 	"menu": {
-		"eyebrow": "Επιλεγμένα πιάτα",
-		"title": "Πιάτα που κρατούν τον ρυθμό της ημέρας.",
-		"subtitle": "Μερικές επιλεγμένες γεύσεις από την all-day κουζίνα — όχι ολόκληρος κατάλογος.",
-		"viewMoreLabel": "Για το σημερινό πλήρες μενού, καλέστε μας.",
-		"viewMoreCta": "Καλέστε μας",
+		"eyebrow": "Από την κουζίνα",
+		"title": "Λίγα πιάτα. Όλη μέρα.",
+		"viewMoreLine": "Για το σημερινό πλήρες μενού, καλέστε μας.",
 		"items": {
 			"crispyChickenBowl": {
 				"name": "Crispy chicken bowl",
@@ -81,10 +83,11 @@
 			}
 		}
 	},
-	"chef": {
-		"eyebrow": "Στην κουζίνα",
-		"title": "Φτιαγμένο με χέρι, ένα πιάτο τη φορά.",
-		"body": "Ανοιχτή κουζίνα. Σκούρα μπλε πλακάκια. Χάλκινα φώτα. Η ομάδα σερβίρει με τον δικό της ρυθμό — γρήγορα αρκετά για να μην κρυώσει, ήσυχα αρκετά για να σας αφήσει να μιλήσετε."
+	"kitchen": {
+		"eyebrow": "Στο πάσο",
+		"title": "Η κουζίνα φαίνεται.",
+		"body": "Μπρίκι, πάσο, φωτιά χαμηλά. Η κουζίνα φαίνεται — αλλά δεν φωνάζει.",
+		"tafCredit": "Καφές από Taf."
 	},
 	"visit": {
 		"eyebrow": "Επισκεφθείτε μας",
@@ -94,33 +97,25 @@
 		"hoursLabel": "Ώρες λειτουργίας",
 		"hoursWeekdays": "Δευ–Παρ · πρωί έως 18:00",
 		"hoursWeekends": "Σαβ–Κυρ · πρωί έως 23:00",
+		"callCta": "Καλέστε τώρα",
 		"mapsCta": "Άνοιγμα στους Χάρτες",
 		"instagramCta": "Δείτε στο Instagram"
 	},
-	"social": {
-		"eyebrow": "Από τον τύπο",
-		"title": "Μια νέα, ήσυχη άφιξη στην Ηλιούπολη.",
-		"pressName": "noupou.gr",
-		"pressDate": "Ιανουάριος 2026",
-		"pressQuote": "«Νέο brunch spot στην Ηλιούπολη.»",
-		"partnerLabel": "Καφές από",
-		"partnerName": "Taf Coffee",
-		"partnerBody": "Καφές από Taf, ένα από τα πιο γνωστά specialty roasters της Αθήνας."
-	},
-	"cta": {
-		"title": "Έρχεστε από νωρίς. Φεύγετε αργά.",
-		"subtitle": "Τραπέζι; Παραγγελία; Καλέστε μας ή στείλτε DM.",
-		"primary": "Καλέστε μας",
-		"secondary": "DM στο Instagram"
+	"endCard": {
+		"phrase": "περάστε από τη Νυμφών.",
+		"actions": {
+			"maps": "Χάρτες",
+			"instagram": "Instagram"
+		}
 	},
 	"footer": {
-		"tagline": "Brunch χωρίς πόζες.",
 		"section": {
 			"visit": "Επίσκεψη",
 			"hours": "Ώρες",
 			"follow": "Ακολουθήστε"
 		},
-		"copyright": "© {year} Echoes Bistrot · Σχεδιάστηκε με φροντίδα στην Αθήνα"
+		"credit": "Αναφορά στο noupou.gr · Καφές από Taf",
+		"copyright": "© {year} Echoes Bistrot"
 	},
 	"a11y": {
 		"skipToContent": "Μετάβαση στο περιεχόμενο",
