@@ -1,4 +1,13 @@
 ---
+/*
+  From the Kitchen — two featured dishes, each with a distinct composition.
+  No alternating two-column rhythm. No 01/02 index. No card containers.
+
+  Panel A: image bleeds to the right viewport edge; text hangs as a narrow
+           column on the left, dish name large, ingredient line under it.
+  Panel B: image contained center-right; dish name as hanging caption above;
+           ingredient line as a credit-style note below.
+*/
 import { Image } from 'astro:assets';
 import type { Locale } from '@/i18n/utils';
 import { useTranslations } from '@/i18n/utils';
@@ -8,10 +17,12 @@ import { menuFeature } from '@/content/menu';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+const [first, second] = menuFeature;
 ---
 
-<section id="menu" class="relative bg-background">
-	<div class="mx-auto max-w-7xl px-5 pt-24 md:px-8 md:pt-32 lg:pt-40">
+<section id="menu" class="relative bg-background pt-24 md:pt-32 lg:pt-40">
+	<div class="mx-auto max-w-7xl px-5 md:px-8">
 		<div class="max-w-3xl" data-reveal>
 			<p class="text-[11px] font-semibold tracking-[0.25em] text-bistro-copper uppercase">
 				{t('menu.eyebrow')}
@@ -25,47 +36,79 @@ const t = useTranslations(locale);
 		</div>
 	</div>
 
-	<ul class="mt-16 flex flex-col gap-24 md:mt-24 md:gap-40">
-		{menuFeature.map((dish, idx) => {
-			const photoOnLeft = idx % 2 === 0;
-			return (
-				<li class="relative" data-reveal>
-					<div class="mx-auto grid max-w-7xl items-center gap-6 px-5 md:grid-cols-12 md:gap-12 md:px-8 lg:gap-16">
-						<figure class={`relative overflow-hidden rounded-sm ${photoOnLeft ? 'md:col-span-7 md:order-1' : 'md:col-span-7 md:order-2'}`}>
-							<Image
-								src={dish.image}
-								alt={t(`menu.items.${dish.i18nKey}.name`)}
-								widths={[640, 960, 1280, 1600]}
-								sizes="(min-width: 768px) 55vw, 90vw"
-								format="webp"
-								quality={84}
-								loading="lazy"
-								class="aspect-[4/5] h-full w-full object-cover md:aspect-[4/5]"
-							/>
-						</figure>
-						<div class={`flex flex-col gap-4 ${photoOnLeft ? 'md:col-span-5 md:order-2 md:pl-2' : 'md:col-span-5 md:order-1 md:pr-2'}`}>
-							<span class="text-[10px] font-semibold tracking-[0.25em] text-foreground/55 uppercase">
-								{String(idx + 1).padStart(2, '0')}
-							</span>
-							<h3
-								class="font-heading text-balance text-foreground"
-								style="font-size: var(--text-display); line-height: var(--text-display--line-height);"
-							>
-								{t(`menu.items.${dish.i18nKey}.name`)}
-							</h3>
-							<p class="text-base leading-relaxed text-foreground/65 md:text-lg">
-								<em class="not-italic">
-									{t(`menu.items.${dish.i18nKey}.desc`)}
-								</em>
-							</p>
-						</div>
-					</div>
-				</li>
-			);
-		})}
-	</ul>
+	<!-- PANEL A — image bleeds to right edge; text hangs at the left as a narrow column. -->
+	{first && (
+		<article class="relative mt-20 md:mt-28" data-reveal>
+			<div class="grid grid-cols-12">
+				<!-- text column: left, narrow, vertically centered to the image -->
+				<div class="z-10 col-span-12 px-5 pb-6 md:col-span-4 md:col-start-1 md:flex md:flex-col md:justify-center md:px-0 md:pl-8 md:pb-0 lg:pl-12">
+					<h3
+						class="font-heading text-balance text-foreground"
+						style="font-size: clamp(2.4rem, 5.5vw, 4.6rem); line-height: 0.98; letter-spacing: -0.015em;"
+					>
+						{t(`menu.items.${first.i18nKey}.name`)}
+					</h3>
+					<p class="mt-6 max-w-[34ch] text-base leading-relaxed text-foreground/65 md:text-lg">
+						<em class="not-italic">
+							{t(`menu.items.${first.i18nKey}.desc`)}
+						</em>
+					</p>
+				</div>
+				<!-- image: bleeds to the right viewport edge -->
+				<figure class="relative col-span-12 md:col-span-8 md:col-start-5 md:-mr-5 lg:-mr-8">
+					<Image
+						src={first.image}
+						alt={t(`menu.items.${first.i18nKey}.name`)}
+						widths={[640, 960, 1280, 1600]}
+						sizes="(min-width: 768px) 65vw, 100vw"
+						format="webp"
+						quality={86}
+						loading="lazy"
+						class="aspect-[4/5] h-full w-full object-cover md:aspect-[5/6] lg:aspect-[16/12]"
+					/>
+				</figure>
+			</div>
+		</article>
+	)}
 
-	<div class="mx-auto mt-24 max-w-3xl px-5 pb-24 text-center md:px-8 md:pb-32" data-reveal>
+	<!-- PANEL B — image contained center-right; dish name hangs ABOVE as caption; ingredient credit-style BELOW. -->
+	{second && (
+		<article class="relative mt-24 md:mt-44" data-reveal>
+			<div class="mx-auto grid max-w-7xl grid-cols-12 px-5 md:px-8">
+				<!-- top caption line: dish name -->
+				<div class="z-10 col-span-12 md:col-span-9 md:col-start-2">
+					<h3
+						class="font-heading text-balance text-foreground"
+						style="font-size: clamp(2rem, 4.6vw, 3.8rem); line-height: 1.02; letter-spacing: -0.012em;"
+					>
+						{t(`menu.items.${second.i18nKey}.name`)}
+					</h3>
+				</div>
+				<!-- image: contained, centered, slight offset -->
+				<figure class="relative col-span-12 mt-6 md:col-span-7 md:col-start-4 md:mt-8">
+					<Image
+						src={second.image}
+						alt={t(`menu.items.${second.i18nKey}.name`)}
+						widths={[480, 720, 960, 1200]}
+						sizes="(min-width: 768px) 55vw, 100vw"
+						format="webp"
+						quality={84}
+						loading="lazy"
+						class="aspect-[4/5] h-full w-full object-cover md:aspect-[4/5]"
+					/>
+				</figure>
+				<!-- bottom credit-style ingredient line -->
+				<p class="col-span-12 mt-5 max-w-[44ch] text-base leading-relaxed text-foreground/65 md:col-span-5 md:col-start-7 md:mt-6 md:text-lg">
+					<em class="not-italic">
+						{t(`menu.items.${second.i18nKey}.desc`)}
+					</em>
+				</p>
+			</div>
+		</article>
+	)}
+
+	<!-- Conversion line: phone number large at the end. -->
+	<div class="mx-auto mt-24 max-w-3xl px-5 pb-24 text-center md:mt-32 md:px-8 md:pb-32" data-reveal>
 		<p class="text-base text-foreground/65 md:text-lg">{t('menu.viewMoreLine')}</p>
 		<a
 			href={`tel:${site.phone}`}

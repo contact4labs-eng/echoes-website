@@ -16,61 +16,61 @@ const year = new Date().getFullYear();
 const copy = t('footer.copyright').replace('{year}', String(year));
 ---
 
-<footer class="border-t border-foreground/10 bg-background px-5 py-14 md:px-8 md:py-20">
-	<div class="mx-auto flex max-w-7xl flex-col gap-10 md:flex-row md:justify-between">
-		<div class="max-w-sm">
-			<a href="/" class="font-heading text-3xl font-semibold tracking-tight text-foreground">
+<footer class="border-t border-foreground/10 bg-background px-5 py-16 md:px-8 md:py-24">
+	<div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-12 md:items-end md:gap-8">
+		<!-- LEFT: oversized wordmark + tiny tagline-free identity. -->
+		<div class="md:col-span-7">
+			<a
+				href="/"
+				class="font-heading inline-block leading-[0.85] tracking-tight text-foreground transition-opacity duration-300 hover:opacity-70"
+				style="font-size: clamp(4rem, 9vw, 7.5rem); letter-spacing: -0.025em;"
+			>
 				{site.wordmark}
 			</a>
 		</div>
 
-		<div class="grid grid-cols-2 gap-10 md:grid-cols-3 md:gap-16">
-			<div>
-				<h3 class="text-[11px] font-semibold tracking-[0.2em] text-foreground/55 uppercase">{t('footer.section.visit')}</h3>
-				<address class="mt-3 not-italic text-sm leading-relaxed text-foreground/85">
-					{streetLine}<br />
-					{localityLine}<br />
-					<a href={`tel:${site.phone}`} class="transition-colors hover:text-primary">{site.phoneDisplay}</a>
-				</address>
+		<!-- RIGHT: address + hours + Instagram as plain text lines, no column headers. -->
+		<div class="flex flex-col gap-4 text-sm leading-relaxed text-foreground/85 md:col-span-5 md:items-end md:text-right">
+			<address class="not-italic">
+				{streetLine}, {localityLine}<br />
+				<a href={`tel:${site.phone}`} class="transition-colors hover:text-bistro-copper">{site.phoneDisplay}</a>
+			</address>
+			<div class="text-foreground/70">
+				<div>{t('visit.hoursWeekdays')}</div>
+				<div>{t('visit.hoursWeekends')}</div>
 			</div>
-			<div>
-				<h3 class="text-[11px] font-semibold tracking-[0.2em] text-foreground/55 uppercase">{t('footer.section.hours')}</h3>
-				<dl class="mt-3 space-y-2 text-sm text-foreground/85">
-					<div>{t('visit.hoursWeekdays')}</div>
-					<div>{t('visit.hoursWeekends')}</div>
-				</dl>
-			</div>
-			<div class="col-span-2 md:col-span-1">
-				<h3 class="text-[11px] font-semibold tracking-[0.2em] text-foreground/55 uppercase">{t('footer.section.follow')}</h3>
-				<a
-					href={site.social.instagramUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="mt-3 inline-flex items-center gap-2 text-sm text-foreground/85 transition-colors hover:text-primary"
-					aria-label={t('a11y.openInstagram')}
+			<a
+				href={site.social.instagramUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center gap-2 transition-colors hover:text-bistro-copper"
+				aria-label={t('a11y.openInstagram')}
+			>
+				<svg
+					width="14"
+					height="14"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.6"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
 				>
-					<svg
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.7"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
-					>
-						<rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-						<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-						<line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-					</svg>
-					<span>@{site.social.instagramHandle}</span>
-				</a>
-			</div>
+					<rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+					<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+					<line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+				</svg>
+				<span>@{site.social.instagramHandle}</span>
+			</a>
 		</div>
 	</div>
-	<div class="mx-auto mt-14 flex max-w-7xl flex-col gap-2 md:flex-row md:items-center md:justify-between">
-		<p class="text-[11px] font-medium tracking-[0.18em] text-foreground/55 uppercase">{t('footer.credit')}</p>
-		<p class="text-xs text-foreground/45">{copy}</p>
+
+	<!-- BOTTOM: thin rule + credit line + copyright as a single horizontal band. -->
+	<div class="mx-auto mt-16 max-w-7xl border-t border-foreground/10 pt-6 md:mt-20">
+		<div class="flex flex-col gap-2 text-[11px] tracking-[0.16em] text-foreground/50 uppercase md:flex-row md:items-center md:justify-between">
+			<p class="font-medium">{t('footer.credit')}</p>
+			<p>{copy}</p>
+		</div>
 	</div>
 </footer>

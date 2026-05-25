@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 
 interface LayerImage {
@@ -17,14 +17,33 @@ interface CrossfadeOnScrollProps {
 }
 
 /**
- * Through the Door — the one major scroll-driven moment in the v1 build.
- * Two stacked photos crossfade as the user scrolls through the section. A
- * caption appears mid-transition. Pin behavior is desktop-only (CSS sticky
- * on a child + tall parent). Honors reduced-motion by stacking statically.
+ * Through the Door — the one major scroll-driven moment in the build.
+ *
+ * Pin + crossfade fire ONLY on desktop with a fine pointer at ≥ 768 px.
+ * Touch/mobile/coarse-pointer + reduced-motion both get the stacked layout:
+ * exterior photo → caption block → interior photo, in normal document flow,
+ * no scroll pinning, no opacity choreography.
+ *
+ * SSR renders the stacked layout (safe default for crawlers + no-JS); after
+ * hydration on a qualifying viewport, the cinematic pin takes over.
  */
 export function CrossfadeOnScroll({ exterior, interior, caption }: CrossfadeOnScrollProps) {
 	const ref = useRef<HTMLDivElement>(null);
 	const reduce = useReducedMotion();
+	const [cinematic, setCinematic] = useState(false);
+
+	useEffect(() => {
+		if (reduce) {
+			setCinematic(false);
+			return;
+		}
+		const mq = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)');
+		const update = () => setCinematic(mq.matches);
+		update();
+		mq.addEventListener('change', update);
+		return () => mq.removeEventListener('change', update);
+	}, [reduce]);
+
 	const { scrollYProgress } = useScroll({
 		target: ref,
 		offset: ['start end', 'end start'],
@@ -36,7 +55,7 @@ export function CrossfadeOnScroll({ exterior, interior, caption }: CrossfadeOnSc
 	const interiorScale = useTransform(scrollYProgress, [0.4, 0.7], [1.08, 1]);
 	const exteriorScale = useTransform(scrollYProgress, [0.25, 0.55], [1, 0.96]);
 
-	if (reduce) {
+	if (reduce || !cinematic) {
 		return (
 			<div ref={ref} className="bg-bistro-ink">
 				<figure className="relative aspect-[16/10] w-full overflow-hidden md:aspect-[16/8]">

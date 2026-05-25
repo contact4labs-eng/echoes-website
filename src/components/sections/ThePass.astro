@@ -33,11 +33,13 @@ const altViola = locale === 'el' ? 'Τοποθέτηση βρώσιμου άνθ
 			</h2>
 		</div>
 
-		<!-- Asymmetric photo essay grid (desktop). Mobile = simple stack. -->
-		<div class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:gap-x-6 md:gap-y-16">
-			<!-- LEFT photo — pouring, hangs lower on desktop. -->
+		<!-- Asymmetric editorial spread (desktop). Mobile = simple stack.
+		     Composition reads as: pouring (mid-left, anchored low) + viola (upper-right,
+		     small counterweight) + dessert (oversized, breaks out across the bottom). -->
+		<div class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:gap-x-6 md:gap-y-0">
+			<!-- LEFT photo — pouring, anchored lower so it visually drops down. -->
 			<figure
-				class="relative overflow-hidden rounded-sm md:col-span-5 md:col-start-1 md:mt-24"
+				class="relative overflow-hidden rounded-sm md:col-span-5 md:col-start-1 md:row-start-1 md:mt-28"
 				data-reveal
 			>
 				<Image
@@ -52,26 +54,9 @@ const altViola = locale === 'el' ? 'Τοποθέτηση βρώσιμου άνθ
 				/>
 			</figure>
 
-			<!-- CENTER photo — the dessert centerpiece, breaks out, larger. -->
+			<!-- RIGHT photo — viola, smaller, anchored high. -->
 			<figure
-				class="relative overflow-hidden rounded-sm md:col-span-7 md:col-start-6 md:row-span-2 md:row-start-1"
-				data-reveal="editorial"
-			>
-				<Image
-					src={dessertImg}
-					alt={altDessert}
-					widths={[640, 960, 1280, 1600]}
-					sizes="(min-width: 768px) 55vw, 90vw"
-					format="webp"
-					quality={86}
-					loading="lazy"
-					class="aspect-[3/4] h-full w-full object-cover md:aspect-[4/5]"
-				/>
-			</figure>
-
-			<!-- RIGHT photo — viola, smaller, hangs higher. -->
-			<figure
-				class="relative overflow-hidden rounded-sm md:col-span-4 md:col-start-1 md:mt-8"
+				class="relative overflow-hidden rounded-sm md:col-span-4 md:col-start-9 md:row-start-1"
 				data-reveal
 			>
 				<Image
@@ -83,6 +68,24 @@ const altViola = locale === 'el' ? 'Τοποθέτηση βρώσιμου άνθ
 					quality={82}
 					loading="lazy"
 					class="aspect-square h-full w-full object-cover md:aspect-[4/5]"
+				/>
+			</figure>
+
+			<!-- CENTER/RIGHT photo — the dessert centerpiece, breaks across columns,
+			     pulls up so it overlaps visually with the row above. -->
+			<figure
+				class="relative overflow-hidden rounded-sm md:col-span-9 md:col-start-2 md:row-start-2 md:-mt-24"
+				data-reveal="editorial"
+			>
+				<Image
+					src={dessertImg}
+					alt={altDessert}
+					widths={[640, 960, 1280, 1600]}
+					sizes="(min-width: 768px) 65vw, 90vw"
+					format="webp"
+					quality={86}
+					loading="lazy"
+					class="aspect-[3/4] h-full w-full object-cover md:aspect-[16/10]"
 				/>
 			</figure>
 		</div>

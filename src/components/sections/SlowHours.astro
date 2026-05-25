@@ -48,11 +48,11 @@ const frames = [
 			</h2>
 		</div>
 
-		<ul class="mt-14 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-3 md:gap-6 lg:gap-10">
-			{frames.map((frame) => (
+		<ul class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-2 md:gap-x-8 md:gap-y-12 lg:grid-cols-3 lg:gap-x-10">
+			{frames.map((frame, idx) => (
 				<li
 					data-slow-hours-slot={frame.slot}
-					class="slow-hours-frame flex flex-col gap-4 transition-opacity duration-700 ease-out"
+					class={`slow-hours-frame flex flex-col gap-4 transition-opacity duration-700 ease-out ${idx === 1 ? 'lg:mt-16' : ''} ${idx === 2 ? 'md:col-span-2 md:ml-auto md:w-2/3 lg:col-span-1 lg:ml-0 lg:w-auto' : ''}`}
 				>
 					<figure class="relative overflow-hidden rounded-sm">
 						<Image

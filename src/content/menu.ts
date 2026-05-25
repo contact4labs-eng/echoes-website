@@ -1,21 +1,20 @@
 import type { ImageMetadata } from 'astro';
 import crispyChickenBowl from '@/assets/photos/menu/crispy-chicken-bowl.jpg';
 import prosciuttoEgg from '@/assets/photos/menu/prosciutto-egg.jpg';
-import frenchToast from '@/assets/photos/dessert-sorbet.jpg';
 
 /**
  * Featured dishes for the `From the Kitchen` editorial panels (Movement 5).
  *
- * Three dishes only — chosen for full-bleed photo strength, not by category
- * coverage. The full menu is "call us" for v1.
+ * TWO dishes only (R3.1) — both verified by noupou.gr Jan 2026. Each gets a
+ * distinct visual treatment in FromTheKitchen.astro, not an alternating two-
+ * column rhythm.
  *
- * - `crispyChickenBowl` — verified by noupou.gr Jan 2026.
- * - `prosciuttoEgg` (Κουλούρι Θεσσαλονίκης) — verified by noupou.gr Jan 2026.
- * - `frenchToastPistachio` — TODO_CLIENT: image00027 (dessert-sorbet.jpg) shows
- *   a fried-bread dessert with raspberry sorbet + meringue crumble. The
- *   raspberry sorbet may correspond to the "forest-fruit sauce" in the
- *   verified `French toast με φιστίκι Αιγίνης` description, but the client
- *   must confirm before publication.
+ * - `crispyChickenBowl` — verified.
+ * - `prosciuttoEgg` (Κουλούρι Θεσσαλονίκης) — verified.
+ *
+ * `dessert-sorbet.jpg` (image00027) is NOT used here in R3.1 — its dish
+ * identity is still TODO_CLIENT. It lives on in The Pass and End Card where
+ * the photo speaks atmospherically without needing a verified dish name.
  */
 export interface MenuFeature {
 	slug: string;
@@ -26,5 +25,4 @@ export interface MenuFeature {
 export const menuFeature: MenuFeature[] = [
 	{ slug: 'crispy-chicken-bowl', i18nKey: 'crispyChickenBowl', image: crispyChickenBowl },
 	{ slug: 'prosciutto-egg', i18nKey: 'prosciuttoEgg', image: prosciuttoEgg },
-	{ slug: 'french-toast-pistachio', i18nKey: 'frenchToastPistachio', image: frenchToast },
 ];

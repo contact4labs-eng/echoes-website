@@ -104,8 +104,7 @@
 	"endCard": {
 		"phrase": "come by Nymfon.",
 		"actions": {
-			"call": "Call us",
-			"maps": "In Maps",
+			"maps": "Maps",
 			"instagram": "Instagram"
 		}
 	},

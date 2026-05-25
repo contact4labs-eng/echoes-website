@@ -104,8 +104,7 @@
 	"endCard": {
 		"phrase": "περάστε από τη Νυμφών.",
 		"actions": {
-			"call": "Καλέστε μας",
-			"maps": "Στους Χάρτες",
+			"maps": "Χάρτες",
 			"instagram": "Instagram"
 		}
 	},

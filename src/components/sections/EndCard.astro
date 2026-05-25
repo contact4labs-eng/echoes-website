@@ -40,23 +40,23 @@ const t = useTranslations(locale);
 		</div>
 
 		<nav
-			class="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium tracking-[0.18em] text-bistro-cream/80 uppercase"
+			class="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-bistro-cream/80"
 			aria-label={t('endCard.phrase')}
 			data-reveal="quiet"
 		>
 			<a
 				href={`tel:${site.phone}`}
-				class="transition-colors duration-300 hover:text-bistro-cream"
+				class="font-heading text-xl text-bistro-cream transition-colors duration-300 hover:text-white md:text-2xl"
 				aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
 			>
-				{t('endCard.actions.call')}
+				{site.phoneDisplay}
 			</a>
 			<span class="text-bistro-cream/35" aria-hidden="true">·</span>
 			<a
 				href={site.mapsSearchUrl}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="transition-colors duration-300 hover:text-bistro-cream"
+				class="text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-bistro-cream"
 			>
 				{t('endCard.actions.maps')}
 			</a>
@@ -65,7 +65,7 @@ const t = useTranslations(locale);
 				href={site.social.instagramUrl}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="transition-colors duration-300 hover:text-bistro-cream"
+				class="text-xs font-medium tracking-[0.18em] uppercase transition-colors duration-300 hover:text-bistro-cream"
 				aria-label={t('a11y.openInstagram')}
 			>
 				{t('endCard.actions.instagram')}
