@@ -1,0 +1,58 @@
+---
+import { getImage } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { CrossfadeOnScroll } from '@/components/interactive/CrossfadeOnScroll';
+import facade from '@/assets/photos/facade-bougainvillea.jpg';
+import interior from '@/assets/photos/interior-awning.jpg';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const sizesAttr = '100vw';
+const widths = [640, 1024, 1440, 1920, 2560];
+
+const facadeImg = await getImage({
+	src: facade,
+	widths,
+	format: 'webp',
+	quality: 84,
+});
+const interiorImg = await getImage({
+	src: interior,
+	widths,
+	format: 'webp',
+	quality: 84,
+});
+
+const exteriorProps = {
+	src: facadeImg.src,
+	srcSet: facadeImg.srcSet?.attribute ?? '',
+	sizes: sizesAttr,
+	width: Number(facadeImg.attributes.width) || 1920,
+	height: Number(facadeImg.attributes.height) || 2880,
+	alt: t('throughDoor.altExterior'),
+};
+const interiorProps = {
+	src: interiorImg.src,
+	srcSet: interiorImg.srcSet?.attribute ?? '',
+	sizes: sizesAttr,
+	width: Number(interiorImg.attributes.width) || 1920,
+	height: Number(interiorImg.attributes.height) || 2880,
+	alt: t('throughDoor.altInterior'),
+};
+---
+
+<section
+	id="through-the-door"
+	class="relative"
+	aria-label={t('throughDoor.caption')}
+>
+	<CrossfadeOnScroll
+		client:visible
+		exterior={exteriorProps}
+		interior={interiorProps}
+		caption={t('throughDoor.caption')}
+	/>
+</section>

@@ -30,6 +30,15 @@
 		transform 1600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Quiet entrance — even slower, shorter translate, for the First Word and other
+   low-key reveals in the Slow Hours direction. */
+[data-reveal="quiet"] {
+	transform: translate3d(0, 16px, 0);
+	transition:
+		opacity 1800ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 1800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 [data-reveal].is-revealed {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
@@ -75,6 +84,34 @@
 	--header-cta-bg: var(--color-bistro-cream);
 	--header-cta-fg: var(--color-bistro-ink);
 	--header-cta-bg-hover: oklch(1 0 0);
+}
+
+/* Active section indicator — small dot below the matching desktop nav link.
+   Works in both header states (over hero + scrolled) because it uses currentColor. */
+[data-site-header] .nav-link {
+	position: relative;
+}
+[data-site-header] .nav-link::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -7px;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: currentColor;
+	opacity: 0;
+	transform: translateX(-50%) scale(0.4);
+	transition:
+		opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-site-header] .nav-link[aria-current="true"] {
+	color: var(--header-fg-strong);
+}
+[data-site-header] .nav-link[aria-current="true"]::after {
+	opacity: 0.85;
+	transform: translateX(-50%) scale(1);
 }
 
 /* Header — scrolled state: dark foreground on cream glass, teal primary CTA. */

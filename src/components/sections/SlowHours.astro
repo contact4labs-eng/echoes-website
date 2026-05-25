@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { SlowHoursActive } from '@/components/interactive/SlowHoursActive';
+
+import morningImg from '@/assets/photos/chef-pouring.jpg';
+import middayImg from '@/assets/photos/caesar-detail.jpg';
+import eveningImg from '@/assets/photos/interior-evening.png';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const frames = [
+	{
+		slot: 'morning',
+		image: morningImg,
+		altKey: locale === 'el' ? 'Σερβίρισμα καφέ από μπρίκι σε λευκή κούπα' : 'Coffee poured from a briki into a white cup',
+	},
+	{
+		slot: 'midday',
+		image: middayImg,
+		altKey: locale === 'el' ? 'Πιάτο με τραγανό κοτόπουλο και πράσινη σαλάτα' : 'A plate of crisp chicken over green salad',
+	},
+	{
+		slot: 'evening',
+		image: eveningImg,
+		altKey: locale === 'el' ? 'Εσωτερικό βραδινό φωτισμένο με χάλκινα φώτα και ορτανσίες' : 'Evening interior lit by copper lamps and hydrangeas',
+	},
+] as const;
+---
+
+<section
+	id="slow-hours"
+	class="slow-hours relative bg-background px-5 py-24 md:px-8 md:py-32 lg:py-40"
+>
+	<div class="mx-auto max-w-7xl">
+		<div class="max-w-3xl" data-reveal>
+			<p class="text-[11px] font-semibold tracking-[0.25em] text-bistro-copper uppercase">
+				{t('slowHours.eyebrow')}
+			</p>
+			<h2
+				class="font-heading mt-5 text-balance text-foreground"
+				style="font-size: var(--text-display); line-height: var(--text-display--line-height);"
+			>
+				{t('slowHours.heading')}
+			</h2>
+		</div>
+
+		<ul class="mt-14 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-3 md:gap-6 lg:gap-10">
+			{frames.map((frame) => (
+				<li
+					data-slow-hours-slot={frame.slot}
+					class="slow-hours-frame flex flex-col gap-4 transition-opacity duration-700 ease-out"
+				>
+					<figure class="relative overflow-hidden rounded-sm">
+						<Image
+							src={frame.image}
+							alt={frame.altKey}
+							widths={[320, 480, 640, 800, 1024]}
+							sizes="(min-width: 768px) 32vw, 90vw"
+							format="webp"
+							quality={82}
+							loading="lazy"
+							class="aspect-[3/4] h-full w-full object-cover"
+						/>
+					</figure>
+					<div class="flex flex-col gap-1.5">
+						<span class="slow-hours-daypart text-[10px] font-semibold tracking-[0.25em] text-foreground/65 uppercase">
+							{t(`slowHours.labels.${frame.slot}.daypart`)}
+						</span>
+						<span class="font-heading text-2xl leading-tight font-medium text-foreground md:text-3xl">
+							{t(`slowHours.labels.${frame.slot}.offer`)}
+						</span>
+					</div>
+				</li>
+			))}
+		</ul>
+	</div>
+	<SlowHoursActive client:visible />
+</section>
+
+<style>
+	.slow-hours-frame {
+		opacity: 1;
+	}
+	/* When the JS island sets data-active on any frame, the others fade back. */
+	.slow-hours:has([data-slow-hours-slot][data-active="true"]) .slow-hours-frame[data-active="false"] {
+		opacity: 0.55;
+	}
+	/* Copper underline under the active daypart label. */
+	.slow-hours-frame[data-active="true"] .slow-hours-daypart {
+		position: relative;
+		color: var(--color-bistro-copper);
+	}
+	.slow-hours-frame[data-active="true"] .slow-hours-daypart::after {
+		content: "";
+		display: block;
+		width: 18px;
+		height: 1px;
+		background-color: var(--color-bistro-copper);
+		margin-top: 6px;
+		opacity: 0.7;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.slow-hours-frame {
+			opacity: 1 !important;
+			transition: none !important;
+		}
+	}
+</style>

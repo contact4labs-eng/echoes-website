@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import facade from '@/assets/photos/facade-bougainvillea.jpg';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const altText = locale === 'el'
+	? 'Η πρόσοψη του Echoes Bistrot στη γωνία Νυμφών 33 με μπουκαμβίλια και ριγέ τέντες'
+	: 'The Echoes Bistrot facade on the corner of Nymfon 33, with bougainvillea and striped awnings';
+---
+
+<section
+	id="threshold"
+	class="relative isolate flex min-h-svh items-end overflow-hidden bg-bistro-ink text-bistro-cream"
+	aria-label="Echoes Bistrot"
+>
+	<div data-threshold-parallax class="absolute inset-0 -z-10 will-change-transform">
+		<Image
+			src={facade}
+			alt={altText}
+			width={1920}
+			height={2880}
+			widths={[640, 1024, 1440, 1920, 2560]}
+			sizes="100vw"
+			format="webp"
+			quality={86}
+			loading="eager"
+			fetchpriority="high"
+			class="threshold-photo h-full w-full object-cover"
+		/>
+	</div>
+
+	<!-- A tiny gradient JUST under the identity strip for readability — nothing across the rest of the photo. -->
+	<div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-bistro-ink/55 via-bistro-ink/15 to-transparent" aria-hidden="true"></div>
+
+	<div class="mx-auto w-full max-w-7xl px-5 pb-8 md:px-8 md:pb-12">
+		<div class="threshold-strip flex items-center gap-4">
+			<span class="block h-px w-12 bg-bistro-copper/70" aria-hidden="true"></span>
+			<p class="text-[11px] font-medium tracking-[0.24em] text-bistro-cream/85 uppercase">
+				{t('threshold.identityStrip')}
+			</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	@keyframes thresholdStripIn {
+		from { opacity: 0; transform: translate3d(0, 8px, 0); }
+		to   { opacity: 1; transform: translate3d(0, 0, 0); }
+	}
+	@keyframes thresholdPhotoDrift {
+		0%   { transform: scale(1.02) translate3d(0, 0, 0); }
+		100% { transform: scale(1.08) translate3d(-0.8%, -0.8%, 0); }
+	}
+	.threshold-strip {
+		opacity: 0;
+		animation: thresholdStripIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 700ms forwards;
+	}
+	.threshold-photo {
+		animation: thresholdPhotoDrift 24s ease-in-out infinite alternate;
+		will-change: transform;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.threshold-strip { opacity: 1 !important; animation: none !important; }
+		.threshold-photo { animation: none !important; }
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		var el = document.querySelector('[data-threshold-parallax]');
+		if (!el) return;
+		var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches;
+		if (reduce || isTouch) return;
+
+		var intensity = 8;
+		var raf = 0;
+		var rect = el.getBoundingClientRect();
+		var resize = function () { rect = el.getBoundingClientRect(); };
+		window.addEventListener('resize', resize, { passive: true });
+
+		window.addEventListener('pointermove', function (e) {
+			if (raf) cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(function () {
+				var cx = (e.clientX - rect.left) / rect.width - 0.5;
+				var cy = (e.clientY - rect.top) / rect.height - 0.5;
+				var x = Math.max(-intensity, Math.min(intensity, -cx * intensity * 2)).toFixed(1);
+				var y = Math.max(-intensity, Math.min(intensity, -cy * intensity * 2)).toFixed(1);
+				el.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+			});
+		}, { passive: true });
+	})();
+</script>

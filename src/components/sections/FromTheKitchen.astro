@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import { menuFeature } from '@/content/menu';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="menu" class="relative bg-background">
+	<div class="mx-auto max-w-7xl px-5 pt-24 md:px-8 md:pt-32 lg:pt-40">
+		<div class="max-w-3xl" data-reveal>
+			<p class="text-[11px] font-semibold tracking-[0.25em] text-bistro-copper uppercase">
+				{t('menu.eyebrow')}
+			</p>
+			<h2
+				class="font-heading mt-5 text-balance text-foreground"
+				style="font-size: var(--text-display); line-height: var(--text-display--line-height);"
+			>
+				{t('menu.title')}
+			</h2>
+		</div>
+	</div>
+
+	<ul class="mt-16 flex flex-col gap-24 md:mt-24 md:gap-40">
+		{menuFeature.map((dish, idx) => {
+			const photoOnLeft = idx % 2 === 0;
+			return (
+				<li class="relative" data-reveal>
+					<div class="mx-auto grid max-w-7xl items-center gap-6 px-5 md:grid-cols-12 md:gap-12 md:px-8 lg:gap-16">
+						<figure class={`relative overflow-hidden rounded-sm ${photoOnLeft ? 'md:col-span-7 md:order-1' : 'md:col-span-7 md:order-2'}`}>
+							<Image
+								src={dish.image}
+								alt={t(`menu.items.${dish.i18nKey}.name`)}
+								widths={[640, 960, 1280, 1600]}
+								sizes="(min-width: 768px) 55vw, 90vw"
+								format="webp"
+								quality={84}
+								loading="lazy"
+								class="aspect-[4/5] h-full w-full object-cover md:aspect-[4/5]"
+							/>
+						</figure>
+						<div class={`flex flex-col gap-4 ${photoOnLeft ? 'md:col-span-5 md:order-2 md:pl-2' : 'md:col-span-5 md:order-1 md:pr-2'}`}>
+							<span class="text-[10px] font-semibold tracking-[0.25em] text-foreground/55 uppercase">
+								{String(idx + 1).padStart(2, '0')}
+							</span>
+							<h3
+								class="font-heading text-balance text-foreground"
+								style="font-size: var(--text-display); line-height: var(--text-display--line-height);"
+							>
+								{t(`menu.items.${dish.i18nKey}.name`)}
+							</h3>
+							<p class="text-base leading-relaxed text-foreground/65 md:text-lg">
+								<em class="not-italic">
+									{t(`menu.items.${dish.i18nKey}.desc`)}
+								</em>
+							</p>
+						</div>
+					</div>
+				</li>
+			);
+		})}
+	</ul>
+
+	<div class="mx-auto mt-24 max-w-3xl px-5 pb-24 text-center md:px-8 md:pb-32" data-reveal>
+		<p class="text-base text-foreground/65 md:text-lg">{t('menu.viewMoreLine')}</p>
+		<a
+			href={`tel:${site.phone}`}
+			class="font-heading mt-3 inline-block text-3xl leading-tight text-bistro-copper underline decoration-bistro-copper/30 underline-offset-[8px] transition-all duration-300 hover:decoration-bistro-copper md:text-4xl"
+			aria-label={t('a11y.callPhone').replace('{phone}', site.phoneDisplay)}
+		>
+			{site.phoneDisplay}
+		</a>
+	</div>
+</section>

@@ -70,7 +70,7 @@ const ogImage = `${site.url}${site.ogImage}`;
 		<Font cssVariable="--font-heading" preload />
 		<Font cssVariable="--font-sans" preload />
 
-		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class="min-h-svh bg-background text-foreground">
 		<a
@@ -99,14 +99,68 @@ const ogImage = `${site.url}${site.ogImage}`;
 				reveals.forEach((el) => io.observe(el));
 			}
 
-			// Header background toggle after 80px scroll.
+			// Header background toggle after 80px scroll — rAF-throttled so we never
+			// run DOM writes more than once per frame.
 			const header = document.querySelector<HTMLElement>('[data-site-header]');
 			if (header) {
-				const onScroll = () => {
+				let ticking = false;
+				const updateHeader = () => {
 					header.classList.toggle('header-scrolled', window.scrollY > 80);
+					ticking = false;
 				};
-				onScroll();
-				window.addEventListener('scroll', onScroll, { passive: true });
+				const requestHeaderUpdate = () => {
+					if (!ticking) {
+						ticking = true;
+						requestAnimationFrame(updateHeader);
+					}
+				};
+				updateHeader();
+				window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
+			}
+
+			// Active section awareness — pick the section whose top sits closest
+			// to (but not below) a band ~40% down the viewport. We re-evaluate all
+			// sections on each scroll frame so the active state can never get stuck.
+			const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+			const sections = Array.from(
+				document.querySelectorAll<HTMLElement>('#menu, #kitchen, #visit')
+			);
+			if (navLinks.length && sections.length) {
+				const setActive = (id: string | null) => {
+					navLinks.forEach((link) => {
+						if (id && link.dataset.navLink === id) {
+							link.setAttribute('aria-current', 'true');
+						} else {
+							link.removeAttribute('aria-current');
+						}
+					});
+				};
+				const updateActiveNav = () => {
+					const bandY = window.innerHeight * 0.4;
+					let activeId: string | null = null;
+					let bestTop = -Infinity;
+					for (const s of sections) {
+						const top = s.getBoundingClientRect().top;
+						if (top <= bandY && top > bestTop) {
+							bestTop = top;
+							activeId = s.id;
+						}
+					}
+					setActive(activeId);
+				};
+				let navTicking = false;
+				const requestNavUpdate = () => {
+					if (!navTicking) {
+						navTicking = true;
+						requestAnimationFrame(() => {
+							updateActiveNav();
+							navTicking = false;
+						});
+					}
+				};
+				updateActiveNav();
+				window.addEventListener('scroll', requestNavUpdate, { passive: true });
+				window.addEventListener('resize', requestNavUpdate, { passive: true });
 			}
 		</script>
 
