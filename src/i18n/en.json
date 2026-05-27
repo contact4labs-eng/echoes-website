@@ -47,6 +47,11 @@
 				"page": "pg. 24",
 				"title": "Nymfon 33.",
 				"blurb": "maps, phone, hours."
+			},
+			"end": {
+				"page": "pg. 28",
+				"title": "come by Nymfon.",
+				"blurb": "last page."
 			}
 		},
 		"footerLeft": "Echoes · Nymfon 33 · Ilioupoli 163 41",
@@ -171,6 +176,21 @@
 		"tagline": "on the corner, from morning.",
 		"postmarkCity": "ILIOUPOLI",
 		"postmarkPostal": "163 41"
+	},
+	"end": {
+		"folioLeft": "pg. 28",
+		"folioCenter": "Echoes · Nymfon 33",
+		"folioRight": "end",
+		"phrase": "come by Nymfon.",
+		"phone": "210 990 1676",
+		"mapsLabel": "maps",
+		"instagramLabel": "instagram",
+		"photoAlt": "evening interior at Echoes"
+	},
+	"colophon": {
+		"line1": "Echoes · Nymfon 33 · Ilioupoli 163 41 · 210 990 1676",
+		"line2": "Featured by noupou.gr · Coffee by Taf",
+		"line3": "© Echoes Bistrot 2026"
 	},
 	"social": {
 		"eyebrow": "From the press",

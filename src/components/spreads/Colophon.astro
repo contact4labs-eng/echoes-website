@@ -1,0 +1,28 @@
+---
+/**
+ * R4 Colophon — the page-bottom printed strip.
+ *
+ * Not a footer with nav columns. Not a "Designed with care" credit.
+ * Three quiet typeset lines:
+ *   1. brand · address · phone (mono caps, ink)
+ *   2. press + partner credits (italic, whisper)
+ *   3. copyright (mono caps, mark)
+ *
+ * Renders as a top-level <footer> at the document end (outside <main>),
+ * below the End spread. Cream paper ground, 1px ink top hairline to
+ * separate from the End spread's dark image above.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import '@/styles/colophon.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<footer class="page-colophon" aria-label="Echoes — colophon">
+	<p class="colophon-line line-1">{t('colophon.line1')}</p>
+	<p class="colophon-line line-2">{t('colophon.line2')}</p>
+	<p class="colophon-line line-3">{t('colophon.line3')}</p>
+</footer>

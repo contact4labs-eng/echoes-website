@@ -1,0 +1,69 @@
+/* -----------------------------------------------------------------------
+   R4 production · Page-level Colophon strip
+   Lives at the very bottom of the page, below the End spread. Three
+   quiet typeset lines — no nav, no agency credit, no 3-column footer.
+   Just a printed colophon.
+   ----------------------------------------------------------------------- */
+
+.page-colophon {
+	background: var(--paper);
+	color: var(--ink);
+	padding: 32px 56px 28px;
+	border-top: 1px solid var(--ink);
+	text-align: center;
+	font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+}
+.page-colophon *, .page-colophon *::before, .page-colophon *::after { box-sizing: border-box; }
+.page-colophon p { margin: 0; }
+
+.page-colophon .colophon-line { margin: 0; }
+
+.page-colophon .line-1 {
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--ink);
+	font-weight: 500;
+	line-height: 1.8;
+}
+
+.page-colophon .line-2 {
+	margin-top: 10px;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 13px;
+	color: var(--whisper);
+	line-height: 1.4;
+}
+
+.page-colophon .line-3 {
+	margin-top: 14px;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 10px;
+	letter-spacing: 0.20em;
+	text-transform: uppercase;
+	/* bumped from --mark (18%) to --whisper (42%) for readable AA contrast */
+	color: var(--whisper);
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.page-colophon {
+		padding: 24px 22px 22px;
+	}
+	.page-colophon .line-1 {
+		font-size: 9.5px;
+		letter-spacing: 0.16em;
+		line-height: 1.85;
+	}
+	.page-colophon .line-2 {
+		font-size: 12px;
+		margin-top: 10px;
+	}
+	.page-colophon .line-3 {
+		font-size: 9px;
+		letter-spacing: 0.18em;
+		margin-top: 12px;
+	}
+}

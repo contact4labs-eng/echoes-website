@@ -1,0 +1,183 @@
+/* -----------------------------------------------------------------------
+   R4 production · End spread (σελ. 28 · περάστε από τη Νυμφών.)
+   Full-bleed interior-evening photo + dark gradient overlay at the
+   bottom + quiet italic phrase + copper rule + small action row.
+   Reads as a magazine back cover, not a CTA section.
+   Single viewport at 1440×900 and 1280×800.
+   ----------------------------------------------------------------------- */
+
+.end {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	overflow: hidden;
+	color: var(--paper);
+	font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+}
+.end *, .end *::before, .end *::after { box-sizing: border-box; }
+.end a { color: inherit; }
+
+/* Full-bleed photo, behind everything */
+.end .end-photo {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	margin: 0;
+	pointer-events: none;
+}
+.end .end-photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 55%;
+	filter: contrast(1.02) saturate(0.95);
+}
+
+/* Soft dark gradient overlay — top is barely touched, bottom carries the
+   type's legibility. Sits between the image (z:0) and content (z:2). */
+.end::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		rgba(12, 10, 8, 0.18) 0%,
+		rgba(12, 10, 8, 0.36) 50%,
+		rgba(12, 10, 8, 0.86) 100%
+	);
+	z-index: 1;
+	pointer-events: none;
+}
+
+/* -------- FOLIO (paper text on photo via gradient) -------- */
+.end .folio {
+	position: relative;
+	z-index: 2;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: baseline;
+	gap: 16px;
+	padding: 22px 56px 14px;
+	border-bottom: 1px solid rgba(240, 231, 210, 0.42);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+}
+.end .folio p { margin: 0; }
+.end .folio .folio-left { color: var(--paper); font-weight: 500; }
+.end .folio .folio-center {
+	color: var(--accent);
+	text-align: center;
+	letter-spacing: 0.24em;
+}
+.end .folio .folio-right {
+	color: rgba(240, 231, 210, 0.62);
+	text-align: right;
+}
+
+/* -------- END CONTENT (centered, bottom-aligned) -------- */
+.end .end-content {
+	position: relative;
+	z-index: 2;
+	align-self: end;
+	padding: 0 56px 64px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 22px;
+}
+
+.end .end-phrase {
+	margin: 0;
+	font-family: var(--font-greek-display), 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: clamp(2.6rem, 5vw, 4.4rem);
+	line-height: 1.05;
+	letter-spacing: -0.018em;
+	color: var(--paper);
+	max-width: 18ch;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Thin copper rule — visual closing punctuation */
+.end .end-rule {
+	width: 56px;
+	height: 1px;
+	background: var(--accent);
+	opacity: 0.7;
+}
+
+.end .end-actions {
+	margin: 0;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: rgba(240, 231, 210, 0.78);
+	display: flex;
+	align-items: baseline;
+	gap: 16px;
+}
+.end .end-actions a {
+	color: rgba(240, 231, 210, 0.86);
+	text-decoration: none;
+	transition: color 200ms ease;
+}
+.end .end-actions a:hover { color: var(--accent); }
+.end .end-actions a:focus-visible {
+	outline: 1px solid var(--accent);
+	outline-offset: 4px;
+}
+.end .end-actions .end-phone {
+	color: var(--accent);
+	font-weight: 500;
+}
+.end .end-actions .sep {
+	color: rgba(240, 231, 210, 0.32);
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.end .end-photo img {
+		object-position: center 50%;
+	}
+
+	.end .folio {
+		grid-template-columns: 1fr 1fr;
+		padding: 18px 22px 12px;
+		font-size: 9.5px;
+		letter-spacing: 0.22em;
+	}
+	.end .folio .folio-center { display: none; }
+
+	.end .end-content {
+		padding: 0 22px 36px;
+		gap: 18px;
+	}
+	.end .end-phrase {
+		font-size: clamp(2.2rem, 9vw, 3rem);
+		max-width: 16ch;
+	}
+	.end .end-rule { width: 44px; }
+	.end .end-actions {
+		gap: 10px;
+		font-size: 9.5px;
+		letter-spacing: 0.14em;
+		/* keep the row as a baseline-aligned text strip; the larger
+		   tap targets come from per-link padding below */
+		align-items: center;
+	}
+	/* Mobile-only: enlarge each action link to a 44px tap target while
+	   keeping the visual as inline text (no button background, no border). */
+	.end .end-actions a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 8px 4px;
+	}
+}

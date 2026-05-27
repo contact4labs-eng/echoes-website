@@ -1,0 +1,70 @@
+---
+/**
+ * R4 EndSpread — σελ. 28 · περάστε από τη Νυμφών. / come by Nymfon.
+ *
+ * The closing spread. Designed as a magazine BACK COVER, not a final
+ * landing-page CTA. Full-bleed interior photo with a soft dark
+ * gradient at the bottom for type legibility; a quiet italic phrase
+ * sits centered above a small action row of three text links (phone,
+ * maps, instagram). No CTA pill. No reservation language. No
+ * "visit us today".
+ *
+ * The action row carries the phone (the conversion path), so no
+ * separate run-on strip — the magazine wayfinding (run-on with phone
+ * + [ περιεχόμενα ]) on the previous spreads has done its job; the
+ * End spread reads as terminal.
+ *
+ * No `[data-reveal]` / fade-up. Static photographic closure.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import { Image } from 'astro:assets';
+import interiorEvening from '@/assets/photos/interior-evening.png';
+import '@/styles/end.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const phoneTel = `tel:${site.phone}`;
+const mapsHref = site.mapsSearchUrl;
+const igHref = site.social.instagramUrl;
+---
+
+<section class="end" id="end" data-spread="end" aria-labelledby="end-phrase">
+	{/* Full-bleed photo behind everything */}
+	<figure class="end-photo" aria-hidden="false">
+		<Image
+			src={interiorEvening}
+			alt={t('end.photoAlt')}
+			widths={[640, 1280, 1920]}
+			sizes="100vw"
+			loading="lazy"
+		/>
+	</figure>
+
+	<header class="folio">
+		<p class="folio-left">{t('end.folioLeft')}</p>
+		<p class="folio-center">{t('end.folioCenter')}</p>
+		<p class="folio-right">{t('end.folioRight')}</p>
+	</header>
+
+	<div class="end-content">
+		<p class="end-phrase" id="end-phrase">{t('end.phrase')}</p>
+
+		<div class="end-rule" aria-hidden="true"></div>
+
+		<p class="end-actions">
+			<a
+				class="end-phone"
+				href={phoneTel}
+				aria-label={`${t('cover.masthead.name')} ${t('end.phone')}`}
+			>{t('end.phone')}</a>
+			<span class="sep" aria-hidden="true">·</span>
+			<a href={mapsHref} target="_blank" rel="noopener noreferrer">{t('end.mapsLabel')}</a>
+			<span class="sep" aria-hidden="true">·</span>
+			<a href={igHref} target="_blank" rel="noopener noreferrer">{t('end.instagramLabel')}</a>
+		</p>
+	</div>
+</section>

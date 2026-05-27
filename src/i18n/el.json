@@ -47,6 +47,11 @@
 				"page": "σελ. 24",
 				"title": "Νυμφών 33.",
 				"blurb": "χάρτες, τηλέφωνο, ώρες."
+			},
+			"end": {
+				"page": "σελ. 28",
+				"title": "περάστε από τη Νυμφών.",
+				"blurb": "τελευταία σελίδα."
 			}
 		},
 		"footerLeft": "Echoes · Νυμφών 33 · Ηλιούπολη 163 41",
@@ -171,6 +176,21 @@
 		"tagline": "στη γωνία, από το πρωί.",
 		"postmarkCity": "ΗΛΙΟΥΠΟΛΗ",
 		"postmarkPostal": "163 41"
+	},
+	"end": {
+		"folioLeft": "σελ. 28",
+		"folioCenter": "Echoes · Νυμφών 33",
+		"folioRight": "τέλος",
+		"phrase": "περάστε από τη Νυμφών.",
+		"phone": "210 990 1676",
+		"mapsLabel": "χάρτες",
+		"instagramLabel": "instagram",
+		"photoAlt": "βραδινό εσωτερικό του Echoes"
+	},
+	"colophon": {
+		"line1": "Echoes · Νυμφών 33 · Ηλιούπολη 163 41 · 210 990 1676",
+		"line2": "Αναφορά στο noupou.gr · Καφές από Taf",
+		"line3": "© Echoes Bistrot 2026"
 	},
 	"social": {
 		"eyebrow": "Από τον τύπο",

@@ -1,16 +1,22 @@
 ---
 /**
- * R4 Phase 4 — HomeContent
+ * R4 Phase 5 — HomeContent
  * Renders Cover + KitchenSpread (σελ. 12) + PassSpread (σελ. 18) +
- * Nymfon33Spread (σελ. 24) + ContentsOverlay React island.
+ * Nymfon33Spread (σελ. 24) + EndSpread (σελ. 28) + Colophon strip +
+ * ContentsOverlay React island.
  * - Header is NOT imported (no top nav bar in R4).
- * - Legacy Footer is NOT rendered (carries banned copy until rewrite).
+ * - The Colophon is a page-level <footer> (outside <main>) — the
+ *   quiet printed colophon, NOT the legacy template Footer.
  * - Spread anchors:
  *     #main    → Cover (the page itself)
  *     #kitchen → KitchenSpread
  *     #pass    → PassSpread
  *     #visit   → Nymfon33Spread
+ *     #end     → EndSpread
  *   These power the contents overlay TOC.
+ * - Slow Hours is intentionally NOT included in Phase 5 — the
+ *   manager wants to ship the magazine direction without re-introducing
+ *   a 3-image triptych/template feeling.
  */
 import type { Locale } from '@/i18n/utils';
 import { useTranslations } from '@/i18n/utils';
@@ -19,6 +25,8 @@ import Cover from '@/components/spreads/Cover.astro';
 import KitchenSpread from '@/components/spreads/KitchenSpread.astro';
 import PassSpread from '@/components/spreads/PassSpread.astro';
 import Nymfon33Spread from '@/components/spreads/Nymfon33Spread.astro';
+import EndSpread from '@/components/spreads/EndSpread.astro';
+import Colophon from '@/components/spreads/Colophon.astro';
 import { ContentsOverlay } from '@/components/interactive/ContentsOverlay';
 
 interface Props {
@@ -31,8 +39,7 @@ const t = useTranslations(locale);
 
 const phoneHref = `tel:${site.phone}`;
 
-// Phase 4: Cover + KitchenSpread + PassSpread + Nymfon33Spread.
-// Slow Hours and End spread arrive in later phases.
+// Phase 5: full 5-spread narrative + Colophon strip.
 const entries = [
 	{
 		page: t('contents.entries.cover.page'),
@@ -58,6 +65,12 @@ const entries = [
 		blurb: t('contents.entries.visit.blurb'),
 		href: '#visit',
 	},
+	{
+		page: t('contents.entries.end.page'),
+		title: t('contents.entries.end.title'),
+		blurb: t('contents.entries.end.blurb'),
+		href: '#end',
+	},
 ];
 ---
 
@@ -66,7 +79,10 @@ const entries = [
 	<KitchenSpread locale={locale} />
 	<PassSpread locale={locale} />
 	<Nymfon33Spread locale={locale} />
+	<EndSpread locale={locale} />
 </main>
+
+<Colophon locale={locale} />
 
 <ContentsOverlay
 	client:idle
