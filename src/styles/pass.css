@@ -1,0 +1,329 @@
+/* -----------------------------------------------------------------------
+   R4 production · The Pass spread (σελ. 18)
+   Reverse-palette: ink ground + paper text + accent red. Distinct from
+   the cover/kitchen cream ground — the visual scene-change from "food"
+   to "kitchen" is intentional.
+
+   Composition: 12-col grid with a 3-row layout:
+     row 1: folio (above composition)
+     row A in composition: title top-left
+     row B in composition: staggered photo triptych across full width
+     row C in composition: body sentence (bottom-left) + caption (bottom-right)
+     row 3: run-on (below composition)
+
+   No fade-up / reveal classes — print-static like the other spreads.
+   ----------------------------------------------------------------------- */
+
+.pass {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	/* tightened from 28/56/36 to fit ≤900px height at 1440×900 */
+	padding: 22px 56px 22px;
+	background:
+		radial-gradient(60% 50% at 60% 28%, #1f1b16 0%, #14110d 60%, #0c0a07 100%);
+	color: var(--paper);
+	font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+}
+.pass *, .pass *::before, .pass *::after { box-sizing: border-box; }
+.pass img { display: block; max-width: 100%; height: auto; }
+.pass a { color: inherit; }
+
+/* -------- FOLIO (reverse palette) -------- */
+.pass .folio {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: baseline;
+	gap: 16px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid rgba(240, 231, 210, 0.4);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+}
+.pass .folio p { margin: 0; }
+.pass .folio .folio-left { color: var(--paper); font-weight: 500; }
+.pass .folio .folio-center {
+	color: var(--accent);
+	text-align: center;
+	letter-spacing: 0.24em;
+}
+.pass .folio .folio-right {
+	color: rgba(240, 231, 210, 0.55);
+	text-align: right;
+}
+
+/* -------- COMPOSITION -------- */
+.pass .composition {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto 1fr auto;
+	column-gap: 24px;
+	/* tightened from 24/48/32 to fit one-viewport at 1440×900 */
+	row-gap: 18px;
+	padding: 28px 0 14px;
+}
+
+.pass .pass-title-area {
+	grid-column: 1 / 9;
+	grid-row: 1;
+}
+.pass .pass-title {
+	margin: 0;
+	font-family: var(--font-greek-display), 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
+	font-weight: 400;
+	font-style: italic;
+	/* tightened max from 8rem to 7rem (saves ~16px height at 1440) */
+	font-size: clamp(3.5rem, 8vw, 7rem);
+	line-height: 0.92;
+	letter-spacing: -0.018em;
+	color: var(--paper);
+}
+
+/* TRIPTYCH — 3 photos, 3 sizes, 3 vertical alignments. */
+.pass .photo-strip {
+	grid-column: 1 / -1;
+	grid-row: 2;
+	display: grid;
+	grid-template-columns: 3fr 5fr 3fr;
+	column-gap: 28px;
+	align-items: stretch;
+	/* tightened from 32px (saves 16px height) */
+	padding-top: 16px;
+}
+.pass .photo-strip .photo { margin: 0; }
+.pass .photo-strip .photo img {
+	width: 100%;
+	object-fit: cover;
+	filter: contrast(1.03) saturate(0.96);
+	box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.25),
+		0 28px 56px -32px rgba(0, 0, 0, 0.7);
+}
+
+/* The three photos use a 3-way stagger:
+   - Left: bottom-aligned in the row + small downward translate → hangs LOW
+   - Center: stretches full row height → the anchor
+   - Right: top-aligned in the row + small upward translate → hangs HIGH
+   The translates step outside the cell to make the stagger visible
+   without forcing the row taller and breaking the page's single-screen
+   height. */
+
+.pass .photo-strip .photo-left {
+	align-self: end;
+	/* reduced from translateY(36px) to keep stagger visible without
+	   overshooting the tightened spread height */
+	transform: translateY(22px);
+}
+.pass .photo-strip .photo-left img {
+	/* aspect 4:5 (less tall than 3:4) trims ~30px vertical to land
+	   the spread at one viewport */
+	aspect-ratio: 4 / 5;
+	object-position: center 40%;
+}
+
+.pass .photo-strip .photo-center { align-self: stretch; }
+.pass .photo-strip .photo-center img {
+	aspect-ratio: 4 / 3;
+	height: 100%;
+	min-height: 240px;
+	object-position: center 45%;
+}
+
+.pass .photo-strip .photo-right {
+	align-self: start;
+	transform: translateY(-22px);
+}
+.pass .photo-strip .photo-right img {
+	aspect-ratio: 4 / 5;
+	object-position: center 30%;
+}
+
+/* Body sentence: bottom-left, italic Crimson Pro on paper. */
+.pass .body-block {
+	grid-column: 1 / 7;
+	grid-row: 3;
+	align-self: end;
+}
+.pass .body-text {
+	margin: 0;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1.2rem, 1.7vw, 1.65rem);
+	line-height: 1.4;
+	color: var(--paper);
+	max-width: 36ch;
+}
+
+/* Caption: bottom-right corner, quiet whisper. Credits Taf. */
+.pass .caption {
+	grid-column: 9 / -1;
+	grid-row: 3;
+	align-self: end;
+	justify-self: end;
+}
+.pass .caption p {
+	margin: 0;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 13px;
+	color: rgba(240, 231, 210, 0.55);
+	text-align: right;
+}
+
+/* -------- RUN-ON (reverse palette) -------- */
+.pass .run-on {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: baseline;
+	gap: 24px;
+	padding-top: 16px;
+	border-top: 1px solid rgba(240, 231, 210, 0.4);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+.pass .run-on .meta {
+	margin: 0;
+	text-align: right;
+	color: var(--paper);
+	grid-column: 2;
+}
+.pass .run-on .meta a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.pass .run-on .meta a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+.pass .run-on .meta .sep { color: rgba(240, 231, 210, 0.3); }
+.pass .run-on .meta .nav-trigger {
+	color: var(--paper);
+	cursor: pointer;
+	background: none;
+	border: 0;
+	padding: 0;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+}
+.pass .run-on .meta .nav-trigger:hover { color: var(--accent); }
+.pass .run-on .meta .nav-trigger:focus-visible {
+	outline: 1px solid var(--accent);
+	outline-offset: 4px;
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.pass {
+		padding: 18px 22px 28px;
+	}
+
+	.pass .folio {
+		grid-template-columns: 1fr 1fr;
+		font-size: 9.5px;
+		letter-spacing: 0.22em;
+	}
+	.pass .folio .folio-center { display: none; }
+
+	.pass .composition {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto auto auto;
+		column-gap: 0;
+		row-gap: 22px;
+		padding: 28px 0 24px;
+	}
+
+	.pass .pass-title-area { grid-column: 1; grid-row: 1; }
+	.pass .pass-title {
+		font-size: clamp(3rem, 14vw, 5rem);
+		line-height: 0.96;
+	}
+
+	/* Photos stack vertically with intentional rhythm — alternating widths
+	   and alignments instead of all-full-width. */
+	.pass .photo-strip {
+		grid-column: 1;
+		grid-row: 2;
+		grid-template-columns: 1fr;
+		column-gap: 0;
+		row-gap: 18px;
+		padding-top: 0;
+	}
+	.pass .photo-strip .photo {
+		margin: 0;
+	}
+	/* Reset desktop translates and alignments — mobile uses horizontal
+	   stagger via justify-self + 78% widths instead of the desktop
+	   vertical-stagger triptych. */
+	.pass .photo-strip .photo-left,
+	.pass .photo-strip .photo-center,
+	.pass .photo-strip .photo-right {
+		transform: none;
+		align-self: stretch;
+	}
+	/* Left photo: 78% width, flush LEFT */
+	.pass .photo-strip .photo-left {
+		width: 78%;
+		justify-self: start;
+	}
+	.pass .photo-strip .photo-left img {
+		aspect-ratio: 3 / 4;
+		max-height: 48vh;
+	}
+	/* Center photo: full width, wide anchor */
+	.pass .photo-strip .photo-center {
+		width: 100%;
+		justify-self: stretch;
+	}
+	.pass .photo-strip .photo-center img {
+		aspect-ratio: 4 / 3;
+		max-height: 44vh;
+		min-height: auto;
+		height: auto;
+	}
+	/* Right photo: 78% width, flush RIGHT */
+	.pass .photo-strip .photo-right {
+		width: 78%;
+		justify-self: end;
+	}
+	.pass .photo-strip .photo-right img {
+		aspect-ratio: 3 / 4;
+		max-height: 48vh;
+	}
+
+	.pass .body-block {
+		grid-column: 1;
+		grid-row: 3;
+		align-self: start;
+	}
+	.pass .body-text {
+		font-size: 1.1rem;
+		line-height: 1.45;
+		max-width: 28ch;
+	}
+
+	.pass .caption {
+		grid-column: 1;
+		grid-row: 4;
+		justify-self: start;
+		align-self: start;
+	}
+	.pass .caption p { text-align: left; }
+
+	.pass .run-on {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.pass .run-on .meta {
+		text-align: left;
+		grid-column: 1;
+	}
+}

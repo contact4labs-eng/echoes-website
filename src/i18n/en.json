@@ -37,6 +37,11 @@
 				"page": "pg. 12",
 				"title": "Weekend.",
 				"blurb": "from the kitchen."
+			},
+			"pass": {
+				"page": "pg. 18",
+				"title": "At the pass.",
+				"blurb": "behind the plate."
 			}
 		},
 		"footerLeft": "Echoes · Nymfon 33 · Ilioupoli 163 41",
@@ -54,6 +59,17 @@
 		"leadA": "Coffee from morning. Brunch at the table.",
 		"leadB": "Cocktails if you stay.",
 		"plateAlt": "Thessaloniki koulouri with eggs — from the Echoes kitchen"
+	},
+	"pass": {
+		"folioLeft": "pg. 18",
+		"folioCenter": "Echoes · Nymfon 33",
+		"folioRight": "at the pass",
+		"title": "At the pass.",
+		"body": "Briki, pass, low heat. The kitchen is open — but it never shouts.",
+		"caption": "Coffee by Taf.",
+		"altLeft": "hand in the Echoes kitchen",
+		"altCenter": "prep at the pass",
+		"altRight": "detail from the kitchen"
 	},
 	"nav": {
 		"story": "Story",

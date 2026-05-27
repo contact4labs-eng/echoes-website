@@ -1,0 +1,110 @@
+---
+/**
+ * R4 PassSpread — σελ. 18 · Στο πάσο. / At the pass.
+ *
+ * The second internal spread. Designed as a magazine PHOTO ESSAY, not a
+ * "chef section" or 01/02/03 process row. Distinct compositional logic
+ * from the KitchenSpread on purpose:
+ *
+ *   KitchenSpread:  title-left + single plate-right, cream ground.
+ *   PassSpread:     title top-left + 3-photo staggered triptych +
+ *                   body sentence hanging in the L-shape negative space,
+ *                   on a dark ink ground.
+ *
+ * The triptych uses 3 photos at different sizes AND different vertical
+ * alignments inside a 12-col grid:
+ *   - left photo (chef-pouring) hangs LOW (margin-top inside its cell)
+ *   - center photo (chef-plating-wide) is the anchor, widest, stretched
+ *   - right photo (chef-viola) hangs HIGH (margin-bottom)
+ *
+ * No chef name. No identity claim from jacket embroidery. Alt text is
+ * neutral — what is photographically visible and where it happens.
+ *
+ * No `[data-reveal]` / fade-up — spread is print-static like the others.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import { Image } from 'astro:assets';
+// Source filenames renamed from chef-* to pass-* so the optimized webp URLs
+// (/_astro/pass-{pour,prep,detail}.HASH.webp) carry no role-word in their path.
+import passPour from '@/assets/photos/pass-pour.jpg';
+import passPrep from '@/assets/photos/pass-prep.jpg';
+import passDetail from '@/assets/photos/pass-detail.png';
+import '@/styles/pass.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const phoneTel = `tel:${site.phone}`;
+---
+
+<section class="pass" id="pass" data-spread="pass" aria-labelledby="pass-title">
+	<header class="folio">
+		<p class="folio-left">{t('pass.folioLeft')}</p>
+		<p class="folio-center">{t('pass.folioCenter')}</p>
+		<p class="folio-right">{t('pass.folioRight')}</p>
+	</header>
+
+	<div class="composition">
+		<div class="pass-title-area">
+			<h2 class="pass-title" id="pass-title">{t('pass.title')}</h2>
+		</div>
+
+		{/* The asymmetric triptych. Three photos, three different sizes,
+		    three different vertical alignments. Order in DOM = visual order
+		    left → center → right at desktop, top → bottom on mobile stack. */}
+		<div class="photo-strip">
+			<figure class="photo photo-left">
+				<Image
+					src={passPour}
+					alt={t('pass.altLeft')}
+					widths={[280, 440, 660]}
+					sizes="(min-width: 769px) 27vw, 80vw"
+					loading="lazy"
+				/>
+			</figure>
+
+			<figure class="photo photo-center">
+				<Image
+					src={passPrep}
+					alt={t('pass.altCenter')}
+					widths={[480, 720, 1080]}
+					sizes="(min-width: 769px) 45vw, 100vw"
+					loading="lazy"
+				/>
+			</figure>
+
+			<figure class="photo photo-right">
+				<Image
+					src={passDetail}
+					alt={t('pass.altRight')}
+					widths={[280, 440, 660]}
+					sizes="(min-width: 769px) 27vw, 80vw"
+					loading="lazy"
+				/>
+			</figure>
+		</div>
+
+		{/* Body sentence hangs in the bottom-left of the composition,
+		    creating an L-shape with the title at top-left. */}
+		<div class="body-block">
+			<p class="body-text">{t('pass.body')}</p>
+		</div>
+
+		{/* Caption sits in the bottom-right corner of the composition,
+		    quiet — credits the coffee partner. */}
+		<div class="caption">
+			<p>{t('pass.caption')}</p>
+		</div>
+	</div>
+
+	<footer class="run-on">
+		<p class="meta">
+			<a href={phoneTel} aria-label={`${t('cover.masthead.name')} ${t('cover.phoneDisplay')}`}>{t('cover.phoneDisplay')}</a>
+			&nbsp;<span class="sep" aria-hidden="true">·</span>&nbsp;
+			<button type="button" class="nav-trigger" data-contents-trigger>{t('cover.contentsTrigger')}</button>
+		</p>
+	</footer>
+</section>

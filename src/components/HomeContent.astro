@@ -1,13 +1,14 @@
 ---
 /**
- * R4 Phase 2 — HomeContent
- * Renders the Cover spread + first internal spread (KitchenSpread,
- * σελ. 12 Σαββατοκύριακο) + ContentsOverlay React island.
+ * R4 Phase 3 — HomeContent
+ * Renders the Cover spread + KitchenSpread (σελ. 12) + PassSpread
+ * (σελ. 18) + ContentsOverlay React island.
  * - Header is NOT imported (no top nav bar in R4).
  * - Legacy Footer is NOT rendered (carries banned copy until rewrite).
  * - Spread anchors:
  *     #main    → Cover (the page itself)
  *     #kitchen → KitchenSpread
+ *     #pass    → PassSpread
  *   These power the contents overlay TOC.
  */
 import type { Locale } from '@/i18n/utils';
@@ -15,6 +16,7 @@ import { useTranslations } from '@/i18n/utils';
 import { site } from '@/lib/config';
 import Cover from '@/components/spreads/Cover.astro';
 import KitchenSpread from '@/components/spreads/KitchenSpread.astro';
+import PassSpread from '@/components/spreads/PassSpread.astro';
 import { ContentsOverlay } from '@/components/interactive/ContentsOverlay';
 
 interface Props {
@@ -27,8 +29,8 @@ const t = useTranslations(locale);
 
 const phoneHref = `tel:${site.phone}`;
 
-// Phase 2: Cover + KitchenSpread. More entries arrive as more spreads
-// land (Slow Hours, Pass, Nymfon 33, End) in later phases.
+// Phase 3: Cover + KitchenSpread + PassSpread. More entries arrive
+// as more spreads land (Slow Hours, Nymfon 33, End) in later phases.
 const entries = [
 	{
 		page: t('contents.entries.cover.page'),
@@ -42,12 +44,19 @@ const entries = [
 		blurb: t('contents.entries.kitchen.blurb'),
 		href: '#kitchen',
 	},
+	{
+		page: t('contents.entries.pass.page'),
+		title: t('contents.entries.pass.title'),
+		blurb: t('contents.entries.pass.blurb'),
+		href: '#pass',
+	},
 ];
 ---
 
 <main id="main">
 	<Cover locale={locale} />
 	<KitchenSpread locale={locale} />
+	<PassSpread locale={locale} />
 </main>
 
 <ContentsOverlay
