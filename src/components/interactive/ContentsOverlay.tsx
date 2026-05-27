@@ -162,7 +162,32 @@ export function ContentsOverlay({
 						<a
 							className="toc-title"
 							href={entry.href}
-							onClick={() => setOpen(false)}
+							onClick={(e) => {
+								// Close the overlay first so the body scroll lock is
+								// released BEFORE we navigate; then scroll to the
+								// anchor on the next tick. Without this, scroll-to-
+								// anchor races with the overflow:hidden cleanup and
+								// can land in the wrong place.
+								e.preventDefault();
+								const href = entry.href;
+								setOpen(false);
+								window.setTimeout(() => {
+									if (href.startsWith('#')) {
+										const target = document.querySelector(href);
+										if (target) {
+											const reduce = window.matchMedia(
+												'(prefers-reduced-motion: reduce)'
+											).matches;
+											target.scrollIntoView({
+												behavior: reduce ? 'auto' : 'smooth',
+												block: 'start',
+											});
+										}
+									} else {
+										window.location.href = href;
+									}
+								}, 0);
+							}}
 						>
 							{entry.title}
 						</a>

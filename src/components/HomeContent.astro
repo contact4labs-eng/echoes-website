@@ -1,19 +1,20 @@
 ---
 /**
- * R4 Phase 1 — HomeContent
- * Renders only the Cover spread + ContentsOverlay React island.
- * - Header is NOT imported — the magazine cover absorbs the brand
- *   identity; there is no top nav bar in R4.
- * - Footer is NOT rendered. The legacy Footer carries banned copy
- *   ("Designed with care in Athens" / "Σχεδιάστηκε με φροντίδα στην
- *   Αθήνα") that must not appear in built output. It will be replaced
- *   by a Colophon spread in a later phase; until then the cover stands
- *   alone as a one-screen experience.
+ * R4 Phase 2 — HomeContent
+ * Renders the Cover spread + first internal spread (KitchenSpread,
+ * σελ. 12 Σαββατοκύριακο) + ContentsOverlay React island.
+ * - Header is NOT imported (no top nav bar in R4).
+ * - Legacy Footer is NOT rendered (carries banned copy until rewrite).
+ * - Spread anchors:
+ *     #main    → Cover (the page itself)
+ *     #kitchen → KitchenSpread
+ *   These power the contents overlay TOC.
  */
 import type { Locale } from '@/i18n/utils';
 import { useTranslations } from '@/i18n/utils';
 import { site } from '@/lib/config';
 import Cover from '@/components/spreads/Cover.astro';
+import KitchenSpread from '@/components/spreads/KitchenSpread.astro';
 import { ContentsOverlay } from '@/components/interactive/ContentsOverlay';
 
 interface Props {
@@ -26,9 +27,8 @@ const t = useTranslations(locale);
 
 const phoneHref = `tel:${site.phone}`;
 
-// Phase 1: only the Cover exists as a spread, so the contents overlay
-// shows a single entry. As new spreads land in later phases their
-// entries are added here (and become anchors on the page).
+// Phase 2: Cover + KitchenSpread. More entries arrive as more spreads
+// land (Slow Hours, Pass, Nymfon 33, End) in later phases.
 const entries = [
 	{
 		page: t('contents.entries.cover.page'),
@@ -36,11 +36,18 @@ const entries = [
 		blurb: t('contents.entries.cover.blurb'),
 		href: '#main',
 	},
+	{
+		page: t('contents.entries.kitchen.page'),
+		title: t('contents.entries.kitchen.title'),
+		blurb: t('contents.entries.kitchen.blurb'),
+		href: '#kitchen',
+	},
 ];
 ---
 
 <main id="main">
 	<Cover locale={locale} />
+	<KitchenSpread locale={locale} />
 </main>
 
 <ContentsOverlay

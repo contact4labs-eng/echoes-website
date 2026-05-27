@@ -1,0 +1,235 @@
+/* -----------------------------------------------------------------------
+   R4 production · Magazine spread base + KitchenSpread (σελ. 12)
+   Direct port of proofs/r4-magazine-cover/spread-v2.css.
+   - palette tokens come from global.css
+   - font families come from the Astro Fonts API CSS variables
+   - all rules are .spread-scoped to avoid colliding with the cover or
+     other spreads
+   No fade-up / reveal classes. Spread is print-static.
+   ----------------------------------------------------------------------- */
+
+.spread {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 28px 56px 40px;
+	background:
+		radial-gradient(80% 60% at 80% 100%, var(--paper-deep) 0%, var(--paper) 70%);
+	color: var(--ink);
+	font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+}
+.spread *, .spread *::before, .spread *::after { box-sizing: border-box; }
+.spread img { display: block; max-width: 100%; height: auto; }
+.spread a { color: inherit; }
+
+/* -------- FOLIO -------- */
+.spread .folio {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: baseline;
+	gap: 16px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--ink);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+}
+.spread .folio p { margin: 0; }
+.spread .folio .folio-left { color: var(--ink); font-weight: 500; }
+.spread .folio .folio-center { color: var(--accent); text-align: center; letter-spacing: 0.24em; }
+.spread .folio .folio-right { color: var(--whisper); text-align: right; }
+
+/* -------- COMPOSITION -------- */
+.spread .composition {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1.1fr 0.9fr;
+	align-items: stretch;
+	column-gap: 40px;
+	padding: 56px 0 40px;
+}
+
+.spread .title-area {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 60vh;
+	padding-right: 8px;
+}
+
+/* Old Standard TT for the spread title — Greek-native italic */
+.spread .spread-title {
+	margin: 0;
+	font-family: var(--font-greek-display), 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: clamp(4rem, 9vw, 8rem);
+	line-height: 0.92;
+	letter-spacing: -0.018em;
+	color: var(--ink);
+}
+.spread .spread-title-line { display: block; }
+
+.spread .spread-subhead {
+	margin: 1.6rem 0 0;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+	line-height: 1.32;
+	color: var(--ink);
+	max-width: 28ch;
+}
+
+/* DECK — magazine pattern: hairline rule + framing sentence. No quote marks. */
+.spread .deck {
+	margin-top: 2.4rem;
+	padding-top: 16px;
+	border-top: 1px solid var(--mark);
+	max-width: 30ch;
+}
+.spread .deck-text {
+	margin: 0;
+	font-family: var(--font-greek-display), 'Old Standard TT', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+	line-height: 1.35;
+	color: var(--whisper);
+}
+
+/* -------- PLATE -------- */
+.spread .plate {
+	margin: 0;
+	align-self: end;
+	justify-self: end;
+	width: clamp(260px, 32vw, 440px);
+}
+.spread .plate img {
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	object-position: center 40%;
+	box-shadow:
+		0 1px 0 rgba(26, 24, 20, 0.06),
+		0 36px 60px -32px rgba(26, 24, 20, 0.30);
+	filter: contrast(1.02) saturate(0.97);
+}
+.spread .plate figcaption {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: baseline;
+	gap: 12px;
+	margin-top: 14px;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-size: 12.5px;
+	line-height: 1.4;
+}
+.spread .caption-label {
+	font-style: italic;
+	font-weight: 500;
+	color: var(--accent);
+	letter-spacing: 0.04em;
+}
+.spread .caption-body {
+	font-style: italic;
+	color: var(--whisper);
+}
+
+/* -------- RUN-ON -------- */
+.spread .run-on {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	gap: 24px;
+	padding-top: 18px;
+	border-top: 1px solid var(--ink);
+}
+.spread .run-on .lead {
+	margin: 0;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: normal;
+	font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+	line-height: 1.5;
+	color: var(--ink);
+	max-width: 56ch;
+}
+.spread .run-on .lead em {
+	font-style: italic;
+	color: var(--accent);
+	font-weight: 500;
+}
+.spread .run-on .meta {
+	margin: 0;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--ink);
+	text-align: right;
+}
+.spread .run-on .meta a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.spread .run-on .meta a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+.spread .run-on .meta .nav-trigger {
+	/* button reset — same pattern as the cover colophon */
+	color: var(--ink);
+	cursor: pointer;
+	background: none;
+	border: 0;
+	padding: 0;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+}
+.spread .run-on .meta .nav-trigger:hover { color: var(--accent); }
+.spread .run-on .meta .nav-trigger:focus-visible {
+	outline: 1px solid var(--accent);
+	outline-offset: 4px;
+}
+.spread .run-on .meta .sep { color: var(--mark); }
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.spread {
+		padding: 18px 22px 28px;
+		grid-template-rows: auto auto 1fr auto;
+	}
+
+	.spread .folio {
+		grid-template-columns: 1fr 1fr;
+		font-size: 9.5px;
+		letter-spacing: 0.22em;
+	}
+	.spread .folio .folio-center { display: none; }
+
+	.spread .composition {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		column-gap: 0;
+		row-gap: 28px;
+		padding: 28px 0 24px;
+	}
+
+	.spread .title-area { min-height: auto; padding-right: 0; }
+	.spread .spread-title { font-size: clamp(3rem, 14vw, 5rem); line-height: 0.95; }
+	.spread .spread-subhead { margin-top: 1.1rem; font-size: 1.05rem; max-width: 26ch; }
+	.spread .deck { margin-top: 1.6rem; padding-top: 12px; max-width: 28ch; }
+	.spread .deck-text { font-size: 1.05rem; }
+
+	.spread .plate { width: 100%; max-width: 100%; justify-self: stretch; }
+	.spread .plate img { max-height: 56vh; }
+	.spread .plate figcaption { grid-template-columns: 1fr; gap: 4px; font-size: 11.5px; }
+
+	.spread .run-on { grid-template-columns: 1fr; gap: 10px; }
+	.spread .run-on .meta { text-align: left; }
+}

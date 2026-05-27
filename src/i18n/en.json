@@ -32,10 +32,28 @@
 				"page": "pg. 01",
 				"title": "Echoes",
 				"blurb": "the cover. which corner."
+			},
+			"kitchen": {
+				"page": "pg. 12",
+				"title": "Weekend.",
+				"blurb": "from the kitchen."
 			}
 		},
 		"footerLeft": "Echoes · Nymfon 33 · Ilioupoli 163 41",
 		"footerPhone": "210 990 1676"
+	},
+	"kitchen": {
+		"folioLeft": "pg. 12",
+		"folioCenter": "Echoes · Nymfon 33",
+		"folioRight": "from the kitchen",
+		"title": "Weekend.",
+		"subhead": "Thessaloniki koulouri, eggs and coffee from morning.",
+		"deck": "today in the kitchen.",
+		"captionLabel": "α'",
+		"caption": "From the Echoes kitchen. Coffee by Taf.",
+		"leadA": "Coffee from morning. Brunch at the table.",
+		"leadB": "Cocktails if you stay.",
+		"plateAlt": "Thessaloniki koulouri with eggs — from the Echoes kitchen"
 	},
 	"nav": {
 		"story": "Story",
