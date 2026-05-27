@@ -1,0 +1,85 @@
+---
+/**
+ * R4 Nymfon33Spread — σελ. 24 · Νυμφών 33. / Nymfon 33.
+ *
+ * The visit/contact spread. Solves the conversion path without becoming a
+ * "contact section": rendered as a physical printed postcard object on a
+ * cream paper ground, slightly tilted, with a faint print frame, a
+ * postmark stamp in the top-right, and the phone presented as
+ * TYPOGRAPHY — not a button.
+ *
+ * No Google Maps iframe.
+ * No fake opening time, no "open now", no reservation language.
+ * Only verified facts: address, postal code, hours, phone, IG handle.
+ * Postmark city + postal come straight from the verified address.
+ *
+ * Maps and Instagram are small text links — magazine-style colophon
+ * affordances. The Maps href resolves to the existing search URL from
+ * src/lib/config.ts (no embed, no lat/lng).
+ *
+ * No `[data-reveal]` / fade-up. Static print object.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import '@/styles/visit.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const phoneTel = `tel:${site.phone}`;
+const mapsHref = site.mapsSearchUrl;
+const igHref = site.social.instagramUrl;
+---
+
+<section class="visit" id="visit" data-spread="visit" aria-labelledby="visit-title">
+	<header class="folio">
+		<p class="folio-left">{t('visit.folioLeft')}</p>
+		<p class="folio-center">{t('visit.folioCenter')}</p>
+		<p class="folio-right">{t('visit.folioRight')}</p>
+	</header>
+
+	<div class="composition">
+		<article class="postcard">
+			{/* Postmark stamp in the top-right — only verified facts (city + postal).
+			    aria-hidden because it's a decorative re-statement of the address
+			    that's about to appear in the postcard body. */}
+			<div class="postmark" aria-hidden="true">
+				<span class="postmark-city">{t('visit.postmarkCity')}</span>
+				<span class="postmark-postal">{t('visit.postmarkPostal')}</span>
+			</div>
+
+			<h2 class="visit-title" id="visit-title">{t('visit.title')}</h2>
+			<p class="visit-address">{t('visit.address')}</p>
+
+			<div class="visit-hours" aria-label={t('visit.folioRight')}>
+				<p>{t('visit.hoursWeekdays')}</p>
+				<p>{t('visit.hoursWeekend')}</p>
+			</div>
+
+			<p class="visit-phone">
+				<a
+					href={phoneTel}
+					aria-label={`${t('cover.masthead.name')} ${t('visit.phone')}`}
+				>{t('visit.phone')}</a>
+			</p>
+
+			<p class="visit-links">
+				<a href={mapsHref} target="_blank" rel="noopener noreferrer">{t('visit.mapsLabel')}</a>
+				<span class="sep" aria-hidden="true">·</span>
+				<a href={igHref} target="_blank" rel="noopener noreferrer">{t('visit.instagramLabel')}</a>
+			</p>
+
+			<p class="visit-tagline">{t('visit.tagline')}</p>
+		</article>
+	</div>
+
+	<footer class="run-on">
+		<p class="meta">
+			<a href={phoneTel} aria-label={`${t('cover.masthead.name')} ${t('cover.phoneDisplay')}`}>{t('cover.phoneDisplay')}</a>
+			&nbsp;<span class="sep" aria-hidden="true">·</span>&nbsp;
+			<button type="button" class="nav-trigger" data-contents-trigger>{t('cover.contentsTrigger')}</button>
+		</p>
+	</footer>
+</section>

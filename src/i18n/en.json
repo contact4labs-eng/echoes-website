@@ -42,6 +42,11 @@
 				"page": "pg. 18",
 				"title": "At the pass.",
 				"blurb": "behind the plate."
+			},
+			"visit": {
+				"page": "pg. 24",
+				"title": "Nymfon 33.",
+				"blurb": "maps, phone, hours."
 			}
 		},
 		"footerLeft": "Echoes · Nymfon 33 · Ilioupoli 163 41",
@@ -153,15 +158,19 @@
 		"body": "Open kitchen. Deep blue tiles. Copper lamps. The team serves at its own pace — quick enough to keep things hot, quiet enough to let you talk."
 	},
 	"visit": {
-		"eyebrow": "Visit us",
-		"title": "Nymfon 33, Ilioupoli.",
-		"addressLabel": "Address",
-		"phoneLabel": "Phone",
-		"hoursLabel": "Hours",
-		"hoursWeekdays": "Mon–Fri · morning until 18:00",
-		"hoursWeekends": "Sat–Sun · morning until 23:00",
-		"mapsCta": "Open in Maps",
-		"instagramCta": "Find us on Instagram"
+		"folioLeft": "pg. 24",
+		"folioCenter": "Echoes · Nymfon 33",
+		"folioRight": "visit",
+		"title": "Nymfon 33.",
+		"address": "Ilioupoli 163 41",
+		"hoursWeekdays": "weekdays · until 18:00",
+		"hoursWeekend": "sat–sun · until 23:00",
+		"phone": "210 990 1676",
+		"mapsLabel": "maps",
+		"instagramLabel": "instagram",
+		"tagline": "on the corner, from morning.",
+		"postmarkCity": "ILIOUPOLI",
+		"postmarkPostal": "163 41"
 	},
 	"social": {
 		"eyebrow": "From the press",
