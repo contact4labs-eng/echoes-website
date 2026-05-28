@@ -1,0 +1,58 @@
+---
+/**
+ * R4.1 UtilityBar — the persistent practical layer.
+ *
+ * Two fixed elements, mutually exclusive by breakpoint:
+ *   - .utility-strip  (desktop ≥769px): a typeset magazine running line —
+ *     Echoes · category · place · phone · maps · [ contents ]
+ *   - .utility-bar    (mobile ≤768px): a sticky 3-action bar —
+ *     τηλέφωνο · χάρτες · περιεχόμενα
+ *
+ * NOT a navbar: no logo-left/links-right chrome, no pills, no hamburger.
+ * Blue = identity/wayfinding (tick, separators, maps, contents). Phone is
+ * the single warm action signal (--accent red).
+ *
+ * The contents buttons carry `data-contents-trigger` — the existing
+ * ContentsOverlay island listens for clicks on that attribute document-
+ * wide, so they open the SAME overlay (no duplicate state, no second
+ * overlay). Focus returns to whichever trigger opened it.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import '@/styles/utility.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const phoneTel = `tel:${site.phone}`;
+const mapsHref = site.mapsSearchUrl;
+const callAria = `${t('utility.name')} ${t('utility.phoneDisplay')}`;
+---
+
+{/* ---------- DESKTOP: running print strip ---------- */}
+<nav class="utility-strip" aria-label={t('utility.ariaLabel')}>
+	<span class="us-tick" aria-hidden="true"></span>
+	<p class="us-line">
+		<span class="us-name">{t('utility.name')}</span>
+		<span class="us-sep" aria-hidden="true">·</span>
+		<span class="us-cats">{t('utility.cats')}</span>
+		<span class="us-sep" aria-hidden="true">·</span>
+		<span class="us-where">{t('utility.where')}</span>
+		<span class="us-sep" aria-hidden="true">·</span>
+		<a class="us-phone" href={phoneTel} aria-label={callAria}>{t('utility.phoneDisplay')}</a>
+		<span class="us-sep" aria-hidden="true">·</span>
+		<a class="us-maps" href={mapsHref} target="_blank" rel="noopener noreferrer">{t('utility.maps')}</a>
+		<button type="button" class="us-contents" data-contents-trigger>{t('utility.contents')}</button>
+	</p>
+</nav>
+
+{/* ---------- MOBILE: sticky action bar ---------- */}
+<nav class="utility-bar" aria-label={t('utility.ariaLabel')}>
+	<a class="ub-item ub-phone" href={phoneTel} aria-label={callAria}>{t('utility.phoneMobile')}</a>
+	<span class="ub-sep" aria-hidden="true">·</span>
+	<a class="ub-item ub-maps" href={mapsHref} target="_blank" rel="noopener noreferrer">{t('utility.maps')}</a>
+	<span class="ub-sep" aria-hidden="true">·</span>
+	<button type="button" class="ub-item ub-contents" data-contents-trigger>{t('utility.contentsMobile')}</button>
+</nav>

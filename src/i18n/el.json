@@ -5,129 +5,124 @@
 			"description": "Brunch χωρίς πόζες στην Ηλιούπολη. Καφές από νωρίς, brunch όλη μέρα, cocktails αθόρυβα ως αργά. Νυμφών 33."
 		}
 	},
-	"nav": {
-		"story": "Ιστορία",
-		"menu": "Μενού",
-		"chef": "Κουζίνα",
-		"visit": "Επίσκεψη",
-		"reserve": "Καλέστε μας",
-		"langOther": "EN"
+	"a11y": {
+		"skipToContent": "Μετάβαση στο περιεχόμενο"
 	},
-	"hero": {
-		"eyebrow": "Νυμφών 33 · Ηλιούπολη",
-		"headline": "Brunch χωρίς πόζες.",
-		"subhead": "Καφές από νωρίς, brunch όλη μέρα, cocktails αθόρυβα ως αργά.",
-		"ctaPrimary": "Καλέστε μας",
-		"ctaSecondary": "Δείτε στο Instagram",
-		"metaA": "Brunch · Coffee · Cocktails",
-		"metaB": "Νυμφών 33, Ηλιούπολη"
+	"utility": {
+		"ariaLabel": "Echoes — γρήγορες ενέργειες",
+		"name": "Echoes",
+		"cats": "καφές · brunch · cocktails",
+		"where": "Νυμφών 33",
+		"phoneDisplay": "210 990 1676",
+		"maps": "χάρτες",
+		"contents": "[ περιεχόμενα ]",
+		"phoneMobile": "τηλέφωνο",
+		"contentsMobile": "περιεχόμενα"
 	},
-	"story": {
-		"eyebrow": "Η ιστορία μας",
-		"title": "Μια πιο ήσυχη εκδοχή του brunch.",
-		"bodyA": "Στη γωνία της Νυμφών, κάτω από κόκκινες και κίτρινες τέντες, το Echoes σερβίρει μια πιο ήσυχη εκδοχή του brunch.",
-		"bodyB": "Καφές από το πρωί, πιάτα με σπιτικό αέρα, και cocktails που εμφανίζονται διακριτικά καθώς πέφτει το φως."
+	"cover": {
+		"masthead": {
+			"name": "Echoes",
+			"where": "Νυμφών 33 · Ηλιούπολη",
+			"cats": "καφές · brunch · cocktails"
+		},
+		"wordmark": "Echoes",
+		"line": "Από το πρωί, στη γωνία της Νυμφών.",
+		"hoursWeekdays": "καθημερινά · έως 18:00",
+		"hoursWeekend": "σαβ–κυρ · έως 23:00",
+		"addressStreet": "Νυμφών 33",
+		"addressCity": "Ηλιούπολη",
+		"addressPostal": "163 41",
+		"phoneDisplay": "210 990 1676",
+		"contentsTrigger": "[ περιεχόμενα ]",
+		"instagramLabel": "instagram",
+		"plateAlt": "από την κουζίνα του Echoes"
 	},
-	"menu": {
-		"eyebrow": "Επιλεγμένα πιάτα",
-		"title": "Πιάτα που κρατούν τον ρυθμό της ημέρας.",
-		"subtitle": "Μερικές επιλεγμένες γεύσεις από την all-day κουζίνα — όχι ολόκληρος κατάλογος.",
-		"viewMoreLabel": "Για το σημερινό πλήρες μενού, καλέστε μας.",
-		"viewMoreCta": "Καλέστε μας",
-		"items": {
-			"crispyChickenBowl": {
-				"name": "Crispy chicken bowl",
-				"desc": "Τραγανό κοτόπουλο πανέ, ρωμαϊκή σαλάτα, κρουτόν, παρμεζάνα."
+	"contents": {
+		"eyebrow": "Echoes",
+		"title": "περιεχόμενα",
+		"closeLabel": "κλείσιμο",
+		"entries": {
+			"cover": {
+				"page": "σελ. 01",
+				"title": "Echoes",
+				"blurb": "το εξώφυλλο. ποια γωνία."
 			},
-			"prosciuttoEgg": {
-				"name": "Κουλούρι Θεσσαλονίκης",
-				"desc": "Πέστο βασιλικού, prosciutto, αυγά, καπνιστή provolone."
+			"kitchen": {
+				"page": "σελ. 12",
+				"title": "Σαββατοκύριακο.",
+				"blurb": "από την κουζίνα."
 			},
-			"scrambleChorizo": {
-				"name": "Scrambled eggs με chorizo",
-				"desc": "Αυγά scrambled, chorizo, αβοκάντο, ντοματίνια, φρέσκα μυρωδικά."
+			"pass": {
+				"page": "σελ. 18",
+				"title": "Στο πάσο.",
+				"blurb": "πίσω από το πιάτο."
 			},
-			"eggsToast": {
-				"name": "Φρυγανισμένο ψωμί με αυγά",
-				"desc": "Σπιτικό ψωμί, αυγά μάτια, ελαιόλαδο, χλωρό τυρί."
+			"visit": {
+				"page": "σελ. 24",
+				"title": "Νυμφών 33.",
+				"blurb": "χάρτες, τηλέφωνο, ώρες."
 			},
-			"baconEggRoll": {
-				"name": "Bacon & egg roll",
-				"desc": "Brioche, cheddar, μαρμελάδα κρεμμυδιού, μπέικον."
-			},
-			"frenchToastTiramisu": {
-				"name": "French toast tiramisu",
-				"desc": "Namelaka λευκής σοκολάτας, παγωτό mocha."
-			},
-			"frenchToastPistachio": {
-				"name": "French toast με φιστίκι Αιγίνης",
-				"desc": "Σάλτσα από δάσος μούρων, καραμελωμένο φιστίκι."
-			},
-			"goddessBowl": {
-				"name": "Goddess bowl",
-				"desc": "Κινόα, εποχιακά λαχανικά, χούμους, φρέσκα μυρωδικά."
-			},
-			"beefBurger": {
-				"name": "Beef burger",
-				"desc": "Brioche, smashed beef patty, σπιτικές σάλτσες."
-			},
-			"quiche": {
-				"name": "Quiche Lorraine",
-				"desc": "Sablée ζύμη, καπνιστό μπέικον, gruyère."
-			},
-			"milkshake": {
-				"name": "Milkshake φράουλα",
-				"desc": "Φρέσκια φράουλα, παγωτό βανίλια, σαντιγί."
+			"end": {
+				"page": "σελ. 28",
+				"title": "περάστε από τη Νυμφών.",
+				"blurb": "τελευταία σελίδα."
 			}
-		}
+		},
+		"footerLeft": "Echoes · Νυμφών 33 · Ηλιούπολη 163 41",
+		"footerPhone": "210 990 1676"
 	},
-	"chef": {
-		"eyebrow": "Στην κουζίνα",
-		"title": "Φτιαγμένο με χέρι, ένα πιάτο τη φορά.",
-		"body": "Ανοιχτή κουζίνα. Σκούρα μπλε πλακάκια. Χάλκινα φώτα. Η ομάδα σερβίρει με τον δικό της ρυθμό — γρήγορα αρκετά για να μην κρυώσει, ήσυχα αρκετά για να σας αφήσει να μιλήσετε."
+	"kitchen": {
+		"folioLeft": "σελ. 12",
+		"folioCenter": "Echoes · Νυμφών 33",
+		"folioRight": "από την κουζίνα",
+		"title": "Σαββατο­κύριακο.",
+		"subhead": "Κουλούρι Θεσσαλονίκης, αυγά και καφές από νωρίς.",
+		"deck": "σήμερα στην κουζίνα.",
+		"captionLabel": "α'",
+		"caption": "Από την κουζίνα του Echoes. Καφές από Taf.",
+		"leadA": "Καφές από νωρίς. Brunch στο τραπέζι.",
+		"leadB": "Cocktails αν μείνετε.",
+		"plateAlt": "Κουλούρι Θεσσαλονίκης με αυγά — από την κουζίνα του Echoes"
+	},
+	"pass": {
+		"folioLeft": "σελ. 18",
+		"folioCenter": "Echoes · Νυμφών 33",
+		"folioRight": "στο πάσο",
+		"title": "Στο πάσο.",
+		"body": "Μπρίκι, πάσο, φωτιά χαμηλά. Η κουζίνα φαίνεται — αλλά δεν φωνάζει.",
+		"caption": "Καφές από Taf.",
+		"altLeft": "χέρι στην κουζίνα του Echoes",
+		"altCenter": "προετοιμασία στο πάσο",
+		"altRight": "λεπτομέρεια από την κουζίνα"
 	},
 	"visit": {
-		"eyebrow": "Επισκεφθείτε μας",
-		"title": "Νυμφών 33, Ηλιούπολη.",
-		"addressLabel": "Διεύθυνση",
-		"phoneLabel": "Τηλέφωνο",
-		"hoursLabel": "Ώρες λειτουργίας",
-		"hoursWeekdays": "Δευ–Παρ · πρωί έως 18:00",
-		"hoursWeekends": "Σαβ–Κυρ · πρωί έως 23:00",
-		"mapsCta": "Άνοιγμα στους Χάρτες",
-		"instagramCta": "Δείτε στο Instagram"
+		"folioLeft": "σελ. 24",
+		"folioCenter": "Echoes · Νυμφών 33",
+		"folioRight": "επίσκεψη",
+		"title": "Νυμφών 33.",
+		"address": "Ηλιούπολη 163 41",
+		"hoursWeekdays": "καθημερινά · έως 18:00",
+		"hoursWeekend": "σαβ–κυρ · έως 23:00",
+		"phone": "210 990 1676",
+		"mapsLabel": "χάρτες",
+		"instagramLabel": "instagram",
+		"tagline": "στη γωνία, από το πρωί.",
+		"postmarkCity": "ΗΛΙΟΥΠΟΛΗ",
+		"postmarkPostal": "163 41"
 	},
-	"social": {
-		"eyebrow": "Από τον τύπο",
-		"title": "Μια νέα, ήσυχη άφιξη στην Ηλιούπολη.",
-		"pressName": "noupou.gr",
-		"pressDate": "Ιανουάριος 2026",
-		"pressQuote": "«Νέο brunch spot στην Ηλιούπολη.»",
-		"partnerLabel": "Καφές από",
-		"partnerName": "Taf Coffee",
-		"partnerBody": "Καφές από Taf, ένα από τα πιο γνωστά specialty roasters της Αθήνας."
+	"end": {
+		"folioLeft": "σελ. 28",
+		"folioCenter": "Echoes · Νυμφών 33",
+		"folioRight": "τέλος",
+		"phrase": "περάστε από τη Νυμφών.",
+		"phone": "210 990 1676",
+		"mapsLabel": "χάρτες",
+		"instagramLabel": "instagram",
+		"photoAlt": "βραδινό εσωτερικό του Echoes"
 	},
-	"cta": {
-		"title": "Έρχεστε από νωρίς. Φεύγετε αργά.",
-		"subtitle": "Τραπέζι; Παραγγελία; Καλέστε μας ή στείλτε DM.",
-		"primary": "Καλέστε μας",
-		"secondary": "DM στο Instagram"
-	},
-	"footer": {
-		"tagline": "Brunch χωρίς πόζες.",
-		"section": {
-			"visit": "Επίσκεψη",
-			"hours": "Ώρες",
-			"follow": "Ακολουθήστε"
-		},
-		"copyright": "© {year} Echoes Bistrot · Σχεδιάστηκε με φροντίδα στην Αθήνα"
-	},
-	"a11y": {
-		"skipToContent": "Μετάβαση στο περιεχόμενο",
-		"openMenu": "Άνοιγμα μενού",
-		"closeMenu": "Κλείσιμο μενού",
-		"switchLang": "Αλλαγή γλώσσας στα Αγγλικά",
-		"callPhone": "Καλέστε το {phone}",
-		"openInstagram": "Άνοιγμα του Instagram σε νέα καρτέλα"
+	"colophon": {
+		"line1": "Echoes · Νυμφών 33 · Ηλιούπολη 163 41 · 210 990 1676",
+		"line2": "Αναφορά στο noupou.gr · Καφές από Taf",
+		"line3": "© Echoes Bistrot 2026"
 	}
 }

@@ -1,7 +1,6 @@
 ---
 import { Font } from 'astro:assets';
 import '../styles/global.css';
-import '../styles/motion.css';
 import { site } from '@/lib/config';
 import { buildRestaurantSchema } from '@/lib/schema';
 import {
@@ -38,7 +37,7 @@ const ogImage = `${site.url}${site.ogImage}`;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-		<meta name="theme-color" content="#f3ecd9" />
+		<meta name="theme-color" content="#f0e7d2" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 
@@ -67,10 +66,15 @@ const ogImage = `${site.url}${site.ogImage}`;
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
 
-		<Font cssVariable="--font-heading" preload />
-		<Font cssVariable="--font-sans" preload />
+		{/* R4 magazine fonts. Cormorant + Crimson Pro + IBM Plex Mono are
+		    above-the-fold on the cover, so preload them. Old Standard TT
+		    only renders inside the contents overlay (lazy) — no preload. */}
+		<Font cssVariable="--font-wordmark" preload />
+		<Font cssVariable="--font-italic" preload />
+		<Font cssVariable="--font-mono" preload />
+		<Font cssVariable="--font-greek-display" />
 
-		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class="min-h-svh bg-background text-foreground">
 		<a
@@ -82,36 +86,11 @@ const ogImage = `${site.url}${site.ogImage}`;
 		<slot />
 
 		<script>
-			// Reveal-on-scroll: toggle `is-revealed` once an element enters the viewport.
-			const reveals = document.querySelectorAll<HTMLElement>('[data-reveal], [data-reveal-stagger]');
-			if (reveals.length) {
-				const io = new IntersectionObserver(
-					(entries) => {
-						for (const entry of entries) {
-							if (entry.isIntersecting) {
-								entry.target.classList.add('is-revealed');
-								io.unobserve(entry.target);
-							}
-						}
-					},
-					{ threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
-				);
-				reveals.forEach((el) => io.observe(el));
-			}
-
-			// Header background toggle after 80px scroll.
-			const header = document.querySelector<HTMLElement>('[data-site-header]');
-			if (header) {
-				const onScroll = () => {
-					header.classList.toggle('header-scrolled', window.scrollY > 80);
-				};
-				onScroll();
-				window.addEventListener('scroll', onScroll, { passive: true });
-			}
-		</script>
-
-		<script>
 			// Smooth scroll via Lenis — desktop only, off under prefers-reduced-motion.
+			// The R4 magazine experience between spreads uses smooth wheel scrolling;
+			// anchor link clicks from inside the ContentsOverlay are handled by the
+			// island itself (preventDefault + scrollIntoView). This block ONLY wires
+			// the wheel smoothing.
 			import Lenis from 'lenis';
 
 			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -124,23 +103,16 @@ const ogImage = `${site.url}${site.ogImage}`;
 					wheelMultiplier: 1,
 					touchMultiplier: 1.5,
 				});
+				// Expose the instance so in-page jump navigation (the
+				// ContentsOverlay TOC) can scroll through Lenis. Native
+				// scrollIntoView({ behavior: 'smooth' }) is cancelled while
+				// Lenis is active, so the overlay calls window.lenis.scrollTo.
+				(window as unknown as { lenis?: unknown }).lenis = lenis;
 				const raf = (time: number) => {
 					lenis.raf(time);
 					requestAnimationFrame(raf);
 				};
 				requestAnimationFrame(raf);
-
-				// In-page anchor links use Lenis.
-				document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
-					a.addEventListener('click', (e) => {
-						const id = a.getAttribute('href');
-						if (!id || id === '#' || id.length < 2) return;
-						const target = document.querySelector(id);
-						if (!target) return;
-						e.preventDefault();
-						lenis.scrollTo(target as HTMLElement, { offset: -72 });
-					});
-				});
 			}
 		</script>
 	</body>

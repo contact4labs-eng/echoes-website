@@ -24,20 +24,41 @@ export default defineConfig({
     }),
   ],
 
+  // R4 magazine direction — final 4-font set:
+  //   --font-wordmark        Cormorant Garamond Italic — Latin wordmark only
+  //   --font-greek-display   Old Standard TT Italic    — Greek display (titles, overlay)
+  //   --font-italic          Crimson Pro               — cover line + body italic
+  //   --font-mono            IBM Plex Mono             — masthead, colophon, folio
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Fraunces',
-      cssVariable: '--font-heading',
-      weights: [400, 500, 600, 700],
-      styles: ['normal'],
+      name: 'Cormorant Garamond',
+      cssVariable: '--font-wordmark',
+      weights: [500],
+      styles: ['italic'],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Old Standard TT',
+      cssVariable: '--font-greek-display',
+      weights: [400],
+      styles: ['italic'],
       subsets: ['latin', 'greek'],
     },
     {
       provider: fontProviders.google(),
-      name: 'Inter',
-      cssVariable: '--font-sans',
-      weights: [400, 500, 600],
+      name: 'Crimson Pro',
+      cssVariable: '--font-italic',
+      weights: [400, 500],
+      styles: ['normal', 'italic'],
+      subsets: ['latin', 'greek'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'IBM Plex Mono',
+      cssVariable: '--font-mono',
+      weights: [400, 500],
       styles: ['normal'],
       subsets: ['latin', 'greek'],
     },

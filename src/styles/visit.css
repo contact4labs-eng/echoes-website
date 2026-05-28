@@ -1,0 +1,312 @@
+/* -----------------------------------------------------------------------
+   R4 production · Νυμφών 33 / Visit spread (σελ. 24)
+   The postcard/contact object. Cream paper ground, slightly tilted card
+   with double hairline border, postmark stamp top-right, phone as a
+   large italic typographic moment (not a button), small text links.
+   No Google Maps iframe. No reservation language. Only verified facts.
+   Single viewport at 1440×900 and 1280×800.
+   ----------------------------------------------------------------------- */
+
+.visit {
+	position: relative;
+	min-height: calc(100vh - var(--utility-height));
+	min-height: calc(100svh - var(--utility-height));
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: 22px 56px 22px;
+	background:
+		radial-gradient(120% 80% at 50% 0%, var(--paper) 60%, var(--paper-deep) 100%);
+	color: var(--ink);
+	font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+}
+.visit *, .visit *::before, .visit *::after { box-sizing: border-box; }
+.visit a { color: inherit; }
+
+/* -------- FOLIO -------- */
+.visit .folio {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: baseline;
+	gap: 16px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--ink);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+}
+.visit .folio p { margin: 0; }
+.visit .folio .folio-left { color: var(--ink); font-weight: 500; }
+.visit .folio .folio-center { color: var(--blue-ink); text-align: center; letter-spacing: 0.24em; }  /* R4.1: blue identity line */
+.visit .folio .folio-right { color: var(--whisper); text-align: right; }
+
+/* -------- COMPOSITION (centers the postcard) -------- */
+.visit .composition {
+	display: grid;
+	place-items: center;
+	padding: 24px 0;
+}
+
+/* -------- POSTCARD -------- */
+.visit .postcard {
+	position: relative;
+	/* R4.1: slightly more present (the most useful spread shouldn't float) */
+	width: clamp(380px, 60vw, 720px);
+	padding: 56px 64px 44px;
+	background:
+		/* very faint paper grain — almost imperceptible */
+		repeating-linear-gradient(
+			45deg,
+			rgba(26, 24, 20, 0.012) 0px,
+			rgba(26, 24, 20, 0.012) 1px,
+			transparent 1px,
+			transparent 4px
+		),
+		/* gentle ellipse vignette */
+		radial-gradient(ellipse 110% 90% at 50% 50%, #f4ecd9 0%, var(--paper) 70%, var(--paper-deep) 100%);
+	border: 1px solid var(--ink);
+	box-shadow:
+		0 1px 0 rgba(26, 24, 20, 0.04),
+		0 20px 44px -24px rgba(26, 24, 20, 0.20);
+	/* subtle tilt — physical print, not Tailwind card */
+	transform: rotate(-1.2deg);
+	transform-origin: center;
+	text-align: center;
+}
+
+/* Inner hairline print frame — R4.1: blue print hairline (Echoes identity) */
+.visit .postcard::before {
+	content: '';
+	position: absolute;
+	inset: 10px;
+	border: 1px solid var(--blue-faint);
+	pointer-events: none;
+}
+
+/* -------- POSTMARK STAMP (top-right) -------- */
+.visit .postcard .postmark {
+	position: absolute;
+	top: 22px;
+	right: 22px;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1px;
+	padding: 6px 10px;
+	/* R4.1: blue stamp ink (was warm red) — reads as a printed postal mark */
+	border: 1px solid rgba(31, 111, 139, 0.5);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 9px;
+	letter-spacing: 0.22em;
+	line-height: 1.2;
+	color: var(--blue-ink);
+	text-transform: uppercase;
+	/* slightly rotated *against* the card's tilt so it reads as a separate stamped element */
+	transform: rotate(8deg);
+	z-index: 2;
+}
+.visit .postcard .postmark-city { font-weight: 500; }
+.visit .postcard .postmark-postal { opacity: 0.78; }
+
+/* -------- POSTCARD CONTENT -------- */
+.visit .postcard .visit-title {
+	margin: 0;
+	font-family: var(--font-greek-display), 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: clamp(2.4rem, 4vw, 3.6rem);
+	line-height: 1;
+	letter-spacing: -0.018em;
+	color: var(--ink);
+}
+.visit .postcard .visit-address {
+	margin: 12px 0 0;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.24em;
+	text-transform: uppercase;
+	color: var(--ink);
+	font-weight: 500;
+}
+
+.visit .postcard .visit-hours {
+	margin: 28px 0 0;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.2em;
+	text-transform: lowercase;
+	color: var(--whisper);
+	line-height: 1.9;
+}
+.visit .postcard .visit-hours p { margin: 0; }
+
+/* Phone — large italic, accent red. Typography, not a button. */
+.visit .postcard .visit-phone {
+	margin: 28px 0 0;
+}
+.visit .postcard .visit-phone a {
+	font-family: var(--font-wordmark), 'Cormorant Garamond', Georgia, serif;
+	font-style: italic;
+	font-weight: 500;
+	font-size: clamp(2.6rem, 4.4vw, 3.8rem);
+	line-height: 1;
+	letter-spacing: -0.01em;
+	color: var(--accent);
+	text-decoration: none;
+	font-feature-settings: "tnum" 1;
+}
+.visit .postcard .visit-phone a:hover {
+	text-decoration: underline;
+	text-underline-offset: 6px;
+	text-decoration-thickness: 1px;
+}
+.visit .postcard .visit-phone a:focus-visible {
+	outline: 1px solid var(--accent);
+	outline-offset: 6px;
+}
+
+/* Small text links — magazine colophon scale, not button scale */
+.visit .postcard .visit-links {
+	margin: 16px 0 0;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--whisper);
+}
+.visit .postcard .visit-links a {
+	color: var(--whisper);
+	text-decoration: none;
+	transition: color 200ms ease;
+}
+/* R4.1 Phase B: maps + instagram read as blue wayfinding (the phone above
+   stays the warm action). Quiet on the cream postcard until hover. */
+.visit .postcard .visit-links a:hover { color: var(--blue-ink); }
+.visit .postcard .visit-links a:focus-visible {
+	outline: 1px solid var(--blue-ink);
+	outline-offset: 4px;
+}
+.visit .postcard .visit-links .sep { color: var(--mark); margin: 0 6px; }
+
+.visit .postcard .visit-tagline {
+	margin: 28px 0 0;
+	font-family: var(--font-italic), 'Crimson Pro', serif;
+	font-style: italic;
+	font-size: 14px;
+	color: var(--whisper);
+	line-height: 1.3;
+}
+
+/* -------- RUN-ON -------- */
+.visit .run-on {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: baseline;
+	gap: 24px;
+	padding-top: 16px;
+	border-top: 1px solid var(--ink);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+.visit .run-on .meta {
+	margin: 0;
+	text-align: right;
+	color: var(--ink);
+	grid-column: 2;
+}
+.visit .run-on .meta a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+}
+.visit .run-on .meta a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.visit .run-on .meta .sep { color: var(--mark); }
+.visit .run-on .meta .nav-trigger {
+	color: var(--ink);
+	cursor: pointer;
+	background: none;
+	border: 0;
+	padding: 0;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+}
+.visit .run-on .meta .nav-trigger:hover { color: var(--accent); }
+.visit .run-on .meta .nav-trigger:focus-visible {
+	outline: 1px solid var(--accent);
+	outline-offset: 4px;
+}
+
+/* -------- MOBILE: 390x844 -------- */
+@media (max-width: 768px) {
+	.visit {
+		padding: 18px 22px 22px;
+	}
+	.visit .folio {
+		grid-template-columns: 1fr 1fr;
+		font-size: 9.5px;
+		letter-spacing: 0.22em;
+	}
+	.visit .folio .folio-center { display: none; }
+
+	.visit .composition { padding: 18px 0; }
+
+	.visit .postcard {
+		width: 100%;
+		padding: 36px 28px 32px;
+		/* on small screens the tilt fights readability — reduce dramatically */
+		transform: rotate(-0.6deg);
+	}
+	.visit .postcard::before {
+		inset: 8px;
+	}
+
+	.visit .postcard .postmark {
+		top: 14px;
+		right: 14px;
+		padding: 5px 8px;
+		font-size: 8px;
+		letter-spacing: 0.2em;
+		transform: rotate(6deg);
+	}
+
+	.visit .postcard .visit-title {
+		font-size: clamp(2rem, 9vw, 2.6rem);
+	}
+	.visit .postcard .visit-address {
+		font-size: 9.5px;
+		letter-spacing: 0.2em;
+	}
+	.visit .postcard .visit-hours {
+		margin-top: 20px;
+		font-size: 9.5px;
+		letter-spacing: 0.18em;
+		line-height: 1.8;
+	}
+	.visit .postcard .visit-phone {
+		margin-top: 20px;
+	}
+	.visit .postcard .visit-phone a {
+		font-size: clamp(2.2rem, 9vw, 2.8rem);
+	}
+	.visit .postcard .visit-links {
+		margin-top: 14px;
+		font-size: 9.5px;
+		letter-spacing: 0.14em;
+	}
+	.visit .postcard .visit-tagline {
+		margin-top: 22px;
+		font-size: 13px;
+	}
+
+	.visit .run-on {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.visit .run-on .meta {
+		text-align: left;
+		grid-column: 1;
+	}
+}

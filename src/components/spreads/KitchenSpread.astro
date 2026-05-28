@@ -1,0 +1,86 @@
+---
+/**
+ * R4 KitchenSpread — production port of proofs/r4-magazine-cover/spread-v2.
+ *
+ * σελ. 12 · Σαββατοκύριακο. — the first internal magazine spread.
+ *
+ * Content rules (per Phase 2 instruction):
+ * - No invented ingredients in visible copy or alt text.
+ * - The existing src/i18n/{el,en}.json `menu.items.prosciuttoEgg.desc`
+ *   claims pesto/prosciutto/provolone but those ingredients are NOT
+ *   independently verified (added during R1 scaffolding, never client-
+ *   confirmed). Phase 2 uses the safer manager-supplied copy instead.
+ * - No fake quotes. No chef name. No awards. No availability claims.
+ *
+ * Layout: ports spread-v2 exactly — folio top, title-area left
+ * (h2 italic Greek-native + subhead + deck), plate right with italic
+ * caption, run-on bottom with lead + meta (phone + [ περιεχόμενα ]).
+ *
+ * id="kitchen" gives the contents overlay's σελ. 12 entry a real anchor.
+ *
+ * No `[data-reveal]`/fade-up: spread is print-static per manager spec.
+ */
+import type { Locale } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/config';
+import { Image } from 'astro:assets';
+// Asset renamed from `prosciutto-egg.jpg` to `kitchen-plate-12.jpg` so the
+// optimized webp URL (/_astro/kitchen-plate-12.HASH.webp) no longer carries
+// an unverified ingredient claim in its path.
+import kitchenPlate from '@/assets/photos/menu/kitchen-plate-12.jpg';
+import '@/styles/spread.css';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const phoneTel = `tel:${site.phone}`;
+---
+
+<section class="spread" id="kitchen" data-spread="kitchen" aria-labelledby="kitchen-title">
+	<header class="folio">
+		<p class="folio-left">{t('kitchen.folioLeft')}</p>
+		<p class="folio-center">{t('kitchen.folioCenter')}</p>
+		<p class="folio-right">{t('kitchen.folioRight')}</p>
+	</header>
+
+	<div class="composition">
+		<div class="title-area">
+			<h2 class="spread-title" id="kitchen-title">
+				<span class="spread-title-line">{t('kitchen.title')}</span>
+			</h2>
+			<p class="spread-subhead">{t('kitchen.subhead')}</p>
+
+			{/* Magazine "deck" line — print convention for a typeset standalone
+			    sentence. No quote marks (avoids the v1 fake-quote pattern). */}
+			<div class="deck">
+				<p class="deck-text">{t('kitchen.deck')}</p>
+			</div>
+		</div>
+
+		<figure class="plate">
+			<Image
+				src={kitchenPlate}
+				alt={t('kitchen.plateAlt')}
+				widths={[280, 440, 880]}
+				sizes="(min-width: 769px) 440px, 100vw"
+				loading="lazy"
+			/>
+			<figcaption>
+				<span class="caption-label">{t('kitchen.captionLabel')}</span>
+				<span class="caption-body">{t('kitchen.caption')}</span>
+			</figcaption>
+		</figure>
+	</div>
+
+	<footer class="run-on">
+		<p class="lead">
+			{t('kitchen.leadA')} <em>{t('kitchen.leadB')}</em>
+		</p>
+		<p class="meta">
+			<a href={phoneTel} aria-label={`${t('cover.masthead.name')} ${t('cover.phoneDisplay')}`}>{t('cover.phoneDisplay')}</a>
+			&nbsp;<span class="sep" aria-hidden="true">·</span>&nbsp;
+			<button type="button" class="nav-trigger" data-contents-trigger>{t('cover.contentsTrigger')}</button>
+		</p>
+	</footer>
+</section>
