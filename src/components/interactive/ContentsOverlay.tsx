@@ -20,6 +20,22 @@ import { useEffect, useRef, useState } from 'react';
 import '@/styles/contents.css';
 
 /**
+ * The page runs Lenis smooth-scroll (instantiated in Layout.astro on
+ * non-touch / non-reduced-motion clients, and exposed there as
+ * `window.lenis`). When Lenis is active it cancels native
+ * `scrollIntoView({ behavior: 'smooth' })`, so TOC navigation must route
+ * through Lenis's own `scrollTo`. We read it through a minimal local type
+ * (a local cast, NOT a global Window augmentation — the lenis package
+ * already declares `Window.lenis`, so augmenting it conflicts).
+ */
+type LenisLike = {
+	scrollTo?: (
+		target: Element | string | number,
+		options?: { offset?: number; immediate?: boolean; duration?: number }
+	) => void;
+};
+
+/**
  * Standard focusable-element selector. Excludes elements with tabindex="-1".
  * Used by the focus trap to find the first/last focusable child of the overlay.
  */
@@ -166,26 +182,41 @@ export function ContentsOverlay({
 								// Close the overlay first so the body scroll lock is
 								// released BEFORE we navigate; then scroll to the
 								// anchor on the next tick. Without this, scroll-to-
-								// anchor races with the overflow:hidden cleanup and
-								// can land in the wrong place.
+								// anchor races with the overflow:hidden cleanup.
 								e.preventDefault();
 								const href = entry.href;
 								setOpen(false);
 								window.setTimeout(() => {
-									if (href.startsWith('#')) {
-										const target = document.querySelector(href);
-										if (target) {
-											const reduce = window.matchMedia(
-												'(prefers-reduced-motion: reduce)'
-											).matches;
-											target.scrollIntoView({
-												behavior: reduce ? 'auto' : 'smooth',
-												block: 'start',
-											});
-										}
-									} else {
+									if (!href.startsWith('#')) {
 										window.location.href = href;
+										return;
 									}
+									const target = document.querySelector(href);
+									if (!target) return;
+									const reduce = window.matchMedia(
+										'(prefers-reduced-motion: reduce)'
+									).matches;
+									const lenis = (window as unknown as { lenis?: LenisLike }).lenis;
+									// Preferred path: Lenis owns the scroll on this client,
+									// so native smooth scrollIntoView would be cancelled.
+									// Route through Lenis when present (and motion allowed).
+									if (!reduce && lenis && typeof lenis.scrollTo === 'function') {
+										try {
+											lenis.scrollTo(target, { offset: 0 });
+											return;
+										} catch {
+											// Lenis failed — instant native scroll still works
+											// even while Lenis is running.
+											target.scrollIntoView({ behavior: 'auto', block: 'start' });
+											return;
+										}
+									}
+									// No Lenis (touch / reduced-motion): native scroll.
+									// reduced-motion → instant; otherwise smooth.
+									target.scrollIntoView({
+										behavior: reduce ? 'auto' : 'smooth',
+										block: 'start',
+									});
 								}, 0);
 							}}
 						>
