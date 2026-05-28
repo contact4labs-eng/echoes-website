@@ -1,25 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @theme inline {
-	/* Brand colors (OKLCH) */
-	--color-bistro-cream: oklch(0.965 0.018 84);
-	--color-bistro-teal: oklch(0.535 0.075 195);
-	--color-bistro-teal-deep: oklch(0.4 0.07 200);
-	--color-bistro-navy: oklch(0.275 0.045 220);
-	--color-bistro-copper: oklch(0.685 0.135 56);
-	--color-bistro-terracotta: oklch(0.62 0.115 35);
-	--color-bistro-mustard: oklch(0.78 0.115 85);
-	--color-bistro-ink: oklch(0.18 0.012 240);
-	--color-bistro-bougainvillea: oklch(0.62 0.21 18);
-
-	/* Font stacks (chained with Astro Font API CSS vars + fallbacks) */
-	--font-heading: var(--font-heading), "Fraunces", "Georgia", "Playfair Display", serif;
-	--font-sans: var(--font-sans), "Inter", "Geist Variable", system-ui, -apple-system, sans-serif;
-
-	/* shadcn surfaces */
+	/* shadcn surface tokens — kept because the body still uses `bg-background
+	   text-foreground` Tailwind classes from Layout.astro. R4 spread CSS does
+	   NOT depend on these (each spread defines its own ground). */
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -61,7 +47,7 @@
 }
 
 :root {
-	/* shadcn variables mapped to Echoes palette */
+	/* shadcn root tokens — body uses these via bg-background / text-foreground */
 	--background: oklch(0.965 0.018 84);
 	--foreground: oklch(0.18 0.012 240);
 	--card: oklch(0.99 0.005 84);
@@ -75,7 +61,6 @@
 	--secondary-foreground: oklch(0.18 0.012 240);
 	--muted: oklch(0.93 0.012 84);
 	--muted-foreground: oklch(0.45 0.018 240);
-	--accent: oklch(0.685 0.135 56);
 	--accent-foreground: oklch(0.18 0.012 240);
 	--destructive: oklch(0.577 0.245 27.325);
 
@@ -101,11 +86,11 @@
 	--sidebar-ring: oklch(0.535 0.075 195);
 
 	/* -----------------------------------------------------------------
-	   R4 magazine palette (additive — does not displace the shadcn tokens
-	   above, which are still used by the not-yet-touched Footer).
-	   These are sRGB hex on purpose: they were locked into the cover/
-	   spread/nav proofs at exact values and have been calibrated against
-	   real photography. Do not OKLCH-convert them.
+	   R4 magazine palette. sRGB hex on purpose — calibrated against the
+	   real photography in the proof and not safe to OKLCH-convert.
+	   These OVERRIDE the shadcn `--accent` above for any consumer of
+	   `var(--accent)` (this is intentional: R4 uses the bougainvillea
+	   red, not the shadcn copper).
 	   ----------------------------------------------------------------- */
 	--paper: #f0e7d2;
 	--paper-deep: #ebe0c5;
@@ -121,18 +106,20 @@
 	}
 	body {
 		@apply bg-background text-foreground antialiased;
-		font-family: var(--font-sans);
+		/* Default body type — R4 italic. Spread CSS overrides per-spread. */
+		font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
 	}
 	html {
 		scroll-behavior: auto;
 	}
 	h1, h2, h3, h4, h5, h6 {
-		font-family: var(--font-heading);
-		font-feature-settings: "ss01", "ss02", "kern";
+		/* Default display type — Greek-native italic. Spread CSS overrides. */
+		font-family: var(--font-greek-display), 'Old Standard TT', Georgia, serif;
+		font-feature-settings: "kern";
 		letter-spacing: -0.01em;
 	}
 	::selection {
-		background-color: var(--color-bistro-copper);
-		color: var(--color-bistro-ink);
+		background-color: var(--accent);
+		color: var(--paper);
 	}
 }

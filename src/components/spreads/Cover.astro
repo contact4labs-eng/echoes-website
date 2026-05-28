@@ -17,7 +17,12 @@ import type { Locale } from '@/i18n/utils';
 import { useTranslations } from '@/i18n/utils';
 import { site } from '@/lib/config';
 import { Image } from 'astro:assets';
-import facadeBougainvillea from '@/assets/photos/facade-bougainvillea.jpg';
+// Wordmark fill uses a downscaled (1200×1600, ~284KB webp) texture derived
+// from facade-bougainvillea.jpg. It only shows inside the "Echoes" letters via
+// background-clip, so full resolution is wasted bytes on the first screen.
+// Same 3:4 aspect as the source, so the CSS background-size/position values
+// stay pixel-identical.
+import facadeWordmark from '@/assets/photos/facade-wordmark.webp';
 import dessertSorbet from '@/assets/photos/dessert-sorbet.jpg';
 import '@/styles/cover.css';
 
@@ -33,7 +38,7 @@ const wordmarkText = t('cover.wordmark');
 <section
 	class="cover"
 	data-spread="cover"
-	style={`--wordmark-bg: url(${facadeBougainvillea.src});`}
+	style={`--wordmark-bg: url(${facadeWordmark.src});`}
 >
 	<header class="masthead" aria-label={`${t('cover.masthead.name')} — ${t('cover.masthead.where')}`}>
 		<p class="masthead-text">
