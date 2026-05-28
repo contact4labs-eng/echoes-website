@@ -8,6 +8,17 @@
 	"a11y": {
 		"skipToContent": "Μετάβαση στο περιεχόμενο"
 	},
+	"utility": {
+		"ariaLabel": "Echoes — γρήγορες ενέργειες",
+		"name": "Echoes",
+		"cats": "καφές · brunch · cocktails",
+		"where": "Νυμφών 33",
+		"phoneDisplay": "210 990 1676",
+		"maps": "χάρτες",
+		"contents": "[ περιεχόμενα ]",
+		"phoneMobile": "τηλέφωνο",
+		"contentsMobile": "περιεχόμενα"
+	},
 	"cover": {
 		"masthead": {
 			"name": "Echoes",

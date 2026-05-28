@@ -27,6 +27,7 @@ import PassSpread from '@/components/spreads/PassSpread.astro';
 import Nymfon33Spread from '@/components/spreads/Nymfon33Spread.astro';
 import EndSpread from '@/components/spreads/EndSpread.astro';
 import Colophon from '@/components/spreads/Colophon.astro';
+import UtilityBar from '@/components/UtilityBar.astro';
 import { ContentsOverlay } from '@/components/interactive/ContentsOverlay';
 
 interface Props {
@@ -83,6 +84,10 @@ const entries = [
 </main>
 
 <Colophon locale={locale} />
+
+{/* R4.1: persistent practical layer — fixed desktop strip + mobile bar.
+    Its [data-contents-trigger] buttons open the same ContentsOverlay below. */}
+<UtilityBar locale={locale} />
 
 <ContentsOverlay
 	client:idle

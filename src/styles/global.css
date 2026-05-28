@@ -97,7 +97,25 @@
 	--ink: #1a1814;
 	--whisper: rgba(26, 24, 20, 0.42);
 	--mark: rgba(26, 24, 20, 0.18);
-	--accent: #b53a2a;
+	--accent: #b53a2a;            /* warm red — phone / call / warmth */
+
+	/* -----------------------------------------------------------------
+	   R4.1 Echoes blue (Phase A). The Aegean blue of the café's actual
+	   painted bar wall. Identity / wayfinding only — never a CTA fill,
+	   never a button background. Phone stays --accent (warm).
+	   ----------------------------------------------------------------- */
+	--blue: #1f6f8b;             /* primary identity blue (marks, ticks, separators) */
+	--blue-ink: #15536a;         /* deeper — small text/links on cream (AA) */
+	--blue-bright: #4fb0cb;      /* lifted — identity text on dark spreads */
+	--blue-faint: rgba(31, 111, 139, 0.30);
+
+	/* Height reserved for the fixed utility layer (desktop strip / mobile bar).
+	   Spreads subtract this so their bottom content clears the fixed bar. */
+	--utility-height: 40px;
+}
+
+@media (max-width: 768px) {
+	:root { --utility-height: 52px; }
 }
 
 @layer base {
@@ -108,6 +126,9 @@
 		@apply bg-background text-foreground antialiased;
 		/* Default body type — R4 italic. Spread CSS overrides per-spread. */
 		font-family: var(--font-italic), 'Crimson Pro', Georgia, serif;
+		/* Clear the fixed utility layer at the very bottom of the document
+		   (the page colophon must not sit behind the strip / mobile bar). */
+		padding-bottom: calc(var(--utility-height) + env(safe-area-inset-bottom, 0px));
 	}
 	html {
 		scroll-behavior: auto;

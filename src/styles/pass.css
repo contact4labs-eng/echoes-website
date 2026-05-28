@@ -16,8 +16,8 @@
 
 .pass {
 	position: relative;
-	min-height: 100vh;
-	min-height: 100svh;
+	min-height: calc(100vh - var(--utility-height));
+	min-height: calc(100svh - var(--utility-height));
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	/* tightened from 28/56/36 to fit ≤900px height at 1440×900 */

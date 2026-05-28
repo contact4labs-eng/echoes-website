@@ -1,0 +1,156 @@
+/* -----------------------------------------------------------------------
+   R4.1 · Persistent utility layer
+   Desktop = fixed bottom running print strip. Mobile = fixed bottom
+   3-action bar. Cream ground, ink type, blue identity marks, warm-red
+   phone. Sits BELOW the contents overlay (z-index 50 < overlay's 100).
+   ----------------------------------------------------------------------- */
+
+/* ============ DESKTOP STRIP ============ */
+.utility-strip {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 50;
+	height: var(--utility-height);
+	display: flex;
+	align-items: stretch;
+	background: rgba(240, 231, 210, 0.94);
+	-webkit-backdrop-filter: saturate(1.05) blur(8px);
+	backdrop-filter: saturate(1.05) blur(8px);
+	border-top: 1px solid var(--ink);
+}
+.utility-strip * { box-sizing: border-box; }
+
+/* blue identity edge tick */
+.utility-strip .us-tick {
+	width: 4px;
+	flex: none;
+	background: var(--blue);
+}
+
+.utility-strip .us-line {
+	margin: 0;
+	padding: 0 22px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: nowrap;
+	overflow: hidden;
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+.utility-strip .us-name { color: var(--ink); font-weight: 500; }
+.utility-strip .us-cats { color: var(--whisper); }
+.utility-strip .us-where { color: var(--ink); }
+.utility-strip .us-sep { color: var(--blue); }      /* blue separators */
+
+/* phone = warm action */
+.utility-strip .us-phone {
+	color: var(--accent);
+	font-weight: 500;
+	text-decoration: none;
+}
+.utility-strip .us-phone:hover { text-decoration: underline; text-underline-offset: 3px; }
+.utility-strip .us-phone:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+/* maps = blue wayfinding link */
+.utility-strip .us-maps {
+	color: var(--blue-ink);
+	text-decoration: none;
+	border-bottom: 1px solid var(--blue-faint);
+	padding-bottom: 1px;
+}
+.utility-strip .us-maps:hover { color: var(--blue); border-bottom-color: var(--blue); }
+.utility-strip .us-maps:focus-visible { outline: 1px solid var(--blue); outline-offset: 3px; }
+
+/* contents = discoverable text button (blue underline), right-aligned */
+.utility-strip .us-contents {
+	margin-left: auto;
+	flex: none;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+	background: none;
+	border: 0;
+	padding: 4px 0;
+	cursor: pointer;
+	color: var(--ink);
+	border-bottom: 1px solid var(--blue);
+}
+.utility-strip .us-contents:hover { color: var(--blue); }
+.utility-strip .us-contents:focus-visible { outline: 1px solid var(--blue); outline-offset: 3px; }
+
+/* ============ MOBILE BAR ============ */
+.utility-bar {
+	display: none;       /* shown only ≤768px */
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 50;
+	min-height: var(--utility-height);
+	align-items: stretch;
+	background: rgba(240, 231, 210, 0.97);
+	-webkit-backdrop-filter: saturate(1.05) blur(8px);
+	backdrop-filter: saturate(1.05) blur(8px);
+	border-top: 1px solid var(--ink);
+	/* notch / home-indicator safe area */
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+	font-size: 10.5px;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+.utility-bar * { box-sizing: border-box; }
+.utility-bar .ub-item {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;            /* tap target */
+	text-decoration: none;
+	color: var(--ink);
+	background: none;
+	border: 0;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+	cursor: pointer;
+}
+.utility-bar .ub-phone { color: var(--accent); font-weight: 500; }   /* call = warm */
+.utility-bar .ub-maps { color: var(--blue-ink); }
+.utility-bar .ub-contents { color: var(--ink); position: relative; }
+.utility-bar .ub-contents::after {     /* blue active mark, not a pill */
+	content: '';
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 8px;
+	width: 26px;
+	height: 2px;
+	background: var(--blue);
+}
+.utility-bar .ub-item:focus-visible { outline: 1px solid var(--blue); outline-offset: -3px; }
+.utility-bar .ub-sep { display: flex; align-items: center; color: var(--mark); }
+
+/* ============ BREAKPOINT SWAP ============ */
+@media (max-width: 768px) {
+	.utility-strip { display: none; }
+	.utility-bar { display: flex; }
+}
+
+/* On narrow desktop widths, drop the descriptive spans but keep the
+   actionable trio (name · phone · maps · contents) legible. */
+@media (min-width: 769px) and (max-width: 960px) {
+	.utility-strip .us-cats,
+	.utility-strip .us-where { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.utility-strip, .utility-bar { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

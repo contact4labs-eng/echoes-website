@@ -8,8 +8,8 @@
 
 .end {
 	position: relative;
-	min-height: 100vh;
-	min-height: 100svh;
+	min-height: calc(100vh - var(--utility-height));
+	min-height: calc(100svh - var(--utility-height));
 	display: grid;
 	grid-template-rows: auto 1fr;
 	overflow: hidden;

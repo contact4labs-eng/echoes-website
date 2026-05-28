@@ -8,6 +8,17 @@
 	"a11y": {
 		"skipToContent": "Skip to content"
 	},
+	"utility": {
+		"ariaLabel": "Echoes — quick actions",
+		"name": "Echoes",
+		"cats": "coffee · brunch · cocktails",
+		"where": "Nymfon 33",
+		"phoneDisplay": "210 990 1676",
+		"maps": "maps",
+		"contents": "[ contents ]",
+		"phoneMobile": "phone",
+		"contentsMobile": "contents"
+	},
 	"cover": {
 		"masthead": {
 			"name": "Echoes",
