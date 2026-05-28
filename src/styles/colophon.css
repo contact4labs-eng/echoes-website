@@ -16,6 +16,18 @@
 .page-colophon *, .page-colophon *::before, .page-colophon *::after { box-sizing: border-box; }
 .page-colophon p { margin: 0; }
 
+/* R4.1 Phase B: a single quiet blue printer's tick closing the document —
+   echoes the blue masthead separator at the very top and the Pass caption
+   tick. Decorative micro-mark only; the colophon text stays ink/whisper. */
+.page-colophon::before {
+	content: '';
+	display: block;
+	width: 18px;
+	height: 2px;
+	margin: 0 auto 18px;
+	background: var(--blue);
+}
+
 .page-colophon .colophon-line { margin: 0; }
 
 .page-colophon .line-1 {

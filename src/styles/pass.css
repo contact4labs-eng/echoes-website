@@ -47,7 +47,8 @@
 .pass .folio p { margin: 0; }
 .pass .folio .folio-left { color: var(--paper); font-weight: 500; }
 .pass .folio .folio-center {
-	color: var(--accent);
+	/* R4.1: blue identity line, lifted for the dark ground */
+	color: var(--blue-bright);
 	text-align: center;
 	letter-spacing: 0.24em;
 }
@@ -173,6 +174,17 @@
 	font-size: 13px;
 	color: rgba(240, 231, 210, 0.55);
 	text-align: right;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+/* R4.1: tiny blue caption tick — echoes the blue kitchen tiles in the photos */
+.pass .caption p::before {
+	content: '';
+	width: 14px;
+	height: 2px;
+	background: var(--blue-bright);
+	flex: none;
 }
 
 /* -------- RUN-ON (reverse palette) -------- */

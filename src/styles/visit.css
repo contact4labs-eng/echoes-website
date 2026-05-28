@@ -37,7 +37,7 @@
 }
 .visit .folio p { margin: 0; }
 .visit .folio .folio-left { color: var(--ink); font-weight: 500; }
-.visit .folio .folio-center { color: var(--accent); text-align: center; letter-spacing: 0.24em; }
+.visit .folio .folio-center { color: var(--blue-ink); text-align: center; letter-spacing: 0.24em; }  /* R4.1: blue identity line */
 .visit .folio .folio-right { color: var(--whisper); text-align: right; }
 
 /* -------- COMPOSITION (centers the postcard) -------- */
@@ -50,7 +50,8 @@
 /* -------- POSTCARD -------- */
 .visit .postcard {
 	position: relative;
-	width: clamp(360px, 56vw, 700px);
+	/* R4.1: slightly more present (the most useful spread shouldn't float) */
+	width: clamp(380px, 60vw, 720px);
 	padding: 56px 64px 44px;
 	background:
 		/* very faint paper grain — almost imperceptible */
@@ -73,12 +74,12 @@
 	text-align: center;
 }
 
-/* Inner hairline print frame */
+/* Inner hairline print frame — R4.1: blue print hairline (Echoes identity) */
 .visit .postcard::before {
 	content: '';
 	position: absolute;
 	inset: 10px;
-	border: 1px solid rgba(26, 24, 20, 0.18);
+	border: 1px solid var(--blue-faint);
 	pointer-events: none;
 }
 
@@ -92,12 +93,13 @@
 	align-items: center;
 	gap: 1px;
 	padding: 6px 10px;
-	border: 1px solid rgba(181, 58, 42, 0.42);
+	/* R4.1: blue stamp ink (was warm red) — reads as a printed postal mark */
+	border: 1px solid rgba(31, 111, 139, 0.5);
 	font-family: var(--font-mono), 'IBM Plex Mono', monospace;
 	font-size: 9px;
 	letter-spacing: 0.22em;
 	line-height: 1.2;
-	color: rgba(181, 58, 42, 0.62);
+	color: var(--blue-ink);
 	text-transform: uppercase;
 	/* slightly rotated *against* the card's tilt so it reads as a separate stamped element */
 	transform: rotate(8deg);
@@ -177,9 +179,11 @@
 	text-decoration: none;
 	transition: color 200ms ease;
 }
-.visit .postcard .visit-links a:hover { color: var(--accent); }
+/* R4.1 Phase B: maps + instagram read as blue wayfinding (the phone above
+   stays the warm action). Quiet on the cream postcard until hover. */
+.visit .postcard .visit-links a:hover { color: var(--blue-ink); }
 .visit .postcard .visit-links a:focus-visible {
-	outline: 1px solid var(--accent);
+	outline: 1px solid var(--blue-ink);
 	outline-offset: 4px;
 }
 .visit .postcard .visit-links .sep { color: var(--mark); margin: 0 6px; }

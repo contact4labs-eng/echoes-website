@@ -69,7 +69,10 @@
 .end .folio p { margin: 0; }
 .end .folio .folio-left { color: var(--paper); font-weight: 500; }
 .end .folio .folio-center {
-	color: var(--accent);
+	/* R4.1 Phase B: the recurring blue identity line, lifted for the dark
+	   photo ground (matches the Pass folio). The warm closing punctuation
+	   below — copper rule + phone — stays accent. */
+	color: var(--blue-bright);
 	text-align: center;
 	letter-spacing: 0.24em;
 }

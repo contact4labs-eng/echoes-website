@@ -46,7 +46,7 @@
 	font-weight: 500;
 	letter-spacing: 0.32em;
 	text-transform: uppercase;
-	color: var(--accent);
+	color: var(--blue-ink);   /* R4.1 Phase B: the index is the wayfinding surface — blue identity mark */
 }
 .contents-overlay .overlay-title {
 	margin: 0;
@@ -80,7 +80,7 @@
 	color: var(--paper);
 }
 .contents-overlay .overlay-close:focus-visible {
-	outline: 2px solid var(--accent);
+	outline: 2px solid var(--blue-ink);   /* R4.1 Phase B: blue wayfinding focus ring */
 	outline-offset: 3px;
 }
 
@@ -127,9 +127,11 @@
 	text-decoration: none;
 	transition: color 220ms ease;
 }
-.contents-overlay .toc-title:hover { color: var(--accent); }
+/* R4.1 Phase B: TOC links are navigation — hover/focus read as blue
+   wayfinding (the only warm element here is the phone in the footer). */
+.contents-overlay .toc-title:hover { color: var(--blue-ink); }
 .contents-overlay .toc-title:focus-visible {
-	outline: 1px solid var(--accent);
+	outline: 1px solid var(--blue-ink);
 	outline-offset: 6px;
 }
 .contents-overlay .toc-blurb {

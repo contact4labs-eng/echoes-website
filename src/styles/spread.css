@@ -39,7 +39,7 @@
 }
 .spread .folio p { margin: 0; }
 .spread .folio .folio-left { color: var(--ink); font-weight: 500; }
-.spread .folio .folio-center { color: var(--accent); text-align: center; letter-spacing: 0.24em; }
+.spread .folio .folio-center { color: var(--blue-ink); text-align: center; letter-spacing: 0.24em; }  /* R4.1: blue identity line */
 .spread .folio .folio-right { color: var(--whisper); text-align: right; }
 
 /* -------- COMPOSITION -------- */
@@ -131,7 +131,7 @@
 .spread .caption-label {
 	font-style: italic;
 	font-weight: 500;
-	color: var(--accent);
+	color: var(--blue-ink);          /* R4.1: blue editorial figure mark (α') */
 	letter-spacing: 0.04em;
 }
 .spread .caption-body {

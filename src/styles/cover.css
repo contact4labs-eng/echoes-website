@@ -46,7 +46,7 @@
 	flex-wrap: wrap;
 }
 .cover .m-name { color: var(--accent); }
-.cover .m-sep { color: var(--mark); }
+.cover .m-sep { color: var(--blue); }            /* R4.1: blue identity separators */
 .cover .m-cats { color: var(--whisper); }
 
 /* -------- COMPOSITION -------- */
@@ -183,7 +183,12 @@
 	text-decoration: none;
 	transition: color 200ms ease;
 }
-.cover .colophon .services a:hover { color: var(--accent); }
+.cover .colophon .services a:hover { color: var(--blue); }   /* R4.1: blue wayfinding hover */
+/* R4.1: the persistent utility strip (fixed, 40px below this line) already
+   owns the contents trigger, so de-duplicate it from the cover colophon.
+   Address · phone · instagram remain; phone stays the warm action. */
+.cover .colophon .services .nav-trigger,
+.cover .colophon .services .sep { display: none; }
 .cover .colophon .services .nav-trigger {
 	color: var(--ink);
 	cursor: pointer;
